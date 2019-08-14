@@ -1,26 +1,33 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import GlobalStyle, {
+  AppWrapper,
+  AppHeader,
+  AppLogo,
+  AppLink
+} from './GlobalStyle';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <AppWrapper>
+        <AppHeader>
+          <AppLogo src={logo} alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <AppLink
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </AppLink>
+        </AppHeader>
+      </AppWrapper>
+    </>
   );
-}
+};
 
 export default App;

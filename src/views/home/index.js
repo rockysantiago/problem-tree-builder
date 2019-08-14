@@ -1,29 +1,48 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 import SearchBar from 'components/SearchBar';
+import SuggestedTopics from 'components/SuggestedTopics';
+
+const suggestedTopicsArray = [
+  'beijing air pollution',
+  'environment',
+  'urban development',
+  'health'
+];
 
 const Home = () => (
   <div
     style={{
       alignItems: 'center',
-      backgroundColor: '#282c34',
       display: 'flex',
       justifyContent: 'center',
       minHeight: '100vh'
     }}
   >
-    <Grid style={{ backgroundColor: 'white', width: '500px' }}>
+    <Grid
+      style={{
+        backgroundColor: 'white',
+        width: '30%'
+      }}
+    >
       <Grid.Row>
-        <Grid.Column>Start building your Tree</Grid.Column>
+        <Grid.Column>
+          <Header as="h1">Start building your tree</Header>
+        </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          Enter topic or keyword
+          <label>Enter topic or keyword</label>
           <SearchBar />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <Grid.Column>Suggested Topics</Grid.Column>
+        <Grid.Column>
+          <label>Suggested Topics</label>
+          <div>
+            <SuggestedTopics suggestedTopics={suggestedTopicsArray} />
+          </div>
+        </Grid.Column>
       </Grid.Row>
     </Grid>
   </div>

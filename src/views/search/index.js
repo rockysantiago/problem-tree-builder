@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import { navigate } from '@reach/router';
-import suggestedTopics from 'api/suggestedTopics.json';
-import List from 'components/List';
+import problems from 'api/problems.json';
+import suggestedTopicsJSON from 'api/suggestedTopics.json';
+import SearchResults from 'components/SearchResults';
 
 const Search = props => {
   return (
@@ -19,7 +20,11 @@ const Search = props => {
         </div>
       </Grid.Column>
       <Grid.Column width={5}>
-        <List suggestedTopics={suggestedTopics} term={props.term} />
+        <SearchResults
+          problems={problems}
+          suggestedTopics={suggestedTopicsJSON}
+          term={props.term}
+        />
       </Grid.Column>
     </Grid>
   );

@@ -8,7 +8,7 @@ import suggestedTopics from 'api/suggestedTopics.json';
 const Home = () => {
   return (
     <Grid centered padded verticalAlign="middle" style={{ minHeight: '100vh' }}>
-      <Grid.Column width={5} style={{ border: '1px solid', height: '280px' }}>
+      <Grid.Column width={5} style={{ height: '280px' }}>
         <Header content="Start building your tree" size="huge" />
         <SearchBar />
         <SuggestedTopics suggestedTopics={suggestedTopics} />

@@ -11,8 +11,8 @@ const App = () => {
       <GlobalStyle />
       <Router>
         <Home path="/" />
-        <Search path="/search" />
-        <GenerateTree path="/generate-tree" />
+        <Search path="search/:term" />
+        <GenerateTree path="generate-tree" />
       </Router>
     </>
   );

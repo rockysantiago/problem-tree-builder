@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react';
 const SuggestedTopics = props => (
   <>
     {props.suggestedTopics.map(suggestedTopic => (
-      <Button basic content={suggestedTopic} size="mini" />
+      <Button basic size="mini" content={suggestedTopic} key={suggestedTopic} />
     ))}
   </>
 );

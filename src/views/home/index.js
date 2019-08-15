@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
-import getSuggestedTopics from 'api/getSuggestedTopics';
+import getSuggestedTopics from 'api/suggestedTopics.json';
 import SearchBar from 'components/SearchBar';
 import SuggestedTopics from 'components/SuggestedTopics';
 
 const Home = () => {
-  const suggestedTopics = getSuggestedTopics();
+  const suggestedTopics = getSuggestedTopics;
 
   return (
     <div

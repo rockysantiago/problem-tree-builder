@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import { Location, navigate } from '@reach/router';
-import getSuggestedTopics from 'api/getSuggestedTopics';
+import getSuggestedTopics from 'api/suggestedTopics.json';
 import List from 'components/List';
 
 const Search = props => {
-  const suggestedTopics = getSuggestedTopics();
+  const suggestedTopics = getSuggestedTopics;
 
   return (
     <Grid style={{ minHeight: '100vh' }} columns="equal">

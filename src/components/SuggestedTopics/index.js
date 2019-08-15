@@ -11,8 +11,8 @@ const SuggestedTopics = props => (
       {props.suggestedTopics &&
         props.suggestedTopics.map(suggestedTopic => (
           <Button
-            basic
             key={suggestedTopic}
+            basic
             content={suggestedTopic}
             onClick={() => navigate(`search/${suggestedTopic}`)}
             size="mini"

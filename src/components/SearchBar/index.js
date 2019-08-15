@@ -12,18 +12,23 @@ const SearchBar = props => {
   const handleChange = event => setTerm(event.target.value);
 
   return (
-    <Input
-      action={{
-        content: 'Search',
-        onClick: handleClick
-      }}
-      fluid
-      icon="search"
-      iconPosition="left"
-      onChange={handleChange}
-      placeholder="e.g. beijing air pollution, environment"
-      value={props.term}
-    />
+    <>
+      <div style={{ marginBottom: '8px' }}>
+        <label>Enter topic or keyword</label>
+      </div>
+      <Input
+        action={{
+          content: 'Search',
+          onClick: handleClick
+        }}
+        icon="search"
+        iconPosition="left"
+        fluid
+        onChange={handleChange}
+        placeholder="e.g. beijing air pollution, environment"
+        value={props.term}
+      />
+    </>
   );
 };
 

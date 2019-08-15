@@ -12,7 +12,6 @@ const List = props => (
       Add a problem
     </Header>
     <SearchBar location={props.location} term={props.term} />
-    <label>Suggested Topics:</label>
     <div>
       <SuggestedTopics
         location={props.location}

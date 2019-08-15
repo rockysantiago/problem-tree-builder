@@ -4,15 +4,22 @@ import { navigate } from '@reach/router';
 
 const SuggestedTopics = props => (
   <>
-    {props.suggestedTopics.map(suggestedTopic => (
-      <Button
-        basic
-        size="mini"
-        content={suggestedTopic}
-        key={suggestedTopic}
-        onClick={() => navigate(`search/${suggestedTopic}`)}
-      />
-    ))}
+    <div style={{ marginTop: '16px' }}>
+      <label>Suggested topics:</label>
+    </div>
+    <div style={{ marginTop: '8px' }}>
+      {props.suggestedTopics &&
+        props.suggestedTopics.map(suggestedTopic => (
+          <Button
+            basic
+            key={suggestedTopic}
+            content={suggestedTopic}
+            onClick={() => navigate(`search/${suggestedTopic}`)}
+            size="mini"
+          />
+        ))}
+      <Button icon="caret right" size="mini" />
+    </div>
   </>
 );
 

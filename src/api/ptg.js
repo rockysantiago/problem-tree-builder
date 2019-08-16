@@ -1,10 +1,10 @@
 import keys from 'config/keys';
 
-export const getProblems = data => {
+export const getProblems = (text, type) => {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ data: text, type })
   };
 
   return fetch(`${keys.baseUrl}/get_problems`, options)
@@ -12,11 +12,11 @@ export const getProblems = data => {
     .catch(error => console.error(error));
 };
 
-export const getWordSuggestions = data => {
+export const getWordSuggestions = text => {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ data: text })
   };
 
   return fetch(`${keys.baseUrl}/suggest_words`, options)

@@ -6,7 +6,8 @@ const SearchBar = props => {
   const [term, setTerm] = useState('');
 
   const handleClick = () => {
-    navigate(`/search/${term}`);
+    // navigate(`/search/${term}`);
+    props.search(term);
   };
 
   const handleChange = event => setTerm(event.target.value);

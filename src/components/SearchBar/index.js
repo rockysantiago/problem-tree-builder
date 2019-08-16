@@ -27,7 +27,7 @@ const SearchBar = props => {
         fluid
         onChange={handleChange}
         placeholder="e.g. beijing air pollution, environment"
-        value={props.term}
+        value={props.searchResult}
       />
     </>
   );

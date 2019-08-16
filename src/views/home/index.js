@@ -17,7 +17,7 @@ class Home extends Component {
       <Grid centered padded verticalAlign="middle" style={{ minHeight: '100vh' }}>
         <Grid.Column width={5} style={{ height: '280px' }}>
           <Header content="Start building your tree" size="huge" />
-          <SearchBar search={this.handleSearch} />
+          <SearchBar search={this.handleSearch} searchResult={['test', 'result']}/>
           <SuggestedTopics suggestedTopics={suggestedTopicsJSON} />
         </Grid.Column>
       </Grid>

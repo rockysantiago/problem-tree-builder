@@ -5,7 +5,16 @@ export default {
     causes: [],
     effects: []
   },
-  causes: [],
-  effects: [],
-  problems: []
+  causes: {
+    isFetching: false,
+    data: []
+  },
+  effects: {
+    isFetching: false,
+    data: []
+  },
+  problems: {
+    isFetching: false,
+    data: []
+  }
 };

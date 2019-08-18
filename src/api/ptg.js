@@ -3,7 +3,10 @@ import keys from 'config/keys';
 export const getProblems = (text, type) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      Authorization: 'Basic bm1fZGVtbzpkZW1vMTIzNA==',
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({ data: { text, type } })
   };
 
@@ -15,7 +18,10 @@ export const getProblems = (text, type) => {
 export const getWordSuggestions = text => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      Authorization: 'Basic bm1fZGVtbzpkZW1vMTIzNA==',
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({ data: { text } })
   };
 

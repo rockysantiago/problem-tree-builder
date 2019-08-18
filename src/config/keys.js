@@ -1,3 +1,3 @@
 export default {
-  baseUrl: 'http://neuralmechanics.ai/adb-api'
+  baseUrl: 'https://serverless-proxy-api.rockysantiago.now.sh/api'
 };

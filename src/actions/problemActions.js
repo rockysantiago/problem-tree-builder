@@ -2,14 +2,17 @@ import * as types from '../constants/actionTypes';
 import { getProblems } from 'api/ptg';
 import problems from 'api/problems.json';
 
-export const searchProblems = (keyword) => {
+export const searchProblems = keyword => {
   return dispatch => {
-    dispatch({ type: types.GET_PROBLEMS  });
-    dispatch({ type: types.SET_TOPIC, payload: {
-      keyword
-    } });
-  
-    // return getProblems(keyword, 'problem')
+    dispatch({ type: types.GET_PROBLEMS });
+    dispatch({
+      type: types.SET_TOPIC,
+      payload: {
+        keyword
+      }
+    });
+
+    // getProblems(keyword, 'problem')
     return Promise.resolve(problems)
       .then(result => {
         dispatch({
@@ -37,12 +40,15 @@ export const selectProblem = (index, problems) => {
     const newProblems = problems.map((problem, idx) => {
       return index === idx
         ? Object.assign({}, problem, { selected: true })
-        : Object.assign({}, problem, { selected: false })
+        : Object.assign({}, problem, { selected: false });
     });
 
-    dispatch({ type: types.SET_TOPIC, payload: {
-      problem: newProblems.filter(problem => problem.selected)[0]
-    }});
+    dispatch({
+      type: types.SET_TOPIC,
+      payload: {
+        problem: newProblems.filter(problem => problem.selected)[0]
+      }
+    });
 
     dispatch({
       type: types.SET_PROBLEMS,

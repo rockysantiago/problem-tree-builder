@@ -26,10 +26,10 @@ class Home extends Component {
     navigate('/compose');
   };
 
-  handleSuggestion = (keyword) => {
+  handleSuggestion = keyword => {
     this.props.searchProblems(keyword);
     navigate('/compose');
-  }
+  };
 
   /**
    * Manages the modification of value within the search field.
@@ -45,16 +45,27 @@ class Home extends Component {
 
   render() {
     return (
-      <Grid centered padded verticalAlign="middle" style={{ minHeight: '100vh' }}>
+      <Grid
+        centered
+        padded
+        verticalAlign="middle"
+        style={{ minHeight: '100vh' }}
+      >
         <Grid.Column width={5} style={{ height: '280px' }}>
           <Header content="Start building your tree" size="huge" />
-          <SearchBar onSearch={this.handleSearch} onChange={this.handleChange} />
-          <SuggestedTopics suggestedTopics={suggestedTopicsJSON} onSelect={this.handleSuggestion} />
+          <SearchBar
+            onSearch={this.handleSearch}
+            onChange={this.handleChange}
+          />
+          <SuggestedTopics
+            suggestedTopics={suggestedTopicsJSON}
+            onSelect={this.handleSuggestion}
+          />
         </Grid.Column>
       </Grid>
     );
   }
-};
+}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
@@ -69,4 +80,7 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

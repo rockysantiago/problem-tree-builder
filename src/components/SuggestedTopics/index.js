@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { navigate } from '@reach/router';
 
 const SuggestedTopics = props => (
   <>

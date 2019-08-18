@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from 'semantic-ui-react';
 
 const SearchBar = props => {
@@ -15,7 +15,7 @@ const SearchBar = props => {
         icon="search"
         iconPosition="left"
         fluid
-        onChange={(e) => props.onChange(e.target.value)}
+        onChange={e => props.onChange(e.target.value)}
         placeholder="e.g. beijing air pollution, environment"
         value={props.keyword}
       />

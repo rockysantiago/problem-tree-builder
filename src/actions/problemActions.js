@@ -1,6 +1,5 @@
-import * as types from '../constants/actionTypes';
 import { getProblems } from 'api/ptg';
-import problems from 'api/problems.json';
+import * as types from 'constants/actionTypes';
 
 export const searchProblems = keyword => {
   return dispatch => {
@@ -12,15 +11,14 @@ export const searchProblems = keyword => {
       }
     });
 
-    // getProblems(keyword, 'problem')
-    return Promise.resolve(problems)
-      .then(result => {
+    return getProblems(keyword, 'problem')
+      .then(payload => {
         dispatch({
           type: types.SET_PROBLEMS,
-          payload: result
+          payload
         });
       })
-      .catch(err => console.log('Problems fetch error: ', err));
+      .catch(err => console.error('Problems fetch error: ', err));
   };
 };
 

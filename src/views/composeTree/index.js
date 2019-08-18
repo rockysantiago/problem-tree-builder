@@ -4,13 +4,10 @@ import { connect } from 'react-redux';
 import { navigate } from '@reach/router';
 import { bindActionCreators } from 'redux';
 import { searchProblems, selectProblem } from 'actions/problemActions';
-import problems from 'api/problems.json';
 import suggestedTopicsJSON from 'api/suggestedTopics.json';
-import SearchResults from 'components/SearchResults';
 import SearchBar from 'components/SearchBar';
 import SuggestedTopics from 'components/SuggestedTopics';
 import SearchResultsList from 'components/SearchResultsList';
-
 
 class ComposeTree extends Component {
   constructor(props) {
@@ -30,12 +27,12 @@ class ComposeTree extends Component {
     this.props.searchProblems(keyword);
   };
 
-  handleSuggestion = (keyword) => {
+  handleSuggestion = keyword => {
     this.setState({
       keyword
     });
     this.props.searchProblems(keyword);
-  }
+  };
 
   /**
    * Manages the modification of value within the search field.
@@ -49,14 +46,14 @@ class ComposeTree extends Component {
     });
   };
 
-  handleSelectResult = (index) => {
+  handleSelectResult = index => {
     const { type } = this.state;
-    this.props.selectProblem(index, this.props[type].data)
-  }
+    this.props.selectProblem(index, this.props[type].data);
+  };
 
   render() {
     const { keyword } = this.state;
-    const  { problems, topic } = this.props;
+    const { problems, topic } = this.props;
 
     return (
       <Grid celled padded style={{ height: '100vh' }}>
@@ -72,28 +69,41 @@ class ComposeTree extends Component {
           </div>
 
           {/* Problem section */}
-          <div style={{ border: '1px solid red' }}>{JSON.stringify(topic.problem)}</div>
+          <div style={{ border: '1px solid red' }}>
+            {JSON.stringify(topic.problem)}
+          </div>
 
           {/* Cause section */}
           {topic.causes.length === 0 && <button>ADD CAUSES</button>}
 
-          {topic.causes.length > 0 &&
-            <div style={{ border: '1px solid green' }}>{JSON.stringify(topic.causes)}</div>
-          }
-
+          {topic.causes.length > 0 && (
+            <div style={{ border: '1px solid green' }}>
+              {JSON.stringify(topic.causes)}
+            </div>
+          )}
         </Grid.Column>
         <Grid.Column width={5}>
           <Header content="Add a problem" size="huge" />
-          <SearchBar keyword={keyword}  onSearch={this.handleSearch} onChange={this.handleChange} />
-          <SuggestedTopics suggestedTopics={suggestedTopicsJSON} onSelect={this.handleSuggestion} />
-          <SearchResultsList items={problems.data || []} onSelect={this.handleSelectResult} />
+          <SearchBar
+            keyword={keyword}
+            onSearch={this.handleSearch}
+            onChange={this.handleChange}
+          />
+          <SuggestedTopics
+            suggestedTopics={suggestedTopicsJSON}
+            onSelect={this.handleSuggestion}
+          />
+          <SearchResultsList
+            items={(problems.data && problems.data.data) || []}
+            onSelect={this.handleSelectResult}
+          />
         </Grid.Column>
       </Grid>
     );
   }
-};
+}
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       searchProblems,
@@ -103,8 +113,10 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 const mapStateToProps = state => {
-  console.log('CURRENT STATE : ', state);
   return state;
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ComposeTree);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ComposeTree);

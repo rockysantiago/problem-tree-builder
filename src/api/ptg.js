@@ -1,31 +1,54 @@
 import keys from 'config/keys';
 
-export const getProblems = (text, type) => {
-  const options = {
+const getOptions = data => {
+  return {
     method: 'POST',
     headers: {
       Authorization: 'Basic bm1fZGVtbzpkZW1vMTIzNA==',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ data: { text, type } })
+    body: JSON.stringify({ data: { ...data } })
   };
-
-  return fetch(`${keys.baseUrl}/get_problems`, options)
-    .then(response => response.json())
-    .catch(error => console.error(error));
 };
 
-export const getWordSuggestions = text => {
-  const options = {
-    method: 'POST',
-    headers: {
-      Authorization: 'Basic bm1fZGVtbzpkZW1vMTIzNA==',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ data: { text } })
-  };
+export const getProblems = async (text, type) => {
+  const options = getOptions({ text, type });
 
-  return fetch(`${keys.baseUrl}/suggest_words`, options)
-    .then(response => response.json())
-    .catch(error => console.error(error));
+  try {
+    let response = await fetch(`${keys.baseUrl}/get_problems`, options);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok.');
+    }
+
+    response = await response.json();
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      'There has been a problem with your fetch operation: ',
+      error.message
+    );
+  }
+};
+
+export const getWordSuggestions = async text => {
+  const options = getOptions({ text });
+
+  try {
+    let response = await fetch(`${keys.baseUrl}/suggest_words`, options);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok.');
+    }
+
+    response = await response.json();
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      'There has been a problem with your fetch operation: ',
+      error.message
+    );
+  }
 };

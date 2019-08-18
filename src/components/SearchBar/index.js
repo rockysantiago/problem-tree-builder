@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from 'semantic-ui-react';
-import { navigate } from '@reach/router';
 
 const SearchBar = props => {
-  const [term, setTerm] = useState('');
-
-  const handleClick = () => {
-    // navigate(`/search/${term}`);
-    props.search(term);
-  };
-
-  const handleChange = event => setTerm(event.target.value);
-
   return (
     <>
       <div style={{ marginBottom: '8px' }}>
@@ -20,14 +10,14 @@ const SearchBar = props => {
       <Input
         action={{
           content: 'Search',
-          onClick: handleClick
+          onClick: () => props.onSearch()
         }}
         icon="search"
         iconPosition="left"
         fluid
-        onChange={handleChange}
+        onChange={(e) => props.onChange(e.target.value)}
         placeholder="e.g. beijing air pollution, environment"
-        value={props.searchResult}
+        value={props.keyword}
       />
     </>
   );

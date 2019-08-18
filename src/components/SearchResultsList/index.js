@@ -5,9 +5,9 @@ import SearchResultsListItem from '../SearchResultsListItem';
 const SearchResultsList = props => {
   return (
     <List celled>
-      {props.problems &&
-        props.problems.map((problem, index) => (
-          <SearchResultsListItem key={index} problem={problem} />
+      {props.items &&
+        props.items.map((item, index) => (
+          <SearchResultsListItem key={index} item={item} onSelect={() => props.onSelect(index)} />
         ))}
     </List>
   );

@@ -5,12 +5,12 @@ const SearchResultsListItem = props => {
   return (
     <List.Item>
       <List.Content>
-        <Button basic icon="add" floated="left" />
-        <List.Header>{props.problem.title}</List.Header>
+        <Button basic icon={props.item.selected ? "minus" : "add"} floated="left" onClick={props.onSelect}/>
+        <List.Header>{props.item.title}</List.Header>
         <List.Description>
-          Source: {props.problem.source} Country: {props.problem.country}
-          Project No: {props.problem.project_no} Section:
-          {props.problem.section}
+          Source: {props.item.source} Country: {props.item.country}
+          Project No: {props.item.project_no} Section:
+          {props.item.section}
         </List.Description>
       </List.Content>
     </List.Item>

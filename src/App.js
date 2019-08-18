@@ -2,7 +2,7 @@ import React from 'react';
 import { Router } from '@reach/router';
 import GlobalStyle from './GlobalStyle';
 import Home from './views/home';
-import Search from './views/search';
+import ComposeTree from './views/composeTree';
 import GenerateTree from 'views/generateTree';
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
       <GlobalStyle />
       <Router>
         <Home path="/" />
-        <Search path="search/:term" />
+        <ComposeTree path="compose" />
         <GenerateTree path="generate-tree" />
       </Router>
     </>

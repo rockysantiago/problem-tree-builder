@@ -6,7 +6,7 @@ import topicReducer from './topicReducer';
 
 const rootReducer = combineReducers({
   topic: topicReducer,
-  poblems: problemsReducer,
+  problems: problemsReducer,
   causes: causesReducer,
   effects: effectsReducer
 });

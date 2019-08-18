@@ -14,7 +14,7 @@ const SuggestedTopics = props => (
             key={suggestedTopic}
             basic
             content={suggestedTopic}
-            onClick={() => navigate(`search/${suggestedTopic}`)}
+            onClick={() => props.onSelect(suggestedTopic)}
             size="mini"
           />
         ))}

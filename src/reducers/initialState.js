@@ -1,7 +1,7 @@
 export default {
   topic: {
     keyword: "",
-    problem: "",
+    problem: {},
     causes: [],
     effects: []
   },

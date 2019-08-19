@@ -23,7 +23,7 @@ export const getProblems = async (text, type) => {
 
     response = await response.json();
 
-    return response.data;
+    if (response.data && response.data.data) return response.data.data;
   } catch (error) {
     console.error(
       'There has been a problem with your fetch operation: ',

@@ -56,7 +56,7 @@ class ComposeTree extends Component {
     const { problems, topic } = this.props;
 
     return (
-      <Grid celled padded style={{ height: '100vh' }}>
+      <Grid padded style={{ height: '100vh' }}>
         <Grid.Column width={11}>
           <div>Tree</div>
           <div>Start building your tree</div>
@@ -94,7 +94,7 @@ class ComposeTree extends Component {
             onSelect={this.handleSuggestion}
           />
           <SearchResultsList
-            items={(problems.data && problems.data.data) || []}
+            items={problems.data || []}
             onSelect={this.handleSelectResult}
           />
         </Grid.Column>

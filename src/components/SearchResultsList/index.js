@@ -7,7 +7,11 @@ const SearchResultsList = props => {
     <List celled>
       {props.items &&
         props.items.map((item, index) => (
-          <SearchResultsListItem key={index} item={item} onSelect={() => props.onSelect(index)} />
+          <SearchResultsListItem
+            key={index}
+            item={item}
+            onSelect={() => props.onSelect(index)}
+          />
         ))}
     </List>
   );

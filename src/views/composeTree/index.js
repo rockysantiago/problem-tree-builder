@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { navigate } from '@reach/router';
 import { bindActionCreators } from 'redux';
 import { searchProblems, selectProblem } from 'actions/problemActions';
+import { searchCauses, selectCause } from 'actions/causesActions';
+import { searchEffects, selectEffect } from 'actions/effectsActions';
 import suggestedTopicsJSON from 'api/suggestedTopics.json';
 import SearchBar from 'components/SearchBar';
 import SuggestedTopics from 'components/SuggestedTopics';
@@ -14,7 +16,7 @@ class ComposeTree extends Component {
     super(props);
     this.state = {
       keyword: props.topic.keyword,
-      type: 'problems' // Possible values: 'problems', 'effetcs', 'causes'
+      type: 'problems' // Possible values: 'problems', 'effects', 'causes'
     };
   }
 
@@ -48,12 +50,32 @@ class ComposeTree extends Component {
 
   handleSelectResult = index => {
     const { type } = this.state;
-    this.props.selectProblem(index, this.props[type].data);
+    
+    if (type === 'problems') {
+      this.props.selectProblem(index, this.props[type].data);
+    } else if (type === 'causes') {
+      this.props.selectCause(index, this.props[type].data);
+    } else if (type === 'effects') {
+      this.props.selectEffect(index, this.props[type].data);
+    }
+    
   };
 
+  initAddWithType = type => {
+    this.setState({
+      type
+    });
+
+    if (type === 'causes') {
+      this.props.searchCauses(this.props.topic.problem.title);
+    } else if(type === 'effects'){
+      this.props.searchEffects(this.props.topic.problem.title);
+    }
+  }
+
   render() {
-    const { keyword } = this.state;
-    const { problems, topic } = this.props;
+    const { keyword, type } = this.state;
+    const { problems, topic, causes, effects } = this.props;
 
     return (
       <Grid padded style={{ height: '100vh' }}>
@@ -67,6 +89,15 @@ class ComposeTree extends Component {
               onClick={() => navigate('/generate-tree')}
             />
           </div>
+          {/* Effects section */}
+          {topic.effects.length === 0 && topic.problem.title && <button onClick={() => this.initAddWithType('effects')}>ADD EFFECTS</button>}
+          {topic.effects.length > 0 && topic.effects.map(effect => (
+             <div style={{ border: '1px solid blue' }}>
+               <p>{effect.title}</p>
+               <button>Add Sub effect</button>
+               <button>Delete</button>
+             </div>
+          ))}
 
           {/* Problem section */}
           <div style={{ border: '1px solid red' }}>
@@ -74,31 +105,67 @@ class ComposeTree extends Component {
           </div>
 
           {/* Cause section */}
-          {topic.causes.length === 0 && <button>ADD CAUSES</button>}
+          {topic.causes.length === 0 && topic.problem.title && <button onClick={() => this.initAddWithType('causes')}>ADD CAUSES</button>}
+          {topic.causes.length > 0 && topic.causes.map(cause => (
+             <div style={{ border: '1px solid green' }}>
+               <p>{cause.title}</p>
+               <button>Add Sub cause</button>
+               <button>Delete</button>
+             </div>
+          ))}
+        </Grid.Column>
 
-          {topic.causes.length > 0 && (
-            <div style={{ border: '1px solid green' }}>
-              {JSON.stringify(topic.causes)}
-            </div>
-          )}
-        </Grid.Column>
-        <Grid.Column width={5}>
-          <Header content="Add a problem" size="huge" />
-          <SearchBar
-            keyword={keyword}
-            onSearch={this.handleSearch}
-            onChange={this.handleChange}
-          />
-          <SuggestedTopics
-            suggestedTopics={suggestedTopicsJSON}
-            onSelect={this.handleSuggestion}
-          />
-          <SearchResultsList
-            items={problems.data || []}
-            onSelect={this.handleSelectResult}
-          />
-        </Grid.Column>
-      </Grid>
+        {type === 'problems' && (
+          <Grid.Column width={5}>
+            {problems.isFetching ? <h1>Loading...</h1> :
+            (<>
+              <Header content="Add a problem" size="huge" />
+              <SearchBar
+                keyword={keyword}
+                onSearch={this.handleSearch}
+                onChange={this.handleChange}
+              />
+              <SuggestedTopics
+                suggestedTopics={suggestedTopicsJSON}
+                onSelect={this.handleSuggestion}
+              />
+              <SearchResultsList
+                items={problems.data || []}
+                onSelect={this.handleSelectResult}
+              />
+            </>)}
+          </Grid.Column>
+        )}
+
+        {/* ADD CAUSES */}
+        {type === 'causes' && (
+          <Grid.Column width={5}>
+            {causes.isFetching ? <h1>Loading...</h1> :
+            (<>
+              <Header content="Add a causes" size="huge" />
+              <SearchResultsList
+                items={causes.data || []}
+                onSelect={this.handleSelectResult}
+              />
+            </>)}
+          </Grid.Column>
+        )}
+
+        {/* ADD EFFECTS */}
+        {type === 'effects' && (
+          <Grid.Column width={5}>
+            {effects.isFetching ? <h1>Loading...</h1> :
+            (<>
+              <Header content="Add a effects" size="huge" />
+              <SearchResultsList
+                items={effects.data || []}
+                onSelect={this.handleSelectResult}
+              />
+            </>)}
+          </Grid.Column>
+        )}
+
+        </Grid>
     );
   }
 }
@@ -107,7 +174,11 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       searchProblems,
-      selectProblem
+      selectProblem,
+      searchCauses,
+      selectCause,
+      searchEffects,
+      selectEffect
     },
     dispatch
   );

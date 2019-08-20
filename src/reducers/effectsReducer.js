@@ -9,7 +9,7 @@ export default function causesReducer(state = initialState.effects, action) {
     case types.SET_EFFECTS:
       return Object.assign({}, { isFetching: false, data: action.payload });
 
-    case types.INITIAL_STATE:
+    case types.INIT_EFFECTS:
       return Object.assign({}, initialState.effects);
 
     default:

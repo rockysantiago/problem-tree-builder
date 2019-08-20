@@ -9,7 +9,7 @@ export default function problemsReducer(state = initialState.problems, action) {
     case types.SET_PROBLEMS:
       return Object.assign({}, { isFetching: false, data: action.payload });
     
-    case types.INITIAL_STATE:
+    case types.INIT_PROBLEMS:
       return Object.assign({}, initialState.problems);
 
     default:

@@ -44,7 +44,7 @@ const SearchFilter = () => (
       <Dropdown.Header content="Filter" />
       <Dropdown.Menu scrolling>
         {filterOptions.map(option => (
-          <Dropdown.Item radio key={option.value} {...option} />
+          <Dropdown.Item key={option.value} {...option} />
         ))}
       </Dropdown.Menu>
     </Dropdown.Menu>

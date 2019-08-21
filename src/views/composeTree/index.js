@@ -235,7 +235,10 @@ class ComposeTree extends Component {
               <h1>Loading...</h1>
             ) : (
               <>
-                <Header content="Add Sub Causes" size="huge" />
+                <SearchInput
+                  content="Adding a sub-cause of:"
+                  text={topic.causes[topic.activeIndex].text}
+                ></SearchInput>
                 <SearchResultsList
                   items={topic.causes[topic.activeIndex]._source || []}
                   onSelect={this.handleSubSelection}
@@ -272,7 +275,10 @@ class ComposeTree extends Component {
               <h1>Loading...</h1>
             ) : (
               <>
-                <Header content="Add Sub Effects" size="huge" />
+                <SearchInput
+                  content="Adding a sub-effect of:"
+                  text={topic.effects[topic.activeIndex].text}
+                ></SearchInput>
                 <SearchResultsList
                   items={topic.causes[topic.activeIndex]._source || []}
                   onSelect={this.handleSubSelection}

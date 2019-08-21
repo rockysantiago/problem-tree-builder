@@ -1,19 +1,24 @@
 import React from 'react';
 import { List } from 'semantic-ui-react';
-import SearchResultsListItem from '../SearchResultsListItem';
 
-const SearchResultsList = props => {
+import SearchResultsListItem from '../SearchResultsListItem';
+import SearchResultsListMenu from '../SearchResultsListMenu';
+
+const SearchResultsList = ({ items, onSelect }) => {
   return (
-    <List celled>
-      {props.items &&
-        props.items.map((item, index) => (
-          <SearchResultsListItem
-            key={index}
-            item={item}
-            onSelect={() => props.onSelect(index)}
-          />
-        ))}
-    </List>
+    <>
+      <SearchResultsListMenu length={items.length} />
+      <List celled>
+        {items &&
+          items.map((item, index) => (
+            <SearchResultsListItem
+              key={index}
+              item={item}
+              onSelect={() => onSelect(index)}
+            />
+          ))}
+      </List>
+    </>
   );
 };
 

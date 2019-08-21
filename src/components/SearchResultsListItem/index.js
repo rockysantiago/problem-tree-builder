@@ -28,10 +28,10 @@ const SearchResultsListItem = ({ item, onSelect }) => {
         />
       </ButtonWrapper>
       <ListDetails>
-        <List.Header>{item.title}</List.Header>
+        <List.Header>{item.text}</List.Header>
         <ListRow style={{ marginTop: '8px' }}>
           <ListColumn style={{ flexFlow: 'nowrap' }}>
-            Source:
+            Link:
             <ItemLink href={item.link}>{item.link}</ItemLink>
           </ListColumn>
           <ListColumn>Country: {item.country}</ListColumn>

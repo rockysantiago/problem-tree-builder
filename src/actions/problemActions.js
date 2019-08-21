@@ -4,14 +4,15 @@ import * as types from 'constants/actionTypes';
 export const searchProblems = keyword => {
   return dispatch => {
     dispatch({ type: types.GET_PROBLEMS });
-    dispatch({ type: types.INIT_CAUSES });
-    dispatch({ type: types.INIT_EFFECTS });
     dispatch({
       type: types.SET_TOPIC,
       payload: {
         keyword,
+        activeType: 'problem',
         effects: [],
         causes: [],
+        _sourceEffects: [],
+        _sourceCauses: [],
         problem: {}
       }
     });

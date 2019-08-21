@@ -4,10 +4,10 @@ import { List } from 'semantic-ui-react';
 import SearchResultsListItem from '../SearchResultsListItem';
 import SearchResultsListMenu from '../SearchResultsListMenu';
 
-const SearchResultsList = ({ items, onSelect }) => {
+const SearchResultsList = ({ items, onSelect, selected }) => {
   return (
     <>
-      <SearchResultsListMenu length={items.length} />
+      <SearchResultsListMenu length={items.length} selected={selected} />
       <List celled>
         {items &&
           items.map((item, index) => (

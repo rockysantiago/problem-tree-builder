@@ -236,6 +236,7 @@ class ComposeTree extends Component {
                 <SearchResultsList
                   items={topic._sourceCauses || []}
                   onSelect={this.handleSelectResult}
+                  selected={topic.causes}
                 />
               </>
             )}
@@ -276,6 +277,7 @@ class ComposeTree extends Component {
                 <SearchResultsList
                   items={topic._sourceEffects || []}
                   onSelect={this.handleSelectResult}
+                  selected={topic.effects}
                 />
               </>
             )}

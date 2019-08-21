@@ -26,7 +26,7 @@ export const searchOptions = (keyword, searchType) => {
   };
 };
 
-export const selectOption = (index, optionType, options) => {
+export const selectOption = (index, activeType, options) => {
   const SEARCH_TYPES = {
     causes: types.SET_CAUSES,
     effects: types.SET_EFFECTS
@@ -42,40 +42,43 @@ export const selectOption = (index, optionType, options) => {
     dispatch({
       type: types.SET_TOPIC,
       payload: {
-        [`${optionType}`]: newOptions.filter(option => option.selected)
+        [`${activeType}`]: newOptions.filter(option => option.selected)
       }
     });
 
     dispatch({
-      type: SEARCH_TYPES[optionType],
+      type: SEARCH_TYPES[activeType],
       payload: newOptions
     });
   };
 };
 
-// TODO:
-export const selectSubOption = (index, optionType, options) => {
-  // const SEARCH_TYPES = {
-  //   'sub-cause': types.SET_SUB_CAUSES,
-  //   'sub-effect': types.SET_SUB_EFFECTS
-  // };
-  // return dispatch => {
-  //   const newOptions = options.map((option, idx) => {
-  //     return index === idx
-  //       ? Object.assign({}, option, { selected: !option.selected })
-  //       : Object.assign({}, option);
-  //   });
-  //   dispatch({
-  //     type: types.SET_TOPIC,
-  //     payload: {
-  //       [`${optionType}`]: newOptions.filter(option => option.selected)
-  //     }
-  //   });
-  //   dispatch({
-  //     type: SEARCH_TYPES[optionType],
-  //     payload: newOptions
-  //   });
-  // };
+export const selectSubOption = (parentIndex, selectedIndex, activeType, options) => {
+  const SEARCH_TYPES = {
+    'sub-cause': types.SET_SUB_CAUSES,
+    'sub-effect': types.SET_SUB_EFFECTS
+  };
+
+  return dispatch => {
+    const newSource = options[parentIndex]._source.map((s, idx) => {
+      return selectedIndex === idx
+        ? Object.assign({}, s, { selected: !s.selected })
+        : s;
+      });
+     
+    // dispatch({
+    //   type: types.SET_TOPIC,
+    //   payload: {
+    //     [`${activeType}`]: newOptions.filter(option => option.selected)
+    //   }
+    // });
+
+    dispatch({
+      type: SEARCH_TYPES[activeType],
+      idx: parentIndex,
+      payload: newSource
+    });
+  };
 };
 
 export const searchSubOptions = (keyword, searchType, idx) => {

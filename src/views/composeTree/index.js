@@ -15,7 +15,8 @@ import {
   setTopic,
   searchOptions,
   selectOption,
-  searchSubOptions
+  searchSubOptions,
+  selectSubOption
 } from 'actions/topicActions';
 
 class ComposeTree extends Component {
@@ -68,18 +69,16 @@ class ComposeTree extends Component {
     }
   };
 
-  handleSubSelection = (parentIndex, subIndex) => {
-    const { activeType } = this.props.topic;
-    console.log('PARENT ID : ', parentIndex);
-    console.log('SUB ID : ', subIndex);
+  handleSubSelection = (selectedIndex) => {
+    const { activeType, activeIndex, causes, effects } = this.props.topic;
+    console.log('SELECTED ID : ', selectedIndex);
     console.log('ACTIVE TYPE : ', activeType);
 
     if (activeType === 'sub-cause') {
       console.log('sub cause');
-      // this.props.selectCause(index, this.props[activeType].data);
+      this.props.selectSubOption(activeIndex, selectedIndex, activeType, causes);
     } else if (activeType === 'sub-effect') {
-      console.log('sub effects');
-      // this.props.selectEffect(index, this.props[activeType].data);
+      this.props.selectSubOption(activeIndex, selectedIndex, activeType, effects);
     }
   };
 
@@ -113,74 +112,41 @@ class ComposeTree extends Component {
       <Grid padded style={{ height: '100vh' }}>
         <Grid.Column width={11}>
           {/* Effects section */}
-          {topic.effects.length === 0 && topic.problem.title && (
-            <button onClick={() => this.initAddWithType('effect')}>
-              ADD EFFECTS
-            </button>
-          )}
-          {topic.effects.length > 0 &&
-            topic.effects.map((effect, idx) => (
-              <div style={{ border: '1px solid blue' }}>
-                <p>{effect.text}</p>
-                <button
-                  onClick={() =>
-                    this.props.setTopic({
-                      activeType: 'effect',
-                      activeIndex: idx
-                    })
-                  }
-                >
-                  Add another effect
-                </button>
-                <button onClick={() => this.initAddWithType('sub-effect', idx)}>
-                  Add Sub Effect
-                </button>
-                <button>Delete</button>
-              </div>
-            ))}
+          {topic.effects.length === 0 && topic.problem.text && <button onClick={() => this.initAddWithType('effect')}>ADD EFFECTS</button>}
+          {topic.effects.length > 0 && topic.effects.map((effect, idx) => (
+             <div style={{ border: '1px solid blue' }}>
+               <p>{effect.text}</p>
+               <button onClick={() => this.props.setTopic({ activeType: 'effect', activeIndex: idx })}>Add another effect</button>
+               <button onClick={() => this.initAddWithType('sub-effect', idx)}>Add Sub Effect</button>
+               <button>Delete</button>
+               {effect._data && effect._data.map(sub => (
+                <div style={{ border: '1px solid yellow' }}>
+                  <p>{sub.text}</p>
+                </div>
+              ))} 
+             </div>
+          ))}
 
           {/* Problem section */}
-          <div
-            style={{ border: '1px solid red' }}
-            onClick={() =>
-              this.props.setTopic({ activeType: 'problem', activeIndex: -1 })
-            }
-          >
+          <div style={{ border: '1px solid red' }} onClick={() => this.props.setTopic({ activeType: 'problem', activeIndex: -1 })}>
             {topic.problem.text}
           </div>
 
           {/* Cause section */}
-          {topic.causes.length === 0 && topic.problem.title && (
-            <button onClick={() => this.initAddWithType('cause')}>
-              ADD CAUSES
-            </button>
-          )}
-          {topic.causes.length > 0 &&
-            topic.causes.map((cause, idx) => (
-              <div style={{ border: '1px solid green' }}>
-                <p>{cause.text}</p>
-                <button
-                  onClick={() =>
-                    this.props.setTopic({
-                      activeType: 'cause',
-                      activeIndex: idx
-                    })
-                  }
-                >
-                  Add another Cause
-                </button>
-                <button onClick={() => this.initAddWithType('sub-cause', idx)}>
-                  Add Sub Cause
-                </button>
-                <button>Delete</button>
-              </div>
-            ))}
-          <div>
-            <Button
-              content="Generate Tree"
-              onClick={() => navigate('/generate-tree')}
-            />
-          </div>
+          {topic.causes.length === 0 && topic.problem.text && <button onClick={() => this.initAddWithType('cause')}>ADD CAUSES</button>}
+          {topic.causes.length > 0 && topic.causes.map((cause, idx) => (
+             <div style={{ border: '1px solid green' }}>
+              <p>{cause.text}</p>
+              <button onClick={() => this.props.setTopic({ activeType: 'cause', activeIndex: idx })}>Add another Cause</button>
+              <button onClick={() => this.initAddWithType('sub-cause', idx)}>Add Sub Cause</button>
+              <button>Delete</button>
+              {cause._data && cause._data.map(sub => (
+                <div style={{ border: '1px solid yellow' }}>
+                  <p>{sub.text}</p>
+                </div>
+              ))} 
+             </div>
+          ))}
         </Grid.Column>
 
         {topic.activeType === 'problem' && (
@@ -271,20 +237,14 @@ class ComposeTree extends Component {
         {/* ADD SUB EFFECTS */}
         {topic.activeType === 'sub-effect' && (
           <Grid.Column width={5}>
-            {topic.isFetching ? (
-              <h1>Loading...</h1>
-            ) : (
-              <>
-                <SearchInput
-                  content="Adding a sub-effect of:"
-                  text={topic.effects[topic.activeIndex].text}
-                ></SearchInput>
-                <SearchResultsList
-                  items={topic.causes[topic.activeIndex]._source || []}
-                  onSelect={this.handleSubSelection}
-                />
-              </>
-            )}
+            {topic.isFetching ? <h1>Loading...</h1> :
+            (<>
+              <Header content="Add Sub Effects" size="huge" />
+              <SearchResultsList
+                items={topic.effects[topic.activeIndex]._source || []}
+                onSelect={this.handleSubSelection}
+              />
+            </>)}
           </Grid.Column>
         )}
       </Grid>
@@ -300,7 +260,8 @@ const mapDispatchToProps = dispatch =>
       setTopic,
       searchOptions,
       searchSubOptions,
-      selectOption
+      selectOption,
+      selectSubOption
     },
     dispatch
   );

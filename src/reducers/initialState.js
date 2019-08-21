@@ -1,17 +1,12 @@
 export default {
   topic: {
     keyword: "",
+    activeType: "problem",
     problem: {},
     causes: [],
-    effects: []
-  },
-  causes: {
-    isFetching: false,
-    data: []
-  },
-  effects: {
-    isFetching: false,
-    data: []
+    effects: [],
+    _sourceCauses: [],
+    _sourceEffects: []
   },
   problems: {
     isFetching: false,

@@ -3,6 +3,7 @@ import { Button, List } from 'semantic-ui-react';
 import {
   ButtonWrapper,
   ItemLink,
+  ItemWrapper,
   ListColumn,
   ListDetails,
   ListRow
@@ -28,7 +29,9 @@ const SearchResultsListItem = ({ item, onSelect }) => {
         />
       </ButtonWrapper>
       <ListDetails>
-        <List.Header>{item.text}</List.Header>
+        <List.Header>
+          <ItemWrapper>{item.text}</ItemWrapper>
+        </List.Header>
         <ListRow style={{ marginTop: '8px' }}>
           <ListColumn style={{ flexFlow: 'nowrap' }}>
             Link:

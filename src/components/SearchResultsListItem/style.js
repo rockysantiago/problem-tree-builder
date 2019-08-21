@@ -12,6 +12,16 @@ export const ItemLink = styled.a`
   width: 90px;
 `;
 
+export const ItemWrapper = styled.div`
+  display: -webkit-box;
+  max-height: 3.2rem;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+`;
+
 export const ListColumn = styled.div`
   display: flex;
   flex-direction: column;

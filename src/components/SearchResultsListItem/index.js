@@ -9,7 +9,7 @@ import {
   ListRow
 } from './style';
 
-const SearchResultsListItem = ({ item, onSelect }) => {
+const SearchResultsListItem = ({ item, onSelect, disabled }) => {
   return (
     <List.Item
       style={{
@@ -26,6 +26,7 @@ const SearchResultsListItem = ({ item, onSelect }) => {
           icon={item.selected ? 'check' : 'add'}
           onClick={onSelect}
           style={{ boxShadow: 'none' }}
+          disabled={!item.selected && disabled}
         />
       </ButtonWrapper>
       <ListDetails>

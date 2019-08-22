@@ -7,6 +7,7 @@ import SearchBar from 'components/SearchBar';
 import SearchInput from 'components/SearchInput';
 import SuggestedTopics from 'components/SuggestedTopics';
 import SearchResultsList from 'components/SearchResultsList';
+import Tree from 'components/Tree';
 
 // Import Actions
 import { searchProblems, selectProblem } from 'actions/problemActions';
@@ -102,10 +103,13 @@ class ComposeTree extends Component {
     const { keyword } = this.state;
     const { problems, topic } = this.props;
 
+    console.log('TOPIC ======', topic);
+
     return (
       <Grid padded style={{ height: '100vh' }}>
-        <Grid.Column width={11}>
+        <Grid.Column width={11} style={{ border: '1px solid red' }}>
           {/* Effects section */}
+          <Tree data={topic} />
           {topic.effects.length === 0 && topic.problem.text && (
             <button onClick={() => this.initAddWithType('effect')}>
               ADD EFFECTS

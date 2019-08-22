@@ -15,7 +15,7 @@ const SearchResultsList = ({ items, onSelect, selected }) => {
               key={index}
               item={item}
               onSelect={() => onSelect(index)}
-              disabled={selected.length >= 2}
+              disabled={selected && selected.length >= 2}
             />
           ))}
       </List>

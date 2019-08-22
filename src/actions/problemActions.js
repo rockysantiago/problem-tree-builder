@@ -50,7 +50,12 @@ export const selectProblem = (index, problems) => {
     dispatch({
       type: types.SET_TOPIC,
       payload: {
-        problem: newProblems.filter(problem => problem.selected)[0]
+        problem: newProblems.filter(problem => problem.selected)[0],
+        activeType: 'problem',
+        effects: [],
+        causes: [],
+        _sourceEffects: [],
+        _sourceCauses: [],
       }
     });
 

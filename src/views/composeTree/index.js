@@ -37,6 +37,7 @@ class ComposeTree extends Component {
   };
 
   handleSuggestion = keyword => {
+    this.setState({ keyword });
     this.props.searchProblems(keyword);
   };
 
@@ -102,8 +103,6 @@ class ComposeTree extends Component {
   render() {
     const { keyword } = this.state;
     const { problems, topic } = this.props;
-
-    console.log('TOPIC ======', topic);
 
     return (
       <Grid padded style={{ height: '100vh' }}>

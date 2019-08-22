@@ -13,9 +13,9 @@ import { searchProblems, selectProblem } from 'actions/problemActions';
 import {
   setTopic,
   searchOptions,
-  selectOption,
   searchSubOptions,
-  selectSubOption
+  selectSubOption,
+  selectOption
 } from 'actions/topicActions';
 
 class ComposeTree extends Component {
@@ -53,47 +53,32 @@ class ComposeTree extends Component {
 
   handleSelectResult = index => {
     const { activeType } = this.props.topic;
-    console.log('ACTIVE TYPE: ', activeType);
-
     if (activeType === 'problem') {
       this.props.selectProblem(index, this.props.problems.data);
-    } else if (activeType === 'cause') {
-      this.props.selectOption(index, 'causes', this.props.topic._sourceCauses);
-    } else if (activeType === 'effect') {
-      this.props.selectOption(
-        index,
-        'effects',
-        this.props.topic._sourceEffects
-      );
+    } else if (activeType === 'cause' || activeType === 'effect' ) {
+      this.props.selectOption(index, activeType);
     }
   };
 
   handleSubSelection = selectedIndex => {
-    const { activeType, activeIndex, causes, effects } = this.props.topic;
-    console.log('SELECTED ID : ', selectedIndex);
-    console.log('ACTIVE TYPE : ', activeType);
-
+    const { activeType } = this.props.topic;
     if (activeType === 'sub-cause') {
-      console.log('sub cause');
       this.props.selectSubOption(
-        activeIndex,
         selectedIndex,
-        activeType,
-        causes
+        activeType
       );
     } else if (activeType === 'sub-effect') {
       this.props.selectSubOption(
-        activeIndex,
         selectedIndex,
-        activeType,
-        effects
+        activeType
       );
     }
   };
 
-  initAddWithType = (activeType, parentIndex) => {
+  initAddWithType = (activeType, parentIndex, listIndex) => {
     this.props.setTopic({
-      activeType
+      activeType,
+      activeIndex: parentIndex
     });
 
     if (activeType === 'cause' || activeType === 'effect') {
@@ -102,13 +87,13 @@ class ComposeTree extends Component {
       this.props.searchSubOptions(
         this.props.topic.causes[parentIndex].text,
         'cause',
-        parentIndex
+        listIndex
       );
     } else if (activeType === 'sub-effect') {
       this.props.searchSubOptions(
         this.props.topic.effects[parentIndex].text,
         'effect',
-        parentIndex
+        listIndex
       );
     }
   };
@@ -140,7 +125,7 @@ class ComposeTree extends Component {
                 >
                   Add another effect
                 </button>
-                <button onClick={() => this.initAddWithType('sub-effect', idx)}>
+                <button onClick={() => this.initAddWithType('sub-effect', idx, effect._listIndex)}>
                   Add Sub Effect
                 </button>
                 <button>Delete</button>
@@ -183,7 +168,7 @@ class ComposeTree extends Component {
                 >
                   Add another Cause
                 </button>
-                <button onClick={() => this.initAddWithType('sub-cause', idx)}>
+                <button onClick={() => this.initAddWithType('sub-cause', idx, cause._listIndex)}>
                   Add Sub Cause
                 </button>
                 <button>Delete</button>
@@ -255,7 +240,7 @@ class ComposeTree extends Component {
                   text={topic.causes[topic.activeIndex].text}
                 ></SearchInput>
                 <SearchResultsList
-                  items={topic.causes[topic.activeIndex]._source || []}
+                  items={topic.causes[topic.activeIndex]._sources || []}
                   onSelect={this.handleSubSelection}
                 />
               </>
@@ -296,7 +281,7 @@ class ComposeTree extends Component {
                   text={topic.effects[topic.activeIndex].text}
                 ></SearchInput>
                 <SearchResultsList
-                  items={topic.effects[topic.activeIndex]._source || []}
+                  items={topic.effects[topic.activeIndex]._sources || []}
                   onSelect={this.handleSubSelection}
                 />
               </>
@@ -316,8 +301,8 @@ const mapDispatchToProps = dispatch =>
       setTopic,
       searchOptions,
       searchSubOptions,
-      selectOption,
-      selectSubOption
+      selectSubOption,
+      selectOption
     },
     dispatch
   );

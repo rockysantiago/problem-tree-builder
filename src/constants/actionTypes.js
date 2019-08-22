@@ -16,3 +16,7 @@ export const SET_CAUSES = 'SET_CAUSES';
 export const SET_SUB_CAUSES = 'SET_SUB_CAUSES';
 export const SET_EFFECTS = 'SET_EFFECTS';
 export const SET_SUB_EFFECTS = 'SET_SUB_EFFECTS';
+export const SELECT_CAUSE = 'SELECT_CAUSE';
+export const SELECT_EFFECT = 'SELECT_EFFECT';
+export const SELECT_SUB_CAUSE = 'SELECT_SUB_CAUSE';
+export const SELECT_SUB_EFFECT = 'SELECT_SUB_EFFECT';

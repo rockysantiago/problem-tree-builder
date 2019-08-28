@@ -57,7 +57,7 @@ class ComposeTree extends Component {
     const { activeType } = this.props.topic;
     if (activeType === 'problem') {
       this.props.selectProblem(index, this.props.problems.data);
-    } else if (activeType === 'cause' || activeType === 'effect' ) {
+    } else if (activeType === 'cause' || activeType === 'effect') {
       this.props.selectOption(index, activeType);
     }
   };
@@ -65,15 +65,9 @@ class ComposeTree extends Component {
   handleSubSelection = selectedIndex => {
     const { activeType } = this.props.topic;
     if (activeType === 'sub-cause') {
-      this.props.selectSubOption(
-        selectedIndex,
-        activeType
-      );
+      this.props.selectSubOption(selectedIndex, activeType);
     } else if (activeType === 'sub-effect') {
-      this.props.selectSubOption(
-        selectedIndex,
-        activeType
-      );
+      this.props.selectSubOption(selectedIndex, activeType);
     }
   };
 
@@ -105,7 +99,7 @@ class ComposeTree extends Component {
     const { problems, topic } = this.props;
 
     return (
-      <Grid padded style={{ height: '100vh' }}>
+      <Grid padded>
         <Grid.Column width={11} style={{ border: '1px solid red' }}>
           {/* Effects section */}
           <Tree data={topic} />
@@ -128,7 +122,11 @@ class ComposeTree extends Component {
                 >
                   Add another effect
                 </button>
-                <button onClick={() => this.initAddWithType('sub-effect', idx, effect._listIndex)}>
+                <button
+                  onClick={() =>
+                    this.initAddWithType('sub-effect', idx, effect._listIndex)
+                  }
+                >
                   Add Sub Effect
                 </button>
                 <button>Delete</button>
@@ -171,7 +169,11 @@ class ComposeTree extends Component {
                 >
                   Add another Cause
                 </button>
-                <button onClick={() => this.initAddWithType('sub-cause', idx, cause._listIndex)}>
+                <button
+                  onClick={() =>
+                    this.initAddWithType('sub-cause', idx, cause._listIndex)
+                  }
+                >
                   Add Sub Cause
                 </button>
                 <button>Delete</button>

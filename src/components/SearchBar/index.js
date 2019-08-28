@@ -1,24 +1,22 @@
 import React from 'react';
 import { Input } from 'semantic-ui-react';
 
-const SearchBar = props => {
+const SearchBar = ({ keyword, onChange, onSearch, size, width }) => {
   return (
     <>
-      <div style={{ marginBottom: '8px' }}>
-        <label>Enter topic or keyword</label>
-      </div>
-
       <Input
         action={{
           content: 'Search',
-          onClick: () => props.onSearch()
+          onClick: () => onSearch()
         }}
-        fluid
+        fluid={width ? false : true}
         icon="search"
         iconPosition="left"
-        onChange={e => props.onChange(e.target.value)}
-        placeholder="e.g. beijing air pollution, environment"
-        value={props.keyword}
+        onChange={e => onChange(e.target.value)}
+        placeholder="Enter topic or keyword"
+        size={size}
+        value={keyword}
+        style={{ width }}
       />
     </>
   );

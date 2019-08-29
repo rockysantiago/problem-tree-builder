@@ -14,7 +14,9 @@ export const Wrapper = styled.div`
 `;
 
 export const VerticalArrow = styled.div`
-  border-left: 1px solid #353535;
+  border-style: solid;
+  border-width: 0 0 0 1px;
+  border-color: #353535;
   width: 1px;
   height: 15px;
 

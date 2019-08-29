@@ -91,10 +91,12 @@ class Tree extends Component {
                         <Node
                           withControls={!forExport}
                           onGroupControlClick={() =>
-                            this.setActiveMenu(`subeffect${seIndex}`)
+                            this.setActiveMenu(
+                              `subeffect[${effectIndex}]${seIndex}`
+                            )
                           }
                           showControlGroup={
-                            `subeffect${seIndex}` === activeMenu
+                            `subeffect[${effectIndex}]${seIndex}` === activeMenu
                           }
                           content={subEffect.text}
                           identifier={!forExport && 'effect'}
@@ -161,7 +163,7 @@ class Tree extends Component {
         </Level>
 
         {/* Center */}
-        <VerticalArrow top />
+        <VerticalArrow />
 
         {data.effects.length <= 1 && <VerticalArrow />}
 
@@ -248,9 +250,11 @@ class Tree extends Component {
                         <Node
                           withControls={!forExport}
                           onGroupControlClick={() =>
-                            this.setActiveMenu(`subcause${scIndex}`)
+                            this.setActiveMenu(`subcause[${index}]${scIndex}`)
                           }
-                          showControlGroup={`subcause${scIndex}` === activeMenu}
+                          showControlGroup={
+                            `subcause[${index}]${scIndex}` === activeMenu
+                          }
                           content={subCause.text}
                           identifier={!forExport && 'cause'}
                           onDelete={() =>

@@ -99,7 +99,7 @@ class ComposeTree extends Component {
     const { problems, topic } = this.props;
 
     return (
-      <Grid padded style={{ height: '100vh' }}>
+      <Grid padded style={{ height: '100vh', overflow: 'hidden' }}>
         <Grid.Column width={11} style={{ height: '100%' }}>
           <Button onClick={() => navigate('/generate-tree')}>
             Generate Tree

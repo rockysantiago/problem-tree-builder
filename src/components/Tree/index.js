@@ -1,37 +1,93 @@
 import React, { Component } from 'react';
-import { Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import { searchProblems, selectProblem } from 'actions/problemActions';
 import {
-  Wrapper,
-  Node,
-  Legend,
-  Text,
-  VerticalArrow,
-  Level,
-  Child,
-  HorizontalLine
-} from './style';
+  setTopic,
+  searchOptions,
+  searchSubOptions,
+  selectSubOption,
+  selectOption
+} from 'actions/topicActions';
+
+import Node from '../Node';
+
+import { Wrapper, VerticalArrow, Level, Child, HorizontalLine } from './style';
 
 class Tree extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeMenu: null
+    };
+  }
+
+  setActiveMenu = index => {
+    const { activeMenu } = this.state;
+
+    if (activeMenu !== index) {
+      this.setState({
+        activeMenu: index
+      });
+    } else {
+      this.setState({
+        activeMenu: null
+      });
+    }
+  };
+
+  initAddWithType = (activeType, parentIndex, listIndex) => {
+    this.props.setTopic({
+      activeType,
+      activeIndex: parentIndex
+    });
+
+    if (activeType === 'cause' || activeType === 'effect') {
+      this.props.searchOptions(this.props.topic.problem.text, activeType);
+    } else if (activeType === 'sub-cause') {
+      this.props.searchSubOptions(
+        this.props.topic.causes[parentIndex].text,
+        'cause',
+        listIndex
+      );
+    } else if (activeType === 'sub-effect') {
+      this.props.searchSubOptions(
+        this.props.topic.effects[parentIndex].text,
+        'effect',
+        listIndex
+      );
+    }
+  };
+
   render() {
     const { data } = this.props;
+    // const { activeMenu } = this.state;
 
     return (
       <Wrapper>
         <Level bottomTop>
-          {data.effects &&
+          {data.effects.length === 0 ? (
+            <Child>
+              <Node
+                onClick={
+                  data.problem.text
+                    ? () => this.initAddWithType('effect')
+                    : () => {}
+                }
+                content="ADD EFFECTS"
+                identifier={data.problem.text ? 'toBeFilled' : 'empty'}
+              />
+            </Child>
+          ) : (
+            data.effects &&
             data.effects.map((effect, effectIndex) => (
               <Child>
-                <Level>
+                <Level bottomTop>
                   {effect._data &&
                     effect._data.map((subEffect, seIndex) => (
                       <Child>
-                        <>
-                          <Legend top />
-                          <Node>
-                            <Text>{subEffect.text}</Text>
-                          </Node>
-                        </>
+                        <Node content={subEffect.text} identifier="effect" />
                         <VerticalArrow top />
                         {effect._data.length > 1 && (
                           <HorizontalLine
@@ -45,13 +101,17 @@ class Tree extends Component {
 
                 {effect._data && effect._data.length > 0 && <VerticalArrow />}
 
-                <>
-                  <Legend top />
-                  <Node>
-                    <Icon name="ellipsis vertical" />
-                    <Text>{effect.text}</Text>
-                  </Node>
-                </>
+                <Node
+                  onClick={() =>
+                    this.initAddWithType(
+                      'sub-effect',
+                      effectIndex,
+                      effect._listIndex
+                    )
+                  }
+                  content={effect.text}
+                  identifier="effect"
+                />
 
                 {data.effects && data.effects.length > 1 && (
                   <>
@@ -63,24 +123,40 @@ class Tree extends Component {
                   </>
                 )}
               </Child>
-            ))}
+            ))
+          )}
         </Level>
 
         {/* Center */}
-        {data.effects && data.effects.length > 0 && <VerticalArrow top />}
-        <>
-          <Legend center />
-          <Node>
-            <Icon name="ellipsis vertical" />
-            <Text>{data.problem.text}</Text>
-          </Node>
-        </>
+        <VerticalArrow top />
+
+        {data.effects.length <= 1 && <VerticalArrow />}
+
+        <Node
+          onClick={() =>
+            this.props.setTopic({ activeType: 'problem', activeIndex: -1 })
+          }
+          content={data.problem.text || 'SELECT A PROBLEM STATEMENT'}
+          identifier="problem"
+        />
+        <VerticalArrow top />
         {/* Center */}
 
-        {data.causes && data.causes.length > 0 && <VerticalArrow top />}
-
         <Level>
-          {data.causes &&
+          {data.causes.length === 0 ? (
+            <Child>
+              <VerticalArrow />
+              <Node
+                onClick={
+                  data.problem.text
+                    ? () => this.initAddWithType('cause')
+                    : () => {}
+                }
+                content="ADD CAUSES"
+                identifier={data.problem.text ? 'toBeFilled' : 'empty'}
+              />
+            </Child>
+          ) : (
             data.causes.map((cause, index) => (
               <Child>
                 {data.causes && data.causes.length > 1 && (
@@ -91,13 +167,17 @@ class Tree extends Component {
                 )}
 
                 <VerticalArrow />
-                <>
-                  <Legend bottom />
-                  <Node>
-                    <Icon name="ellipsis vertical" />
-                    <Text>{cause.text}</Text>
-                  </Node>
-                </>
+
+                <Node
+                  onClick={() =>
+                    this.initAddWithType('sub-cause', index, cause._listIndex)
+                  }
+                  content={cause.text}
+                  identifier="cause"
+                  // withControls
+                  // onGroupControlClick={() => this.setActiveMenu(`cause${index}`)}
+                  // showControlGroup={`cause${index}` === activeMenu}
+                />
 
                 {cause._data && cause._data.length > 0 && <VerticalArrow top />}
 
@@ -113,22 +193,38 @@ class Tree extends Component {
                         )}
 
                         <VerticalArrow />
-                        <>
-                          <Legend bottom />
-                          <Node>
-                            <Icon name="ellipsis vertical" />
-                            <Text>{subCause.text}</Text>
-                          </Node>
-                        </>
+                        <Node content={subCause.text} identifier="cause" />
                       </Child>
                     ))}
                 </Level>
               </Child>
-            ))}
+            ))
+          )}
         </Level>
       </Wrapper>
     );
   }
 }
 
-export default Tree;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      searchProblems,
+      selectProblem,
+      setTopic,
+      searchOptions,
+      searchSubOptions,
+      selectSubOption,
+      selectOption
+    },
+    dispatch
+  );
+
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tree);

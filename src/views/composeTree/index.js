@@ -57,7 +57,7 @@ class ComposeTree extends Component {
     const { activeType } = this.props.topic;
     if (activeType === 'problem') {
       this.props.selectProblem(index, this.props.problems.data);
-    } else if (activeType === 'cause' || activeType === 'effect' ) {
+    } else if (activeType === 'cause' || activeType === 'effect') {
       this.props.selectOption(index, activeType);
     }
   };
@@ -65,15 +65,9 @@ class ComposeTree extends Component {
   handleSubSelection = selectedIndex => {
     const { activeType } = this.props.topic;
     if (activeType === 'sub-cause') {
-      this.props.selectSubOption(
-        selectedIndex,
-        activeType
-      );
+      this.props.selectSubOption(selectedIndex, activeType);
     } else if (activeType === 'sub-effect') {
-      this.props.selectSubOption(
-        selectedIndex,
-        activeType
-      );
+      this.props.selectSubOption(selectedIndex, activeType);
     }
   };
 
@@ -105,15 +99,16 @@ class ComposeTree extends Component {
     const { problems, topic } = this.props;
 
     return (
-      <Grid padded style={{ height: '100vh' }}>
-        <Grid.Column width={11} style={{ border: '1px solid red' }}>
+      <Grid padded style={{ height: '100vh', overflow: 'hidden' }}>
+        <Grid.Column width={11} style={{ height: '100%' }}>
           {/* Effects section */}
           <Tree data={topic} />
-          {topic.effects.length === 0 && topic.problem.text && (
+          {/* {topic.effects.length === 0 && topic.problem.text && (
             <button onClick={() => this.initAddWithType('effect')}>
               ADD EFFECTS
             </button>
           )}
+
           {topic.effects.length > 0 &&
             topic.effects.map((effect, idx) => (
               <div style={{ border: '1px solid blue' }}>
@@ -128,7 +123,11 @@ class ComposeTree extends Component {
                 >
                   Add another effect
                 </button>
-                <button onClick={() => this.initAddWithType('sub-effect', idx, effect._listIndex)}>
+                <button
+                  onClick={() =>
+                    this.initAddWithType('sub-effect', idx, effect._listIndex)
+                  }
+                >
                   Add Sub Effect
                 </button>
                 <button>Delete</button>
@@ -142,22 +141,21 @@ class ComposeTree extends Component {
             ))}
 
           {/* Problem section */}
-          <div
-            style={{ border: '1px solid red' }}
+          {/* <div
             onClick={() =>
               this.props.setTopic({ activeType: 'problem', activeIndex: -1 })
             }
           >
             {topic.problem.text}
-          </div>
+          </div> */}
 
           {/* Cause section */}
-          {topic.causes.length === 0 && topic.problem.text && (
+          {/* {topic.causes.length === 0 && topic.problem.text && (
             <button onClick={() => this.initAddWithType('cause')}>
               ADD CAUSES
             </button>
-          )}
-          {topic.causes.length > 0 &&
+          )} */}
+          {/* {topic.causes.length > 0 &&
             topic.causes.map((cause, idx) => (
               <div style={{ border: '1px solid green' }}>
                 <p>{cause.text}</p>
@@ -171,7 +169,11 @@ class ComposeTree extends Component {
                 >
                   Add another Cause
                 </button>
-                <button onClick={() => this.initAddWithType('sub-cause', idx, cause._listIndex)}>
+                <button
+                  onClick={() =>
+                    this.initAddWithType('sub-cause', idx, cause._listIndex)
+                  }
+                >
                   Add Sub Cause
                 </button>
                 <button>Delete</button>
@@ -182,9 +184,8 @@ class ComposeTree extends Component {
                     </div>
                   ))}
               </div>
-            ))}
+            ))} */}
         </Grid.Column>
-
         {topic.activeType === 'problem' && (
           <Grid.Column width={5}>
             {problems.isFetching ? (
@@ -209,7 +210,6 @@ class ComposeTree extends Component {
             )}
           </Grid.Column>
         )}
-
         {/* ADD CAUSES */}
         {topic.activeType === 'cause' && (
           <Grid.Column width={5}>
@@ -230,7 +230,6 @@ class ComposeTree extends Component {
             )}
           </Grid.Column>
         )}
-
         {/* ADD SUB CAUSE */}
         {topic.activeType === 'sub-cause' && (
           <Grid.Column width={5}>
@@ -250,7 +249,6 @@ class ComposeTree extends Component {
             )}
           </Grid.Column>
         )}
-
         {/* ADD EFFECTS */}
         {topic.activeType === 'effect' && (
           <Grid.Column width={5}>
@@ -271,7 +269,6 @@ class ComposeTree extends Component {
             )}
           </Grid.Column>
         )}
-
         {/* ADD SUB EFFECTS */}
         {topic.activeType === 'sub-effect' && (
           <Grid.Column width={5}>
@@ -290,7 +287,8 @@ class ComposeTree extends Component {
               </>
             )}
           </Grid.Column>
-        )}
+        )}{' '}
+        */}
       </Grid>
     );
   }

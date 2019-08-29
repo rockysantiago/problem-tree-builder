@@ -2,58 +2,19 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-`;
-
-export const Node = styled.div`
-  border: 1px solid #ccc;
-  width: 220px;
-  min-height: 70px;
-  font-size: 10px;
-  margin: 0 10px;
 
   i {
-    width: 5%;
-    float: right;
+    width: 5px;
   }
 `;
 
-export const Legend = styled.div`
-  border: 1px solid #ccc;
-  margin-bottom: -1px;
-  width: 220px;
-  height: 8px;
-  background: ${props => {
-    let color;
-
-    if (props.center) {
-      color = 'pink';
-    } else if (props.bottom) {
-      color = 'lightblue';
-    } else if (props.top) {
-      color = 'paleturquoise';
-    }
-
-    return color;
-  }};
-`;
-
-export const Text = styled.div`
-  font-size: 12px;
-  text-transform: capitalize;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 70px;
-  position: absolute;
-  width: 220px;
-`;
-
 export const VerticalArrow = styled.div`
-  border: 1px solid #ccc;
+  border-left: 1px solid #353535;
   width: 1px;
   height: 15px;
 
@@ -61,32 +22,31 @@ export const VerticalArrow = styled.div`
     props.top &&
     `
     margin-top: 4px;
+    font-family: Icons;
+
     &:before {
-      content: '\\25b2';
-      color: #ccc;
-      font-size: 11px;
+      content: '\\f106';
+      color: #353535;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
       margin-left: -5px;
       float: left;
-      margin-top: -11px;
+      margin-top: -7px;
     }`};
 
   ${props =>
     props.bottom &&
     `
     margin-bottom: 5px;
+
     &:after {
-      content: '\\25bc';
-      color: #ccc;
+      content: '\\2193';
+      color: #353535;
       font-size: 11px;
       margin-left: -5px;
       float: left;
       margin-top: 11px;
     }`};
-`;
-
-export const HorizontalArrow = styled.div`
-  border: 1px solid #ccc;
-  width: calc(25% + 2px);
 `;
 
 export const Level = styled.div`
@@ -116,20 +76,20 @@ export const Child = styled.div`
 `;
 
 export const HorizontalLine = styled.div`
-  border: 1px solid #ccc;
+  border-top: thin solid #353535;
   width: 100%;
 
   ${props =>
     props.rightHalf &&
     `
-    width: calc(50% + 2px);
+    width: calc(50% + 1px);
       margin-left: 50%;
     `}
 
   ${props =>
     props.leftHalf &&
     `
-    width: calc(50% + 2px);
+    width: calc(50% + 1px);
       margin-right: 50%;
     `}
 `;

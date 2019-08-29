@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Grid, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import suggestedTopicsJSON from 'api/suggestedTopics.json';
+import { Grid, Header } from 'semantic-ui-react';
+
 import SearchBar from 'components/SearchBar';
 import SearchInput from 'components/SearchInput';
-import SuggestedTopics from 'components/SuggestedTopics';
 import SearchResultsList from 'components/SearchResultsList';
 import Tree from 'components/Tree';
 
@@ -197,10 +196,6 @@ class ComposeTree extends Component {
                   keyword={keyword}
                   onSearch={this.handleSearch}
                   onChange={this.handleChange}
-                />
-                <SuggestedTopics
-                  suggestedTopics={suggestedTopicsJSON}
-                  onSelect={this.handleSuggestion}
                 />
                 <SearchResultsList
                   items={problems.data || []}

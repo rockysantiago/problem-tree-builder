@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
+import { Button } from 'semantic-ui-react';
+
+import Tree from 'components/Tree';
 
 class GenerateTree extends Component {
   printDocument = async () => {
@@ -10,8 +14,19 @@ class GenerateTree extends Component {
   };
 
   render() {
-    return <div id="capture">GenerateTree</div>;
+    const { topic } = this.props;
+
+    return (
+      <>
+        <div id="capture">
+          <Tree data={topic} />
+        </div>
+        <Button onClick={this.printDocument}>Export File</Button>
+      </>
+    );
   }
 }
 
-export default GenerateTree;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(GenerateTree);

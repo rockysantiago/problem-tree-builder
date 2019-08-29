@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid, Header } from 'semantic-ui-react';
+import { Button, Grid, Header } from 'semantic-ui-react';
 
 import SearchBar from 'components/SearchBar';
 import SearchInput from 'components/SearchInput';
@@ -101,6 +102,9 @@ class ComposeTree extends Component {
       <Grid padded style={{ height: '100vh', overflow: 'hidden' }}>
         <Grid.Column width={11} style={{ height: '100%' }}>
           {/* Effects section */}
+          <Button onClick={() => navigate('/generate-tree')}>
+            Generate Tree
+          </Button>
           <Tree data={topic} onDeleteSibling={this.handleSelectResult} />
           {/* {topic.effects.length === 0 && topic.problem.text && (
             <button onClick={() => this.initAddWithType('effect')}>

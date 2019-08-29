@@ -61,7 +61,7 @@ class Tree extends Component {
   };
 
   render() {
-    const { data } = this.props;
+    const data = this.props.topic;
     const { activeMenu } = this.state;
 
     return (
@@ -87,10 +87,14 @@ class Tree extends Component {
                   {effect._data &&
                     effect._data.map((subEffect, seIndex) => (
                       <Child>
-                        <Node 
+                        <Node
                           withControls
-                          onGroupControlClick={() => this.setActiveMenu(`subeffect${seIndex}`)}
-                          showControlGroup={`subeffect${seIndex}` === activeMenu}
+                          onGroupControlClick={() =>
+                            this.setActiveMenu(`subeffect${seIndex}`)
+                          }
+                          showControlGroup={
+                            `subeffect${seIndex}` === activeMenu
+                          }
                           content={subEffect.text}
                           identifier="effect"
                         />
@@ -108,19 +112,27 @@ class Tree extends Component {
                 {effect._data && effect._data.length > 0 && <VerticalArrow />}
 
                 <Node
-                  onAddSibling={() => this.props.setTopic({
-                    activeType: 'effect',
-                    activeIndex: effectIndex
-                  })}
+                  onAddSibling={() =>
+                    this.props.setTopic({
+                      activeType: 'effect',
+                      activeIndex: effectIndex
+                    })
+                  }
                   addSiblingLabel="Add another effect"
                   onAddChild={() =>
-                    this.initAddWithType('sub-effect', effectIndex, effect._listIndex)
+                    this.initAddWithType(
+                      'sub-effect',
+                      effectIndex,
+                      effect._listIndex
+                    )
                   }
                   addChildLabel="Add Sub-Effect"
                   content={effect.text}
                   identifier="effect"
                   withControls
-                  onGroupControlClick={() => this.setActiveMenu(`effect${effectIndex}`)}
+                  onGroupControlClick={() =>
+                    this.setActiveMenu(`effect${effectIndex}`)
+                  }
                   showControlGroup={`effect${effectIndex}` === activeMenu}
                 />
 
@@ -180,10 +192,12 @@ class Tree extends Component {
                 <VerticalArrow />
 
                 <Node
-                  onAddSibling={() => this.props.setTopic({
-                    activeType: 'cause',
-                    activeIndex: index
-                  })}
+                  onAddSibling={() =>
+                    this.props.setTopic({
+                      activeType: 'cause',
+                      activeIndex: index
+                    })
+                  }
                   addSiblingLabel="Add another cause"
                   onAddChild={() =>
                     this.initAddWithType('sub-cause', index, cause._listIndex)
@@ -192,7 +206,9 @@ class Tree extends Component {
                   content={cause.text}
                   identifier="cause"
                   withControls
-                  onGroupControlClick={() => this.setActiveMenu(`cause${index}`)}
+                  onGroupControlClick={() =>
+                    this.setActiveMenu(`cause${index}`)
+                  }
                   showControlGroup={`cause${index}` === activeMenu}
                 />
 
@@ -210,11 +226,15 @@ class Tree extends Component {
                         )}
 
                         <VerticalArrow />
-                        <Node 
+                        <Node
                           withControls
-                          onGroupControlClick={() => this.setActiveMenu(`subcause${scIndex}`)}
-                          showControlGroup={`subcause${scIndex}` === activeMenu} 
-                          content={subCause.text} identifier="cause" />
+                          onGroupControlClick={() =>
+                            this.setActiveMenu(`subcause${scIndex}`)
+                          }
+                          showControlGroup={`subcause${scIndex}` === activeMenu}
+                          content={subCause.text}
+                          identifier="cause"
+                        />
                       </Child>
                     ))}
                 </Level>

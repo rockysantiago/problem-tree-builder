@@ -98,192 +98,126 @@ class ComposeTree extends Component {
     const { problems, topic } = this.props;
 
     return (
-      <Grid padded style={{ height: '100vh', overflow: 'hidden' }}>
+      <Grid padded style={{ height: '100vh' }}>
         <Grid.Column width={11} style={{ height: '100%' }}>
-          {/* Effects section */}
-          <Tree data={topic} />
-          {/* {topic.effects.length === 0 && topic.problem.text && (
-            <button onClick={() => this.initAddWithType('effect')}>
-              ADD EFFECTS
-            </button>
+          <Tree />
+        </Grid.Column>
+        <Grid.Column
+          width={5}
+          style={{
+            position: 'fixed',
+            right: 0,
+            bottom: 0,
+            top: 0,
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          {topic.activeType === 'problem' && (
+            <>
+              {problems.isFetching ? (
+                <h1>Loading...</h1>
+              ) : (
+                <>
+                  <Header
+                    content="Add a problem"
+                    size="huge"
+                    style={{ minHeight: 'auto' }}
+                  />
+                  <SearchBar
+                    keyword={keyword}
+                    onSearch={this.handleSearch}
+                    onChange={this.handleChange}
+                  />
+                  <SearchResultsList
+                    items={problems.data || []}
+                    onSelect={this.handleSelectResult}
+                  />
+                </>
+              )}
+            </>
           )}
 
-          {topic.effects.length > 0 &&
-            topic.effects.map((effect, idx) => (
-              <div style={{ border: '1px solid blue' }}>
-                <p>{effect.text}</p>
-                <button
-                  onClick={() =>
-                    this.props.setTopic({
-                      activeType: 'effect',
-                      activeIndex: idx
-                    })
-                  }
-                >
-                  Add another effect
-                </button>
-                <button
-                  onClick={() =>
-                    this.initAddWithType('sub-effect', idx, effect._listIndex)
-                  }
-                >
-                  Add Sub Effect
-                </button>
-                <button>Delete</button>
-                {effect._data &&
-                  effect._data.map(sub => (
-                    <div style={{ border: '1px solid yellow' }}>
-                      <p>{sub.text}</p>
-                    </div>
-                  ))}
-              </div>
-            ))}
-
-          {/* Problem section */}
-          {/* <div
-            onClick={() =>
-              this.props.setTopic({ activeType: 'problem', activeIndex: -1 })
-            }
-          >
-            {topic.problem.text}
-          </div> */}
-
-          {/* Cause section */}
-          {/* {topic.causes.length === 0 && topic.problem.text && (
-            <button onClick={() => this.initAddWithType('cause')}>
-              ADD CAUSES
-            </button>
-          )} */}
-          {/* {topic.causes.length > 0 &&
-            topic.causes.map((cause, idx) => (
-              <div style={{ border: '1px solid green' }}>
-                <p>{cause.text}</p>
-                <button
-                  onClick={() =>
-                    this.props.setTopic({
-                      activeType: 'cause',
-                      activeIndex: idx
-                    })
-                  }
-                >
-                  Add another Cause
-                </button>
-                <button
-                  onClick={() =>
-                    this.initAddWithType('sub-cause', idx, cause._listIndex)
-                  }
-                >
-                  Add Sub Cause
-                </button>
-                <button>Delete</button>
-                {cause._data &&
-                  cause._data.map(sub => (
-                    <div style={{ border: '1px solid yellow' }}>
-                      <p>{sub.text}</p>
-                    </div>
-                  ))}
-              </div>
-            ))} */}
+          {/* ADD CAUSES */}
+          {topic.activeType === 'cause' && (
+            <>
+              {topic.isFetching ? (
+                <h1>Loading...</h1>
+              ) : (
+                <>
+                  <SearchInput
+                    content="Adding a cause of:"
+                    text={topic.problem.text}
+                  ></SearchInput>
+                  <SearchResultsList
+                    items={topic._sourceCauses || []}
+                    onSelect={this.handleSelectResult}
+                    selected={topic.causes}
+                  />
+                </>
+              )}
+            </>
+          )}
+          {/* ADD SUB CAUSE */}
+          {topic.activeType === 'sub-cause' && (
+            <>
+              {topic.isFetching ? (
+                <h1>Loading...</h1>
+              ) : (
+                <>
+                  <SearchInput
+                    content="Adding a sub-cause of:"
+                    text={topic.causes[topic.activeIndex].text}
+                  ></SearchInput>
+                  <SearchResultsList
+                    items={topic.causes[topic.activeIndex]._sources || []}
+                    onSelect={this.handleSubSelection}
+                  />
+                </>
+              )}
+            </>
+          )}
+          {/* ADD EFFECTS */}
+          {topic.activeType === 'effect' && (
+            <>
+              {topic.isFetching ? (
+                <h1>Loading...</h1>
+              ) : (
+                <>
+                  <SearchInput
+                    content="Adding an effect of:"
+                    text={topic.problem.text}
+                  ></SearchInput>
+                  <SearchResultsList
+                    items={topic._sourceEffects || []}
+                    onSelect={this.handleSelectResult}
+                    selected={topic.effects}
+                  />
+                </>
+              )}
+            </>
+          )}
+          {/* ADD SUB EFFECTS */}
+          {topic.activeType === 'sub-effect' && (
+            <>
+              {topic.isFetching ? (
+                <h1>Loading...</h1>
+              ) : (
+                <>
+                  <SearchInput
+                    content="Adding a sub-effect of:"
+                    text={topic.effects[topic.activeIndex].text}
+                  ></SearchInput>
+                  <SearchResultsList
+                    items={topic.effects[topic.activeIndex]._sources || []}
+                    onSelect={this.handleSubSelection}
+                  />
+                </>
+              )}
+            </>
+          )}
         </Grid.Column>
-        {topic.activeType === 'problem' && (
-          <Grid.Column width={5}>
-            {problems.isFetching ? (
-              <h1>Loading...</h1>
-            ) : (
-              <>
-                <Header content="Add a problem" size="huge" />
-                <SearchBar
-                  keyword={keyword}
-                  onSearch={this.handleSearch}
-                  onChange={this.handleChange}
-                />
-                <SearchResultsList
-                  items={problems.data || []}
-                  onSelect={this.handleSelectResult}
-                />
-              </>
-            )}
-          </Grid.Column>
-        )}
-        {/* ADD CAUSES */}
-        {topic.activeType === 'cause' && (
-          <Grid.Column width={5}>
-            {topic.isFetching ? (
-              <h1>Loading...</h1>
-            ) : (
-              <>
-                <SearchInput
-                  content="Adding a cause of:"
-                  text={topic.problem.text}
-                ></SearchInput>
-                <SearchResultsList
-                  items={topic._sourceCauses || []}
-                  onSelect={this.handleSelectResult}
-                  selected={topic.causes}
-                />
-              </>
-            )}
-          </Grid.Column>
-        )}
-        {/* ADD SUB CAUSE */}
-        {topic.activeType === 'sub-cause' && (
-          <Grid.Column width={5}>
-            {topic.isFetching ? (
-              <h1>Loading...</h1>
-            ) : (
-              <>
-                <SearchInput
-                  content="Adding a sub-cause of:"
-                  text={topic.causes[topic.activeIndex].text}
-                ></SearchInput>
-                <SearchResultsList
-                  items={topic.causes[topic.activeIndex]._sources || []}
-                  onSelect={this.handleSubSelection}
-                />
-              </>
-            )}
-          </Grid.Column>
-        )}
-        {/* ADD EFFECTS */}
-        {topic.activeType === 'effect' && (
-          <Grid.Column width={5}>
-            {topic.isFetching ? (
-              <h1>Loading...</h1>
-            ) : (
-              <>
-                <SearchInput
-                  content="Adding an effect of:"
-                  text={topic.problem.text}
-                ></SearchInput>
-                <SearchResultsList
-                  items={topic._sourceEffects || []}
-                  onSelect={this.handleSelectResult}
-                  selected={topic.effects}
-                />
-              </>
-            )}
-          </Grid.Column>
-        )}
-        {/* ADD SUB EFFECTS */}
-        {topic.activeType === 'sub-effect' && (
-          <Grid.Column width={5}>
-            {topic.isFetching ? (
-              <h1>Loading...</h1>
-            ) : (
-              <>
-                <SearchInput
-                  content="Adding a sub-effect of:"
-                  text={topic.effects[topic.activeIndex].text}
-                ></SearchInput>
-                <SearchResultsList
-                  items={topic.effects[topic.activeIndex]._sources || []}
-                  onSelect={this.handleSubSelection}
-                />
-              </>
-            )}
-          </Grid.Column>
-        )}{' '}
-        */}
       </Grid>
     );
   }

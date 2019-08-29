@@ -9,8 +9,18 @@ export const Wrapper = styled.div`
 
 export const Controls = styled.div`
   position: absolute;
-  right: 0;
   bottom: 0;
-  width: 150px;
-  margin-bottom: 5%;
+  width: 250px;
+  margin-bottom: 3%;
+  display: flex;
+  padding: 0 20px;
+
+  ${props =>
+    props.right &&
+    `right: 0;
+    justify-content: flex-start;`}
+  ${props =>
+    props.left &&
+    `left: 0;
+    justify-content: flex-end;`}
 `;

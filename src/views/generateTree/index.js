@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
@@ -21,8 +22,15 @@ class GenerateTree extends Component {
         <div id="capture">
           <Tree forExport />
         </div>
-        <Controls>
-          <Button onClick={this.printDocument}>Export File</Button>
+        <Controls left>
+          <Button fluid onClick={() => navigate('/compose')}>
+            Back to Editing
+          </Button>
+        </Controls>
+        <Controls right>
+          <Button fluid onClick={this.printDocument}>
+            Export File
+          </Button>
         </Controls>
       </Wrapper>
     );

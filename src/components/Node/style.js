@@ -75,7 +75,7 @@ export const Wrapper = styled.div`
       } else if (props.identifier === 'empty') {
         minHeight = '40px';
       } else {
-        minHeight = '70px';
+        minHeight = '45px';
       }
 
       return minHeight;

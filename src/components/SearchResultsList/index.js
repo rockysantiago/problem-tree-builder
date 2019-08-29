@@ -2,13 +2,12 @@ import React from 'react';
 
 import SearchResultsListItem from '../SearchResultsListItem';
 import SearchResultsListMenu from '../SearchResultsListMenu';
-import { filterList } from  'utils';
+import { filterList } from 'utils';
 
 import { StyledList } from './style';
 
 const SearchResultsList = ({ items, onSelect, selected, filter }) => {
-
-  const newItems = filterList(filter, items)
+  const newItems = filterList(filter, items);
   return (
     <>
       <SearchResultsListMenu length={newItems.length} selected={selected} />
@@ -23,7 +22,7 @@ const SearchResultsList = ({ items, onSelect, selected, filter }) => {
             />
           ))}
       </StyledList>
-    </> 
+    </>
   );
 };
 

@@ -6,7 +6,6 @@ export const Container = styled.div`
   margin: 0 10px;
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
 

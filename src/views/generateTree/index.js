@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import { navigate } from '@reach/router';
+import { connect } from 'react-redux';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
+import { Button } from 'semantic-ui-react';
+
+import Tree from 'components/Tree';
+
+import { Wrapper, Controls } from './style';
 
 class GenerateTree extends Component {
   printDocument = async () => {
@@ -10,8 +17,26 @@ class GenerateTree extends Component {
   };
 
   render() {
-    return <div id="capture">GenerateTree</div>;
+    return (
+      <Wrapper>
+        <div id="capture">
+          <Tree forExport />
+        </div>
+        <Controls left>
+          <Button fluid onClick={() => navigate('/compose')}>
+            Back to Editing
+          </Button>
+        </Controls>
+        <Controls right>
+          <Button fluid onClick={this.printDocument}>
+            Export File
+          </Button>
+        </Controls>
+      </Wrapper>
+    );
   }
 }
 
-export default GenerateTree;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(GenerateTree);

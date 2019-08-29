@@ -50,21 +50,28 @@ class Tree extends Component {
         this.props.topic.causes[parentIndex].text,
         'cause',
         listIndex,
-        !(this.props.topic.causes[parentIndex]._sources && this.props.topic.causes[parentIndex]._sources.length > 0)
+        !(
+          this.props.topic.causes[parentIndex]._sources &&
+          this.props.topic.causes[parentIndex]._sources.length > 0
+        )
       );
     } else if (activeType === 'sub-effect') {
       this.props.searchSubOptions(
         this.props.topic.effects[parentIndex].text,
         'effect',
         listIndex,
-        !(this.props.topic.effects[parentIndex]._sources && this.props.topic.effects[parentIndex]._sources.length > 0)
+        !(
+          this.props.topic.effects[parentIndex]._sources &&
+          this.props.topic.effects[parentIndex]._sources.length > 0
+        )
       );
     }
   };
 
   render() {
-    const { data } = this.props;
+    const data = this.props.topic;
     const { activeMenu } = this.state;
+    const { forExport } = this.props;
 
     return (
       <Wrapper>
@@ -89,13 +96,25 @@ class Tree extends Component {
                   {effect._data &&
                     effect._data.map((subEffect, seIndex) => (
                       <Child>
-                        <Node 
-                          withControls
-                          onGroupControlClick={() => this.setActiveMenu(`subeffect${seIndex}`)}
-                          showControlGroup={`subeffect${seIndex}` === activeMenu}
+                        <Node
+                          withControls={!forExport}
+                          onGroupControlClick={() =>
+                            this.setActiveMenu(
+                              `subeffect[${effectIndex}]${seIndex}`
+                            )
+                          }
+                          showControlGroup={
+                            `subeffect[${effectIndex}]${seIndex}` === activeMenu
+                          }
                           content={subEffect.text}
-                          identifier="effect"
-                          onDelete={() => this.props.selectSubOption(effect._listIndex, subEffect._listIndex, 'sub-effect')}
+                          identifier={!forExport && 'effect'}
+                          onDelete={() =>
+                            this.props.selectSubOption(
+                              effect._listIndex,
+                              subEffect._listIndex,
+                              'sub-effect'
+                            )
+                          }
                         />
                         <VerticalArrow top />
                         {effect._data.length > 1 && (
@@ -111,21 +130,31 @@ class Tree extends Component {
                 {effect._data && effect._data.length > 0 && <VerticalArrow />}
 
                 <Node
-                  onAddSibling={() => this.props.setTopic({
-                    activeType: 'effect',
-                    activeIndex: effectIndex
-                  })}
+                  onAddSibling={() =>
+                    this.props.setTopic({
+                      activeType: 'effect',
+                      activeIndex: effectIndex
+                    })
+                  }
                   addSiblingLabel="Add another effect"
                   onAddChild={() =>
-                    this.initAddWithType('sub-effect', effectIndex, effect._listIndex)
+                    this.initAddWithType(
+                      'sub-effect',
+                      effectIndex,
+                      effect._listIndex
+                    )
                   }
                   addChildLabel="Add Sub-Effect"
                   content={effect.text}
-                  identifier="effect"
-                  withControls
-                  onGroupControlClick={() => this.setActiveMenu(`effect${effectIndex}`)}
+                  identifier={!forExport && 'effect'}
+                  withControls={!forExport}
+                  onGroupControlClick={() =>
+                    this.setActiveMenu(`effect${effectIndex}`)
+                  }
                   showControlGroup={`effect${effectIndex}` === activeMenu}
-                  onDelete={() => this.props.selectOption(effect._listIndex, 'effect')}
+                  onDelete={() =>
+                    this.props.selectOption(effect._listIndex, 'effect')
+                  }
                 />
 
                 {data.effects && data.effects.length > 1 && (
@@ -143,16 +172,22 @@ class Tree extends Component {
         </Level>
 
         {/* Center */}
-        <VerticalArrow top />
+        <VerticalArrow />
 
         {data.effects.length <= 1 && <VerticalArrow />}
 
         <Node
-          onClick={() =>
-            this.props.setTopic({ activeType: 'problem', activeIndex: -1 })
+          onClick={
+            forExport
+              ? () => {}
+              : () =>
+                  this.props.setTopic({
+                    activeType: 'problem',
+                    activeIndex: -1
+                  })
           }
           content={data.problem.text || 'SELECT A PROBLEM STATEMENT'}
-          identifier="problem"
+          identifier={!forExport && 'problem'}
         />
         <VerticalArrow top />
         {/* Center */}
@@ -184,21 +219,27 @@ class Tree extends Component {
                 <VerticalArrow />
 
                 <Node
-                  onAddSibling={() => this.props.setTopic({
-                    activeType: 'cause',
-                    activeIndex: index
-                  })}
+                  onAddSibling={() =>
+                    this.props.setTopic({
+                      activeType: 'cause',
+                      activeIndex: index
+                    })
+                  }
                   addSiblingLabel="Add another cause"
                   onAddChild={() =>
                     this.initAddWithType('sub-cause', index, cause._listIndex)
                   }
                   addChildLabel="Add Sub-Cause"
                   content={cause.text}
-                  identifier="cause"
-                  withControls
-                  onGroupControlClick={() => this.setActiveMenu(`cause${index}`)}
+                  identifier={!forExport && 'cause'}
+                  withControls={!forExport}
+                  onGroupControlClick={() =>
+                    this.setActiveMenu(`cause${index}`)
+                  }
                   showControlGroup={`cause${index}` === activeMenu}
-                  onDelete={() => this.props.selectOption(cause._listIndex, 'cause')}
+                  onDelete={() =>
+                    this.props.selectOption(cause._listIndex, 'cause')
+                  }
                 />
 
                 {cause._data && cause._data.length > 0 && <VerticalArrow top />}
@@ -215,13 +256,23 @@ class Tree extends Component {
                         )}
 
                         <VerticalArrow />
-                        <Node 
-                          withControls
-                          onGroupControlClick={() => this.setActiveMenu(`subcause${scIndex}`)}
-                          showControlGroup={`subcause${scIndex}` === activeMenu} 
+                        <Node
+                          withControls={!forExport}
+                          onGroupControlClick={() =>
+                            this.setActiveMenu(`subcause[${index}]${scIndex}`)
+                          }
+                          showControlGroup={
+                            `subcause[${index}]${scIndex}` === activeMenu
+                          }
                           content={subCause.text}
-                          identifier="cause"
-                          onDelete={() => this.props.selectSubOption(cause._listIndex, subCause._listIndex, 'sub-cause')}
+                          identifier={!forExport && 'cause'}
+                          onDelete={() =>
+                            this.props.selectSubOption(
+                              cause._listIndex,
+                              subCause._listIndex,
+                              'sub-cause'
+                            )
+                          }
                         />
                       </Child>
                     ))}

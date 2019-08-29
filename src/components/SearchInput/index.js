@@ -3,7 +3,7 @@ import { Header, Input } from 'semantic-ui-react';
 
 const SearchInput = ({ content, text }) => (
   <>
-    <Header size="huge">
+    <Header size="huge" style={{ minHeight: 'auto' }}>
       {content}
       <Header.Subheader>{text}</Header.Subheader>
     </Header>

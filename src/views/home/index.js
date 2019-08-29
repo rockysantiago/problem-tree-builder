@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
+import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid, Header } from 'semantic-ui-react';
-import suggestedTopicsJSON from 'api/suggestedTopics.json';
-import SearchBar from 'components/SearchBar';
-import SuggestedTopics from 'components/SuggestedTopics';
+import { Grid } from 'semantic-ui-react';
+
 import { searchProblems } from 'actions/problemActions';
-import { navigate } from '@reach/router';
+import SearchBar from 'components/SearchBar';
+
+import { HeaderWrapper, HomeWrapper } from './style';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      keyword: ''
-    };
-  }
+  state = {
+    keyword: ''
+  };
+
+  /**
+   * Manages the modification of the keyword within the search field.
+   *
+   * @param {string} keyword
+   * String value of the text field
+   */
+  handleChange = keyword => this.setState({ keyword });
 
   /**
    * Triggers the search using the keyword and navigates
@@ -26,59 +32,29 @@ class Home extends Component {
     navigate('/compose');
   };
 
-  handleSuggestion = keyword => {
-    this.props.searchProblems(keyword);
-    navigate('/compose');
-  };
-
-  /**
-   * Manages the modification of value within the search field.
-   *
-   * @param {string} value
-   * String value of the text field
-   */
-  handleChange = value => {
-    this.setState({
-      keyword: value
-    });
-  };
-
   render() {
     return (
-      <Grid
-        centered
-        padded
-        verticalAlign="middle"
-        style={{ minHeight: '100vh' }}
-      >
-        <Grid.Column width={5} style={{ height: '280px' }}>
-          <Header content="Start building your tree" size="huge" />
-          <SearchBar
-            onSearch={this.handleSearch}
-            onChange={this.handleChange}
-          />
-          <SuggestedTopics
-            suggestedTopics={suggestedTopicsJSON}
-            onSelect={this.handleSuggestion}
-          />
+      <Grid centered verticalAlign="middle" style={{ minHeight: '100vh' }}>
+        <Grid.Column width={10} style={{ height: '520px' }}>
+          <HomeWrapper>
+            <HeaderWrapper>Start building your tree</HeaderWrapper>
+            <SearchBar
+              onSearch={this.handleSearch}
+              onChange={this.handleChange}
+              size="huge"
+              width="50%"
+            />
+          </HomeWrapper>
         </Grid.Column>
       </Grid>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      searchProblems
-    },
-    dispatch
-  );
-}
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ searchProblems }, dispatch);
 
-function mapStateToProps(state) {
-  return state;
-}
+const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,

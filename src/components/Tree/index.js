@@ -93,6 +93,7 @@ class Tree extends Component {
                           showControlGroup={`subeffect${seIndex}` === activeMenu}
                           content={subEffect.text}
                           identifier="effect"
+                          onDelete={() => this.props.selectSubOption(subEffect._listIndex, 'sub-effect')}
                         />
                         <VerticalArrow top />
                         {effect._data.length > 1 && (
@@ -122,6 +123,7 @@ class Tree extends Component {
                   withControls
                   onGroupControlClick={() => this.setActiveMenu(`effect${effectIndex}`)}
                   showControlGroup={`effect${effectIndex}` === activeMenu}
+                  onDelete={() => this.props.selectOption(effect._listIndex, 'effect')}
                 />
 
                 {data.effects && data.effects.length > 1 && (
@@ -194,6 +196,7 @@ class Tree extends Component {
                   withControls
                   onGroupControlClick={() => this.setActiveMenu(`cause${index}`)}
                   showControlGroup={`cause${index}` === activeMenu}
+                  onDelete={() => this.props.selectOption(cause._listIndex, 'cause')}
                 />
 
                 {cause._data && cause._data.length > 0 && <VerticalArrow top />}
@@ -214,7 +217,10 @@ class Tree extends Component {
                           withControls
                           onGroupControlClick={() => this.setActiveMenu(`subcause${scIndex}`)}
                           showControlGroup={`subcause${scIndex}` === activeMenu} 
-                          content={subCause.text} identifier="cause" />
+                          content={subCause.text}
+                          identifier="cause"
+                          onDelete={() => this.props.selectSubOption(subCause._listIndex, 'sub-cause')}
+                        />
                       </Child>
                     ))}
                 </Level>

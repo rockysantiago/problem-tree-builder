@@ -101,7 +101,7 @@ class ComposeTree extends Component {
       <Grid padded style={{ height: '100vh', overflow: 'hidden' }}>
         <Grid.Column width={11} style={{ height: '100%' }}>
           {/* Effects section */}
-          <Tree data={topic} />
+          <Tree data={topic} onDeleteSibling={this.handleSelectResult} />
           {/* {topic.effects.length === 0 && topic.problem.text && (
             <button onClick={() => this.initAddWithType('effect')}>
               ADD EFFECTS

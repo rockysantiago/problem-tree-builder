@@ -22,7 +22,8 @@ class Node extends Component {
       onAddSibling,
       addSiblingLabel,
       onAddChild,
-      addChildLabel
+      addChildLabel,
+      onDelete
     } = this.props;
 
     return (
@@ -62,7 +63,7 @@ class Node extends Component {
               </div>
             )}
             
-            <Delete>
+            <Delete onClick={onDelete}>
               <span>DELETE</span>
               <Icon name="close icon" />
             </Delete>

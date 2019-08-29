@@ -49,13 +49,15 @@ class Tree extends Component {
       this.props.searchSubOptions(
         this.props.topic.causes[parentIndex].text,
         'cause',
-        listIndex
+        listIndex,
+        !(this.props.topic.causes[parentIndex]._sources && this.props.topic.causes[parentIndex]._sources.length > 0)
       );
     } else if (activeType === 'sub-effect') {
       this.props.searchSubOptions(
         this.props.topic.effects[parentIndex].text,
         'effect',
-        listIndex
+        listIndex,
+        !(this.props.topic.effects[parentIndex]._sources && this.props.topic.effects[parentIndex]._sources.length > 0)
       );
     }
   };
@@ -93,7 +95,7 @@ class Tree extends Component {
                           showControlGroup={`subeffect${seIndex}` === activeMenu}
                           content={subEffect.text}
                           identifier="effect"
-                          onDelete={() => this.props.selectSubOption(subEffect._listIndex, 'sub-effect')}
+                          onDelete={() => this.props.selectSubOption(effect._listIndex, subEffect._listIndex, 'sub-effect')}
                         />
                         <VerticalArrow top />
                         {effect._data.length > 1 && (
@@ -219,7 +221,7 @@ class Tree extends Component {
                           showControlGroup={`subcause${scIndex}` === activeMenu} 
                           content={subCause.text}
                           identifier="cause"
-                          onDelete={() => this.props.selectSubOption(subCause._listIndex, 'sub-cause')}
+                          onDelete={() => this.props.selectSubOption(cause._listIndex, subCause._listIndex, 'sub-cause')}
                         />
                       </Child>
                     ))}

@@ -2,20 +2,23 @@ import React from 'react';
 
 import SearchResultsListItem from '../SearchResultsListItem';
 import SearchResultsListMenu from '../SearchResultsListMenu';
+import { filterList } from  'utils';
 
 import { StyledList } from './style';
 
-const SearchResultsList = ({ items, onSelect, selected }) => {
+const SearchResultsList = ({ items, onSelect, selected, filter }) => {
+
+  const newItems = filterList(filter, items)
   return (
     <>
-      <SearchResultsListMenu length={items.length} selected={selected} />
+      <SearchResultsListMenu length={newItems.length} selected={selected} />
       <StyledList celled>
-        {items &&
-          items.map((item, index) => (
+        {newItems &&
+          newItems.map((item, index) => (
             <SearchResultsListItem
               key={index}
               item={item}
-              onSelect={() => onSelect(index)}
+              onSelect={() => onSelect(item._listIndex)}
               disabled={selected && selected.length >= 3}
             />
           ))}

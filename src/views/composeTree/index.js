@@ -62,11 +62,11 @@ class ComposeTree extends Component {
   };
 
   handleSubSelection = selectedIndex => {
-    const { activeType } = this.props.topic;
+    const { activeType, causes, effects, activeIndex} = this.props.topic;
     if (activeType === 'sub-cause') {
-      this.props.selectSubOption(selectedIndex, activeType);
+      this.props.selectSubOption(causes[activeIndex]._listIndex, selectedIndex, activeType);
     } else if (activeType === 'sub-effect') {
-      this.props.selectSubOption(selectedIndex, activeType);
+      this.props.selectSubOption(effects[activeIndex]._listIndex, selectedIndex, activeType);
     }
   };
 
@@ -101,7 +101,7 @@ class ComposeTree extends Component {
       <Grid padded style={{ height: '100vh', overflow: 'hidden' }}>
         <Grid.Column width={11} style={{ height: '100%' }}>
           {/* Effects section */}
-          <Tree data={topic} onDeleteSibling={this.handleSelectResult} />
+          <Tree data={topic} />
           {/* {topic.effects.length === 0 && topic.problem.text && (
             <button onClick={() => this.initAddWithType('effect')}>
               ADD EFFECTS
@@ -200,6 +200,7 @@ class ComposeTree extends Component {
                 <SearchResultsList
                   items={problems.data || []}
                   onSelect={this.handleSelectResult}
+                  filter={topic.filter}
                 />
               </>
             )}
@@ -220,6 +221,7 @@ class ComposeTree extends Component {
                   items={topic._sourceCauses || []}
                   onSelect={this.handleSelectResult}
                   selected={topic.causes}
+                  filter={topic.filter}
                 />
               </>
             )}
@@ -239,6 +241,7 @@ class ComposeTree extends Component {
                 <SearchResultsList
                   items={topic.causes[topic.activeIndex]._sources || []}
                   onSelect={this.handleSubSelection}
+                  filter={topic.filter}
                 />
               </>
             )}
@@ -259,6 +262,7 @@ class ComposeTree extends Component {
                   items={topic._sourceEffects || []}
                   onSelect={this.handleSelectResult}
                   selected={topic.effects}
+                  filter={topic.filter}
                 />
               </>
             )}
@@ -278,6 +282,7 @@ class ComposeTree extends Component {
                 <SearchResultsList
                   items={topic.effects[topic.activeIndex]._sources || []}
                   onSelect={this.handleSubSelection}
+                  filter={topic.filter}
                 />
               </>
             )}

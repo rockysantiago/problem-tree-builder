@@ -7,7 +7,11 @@ export default function problemsReducer(state = initialState.problems, action) {
       return Object.assign({}, state, { isFetching: true });
 
     case types.SET_PROBLEMS:
-      return Object.assign({}, { isFetching: false, data: action.payload });
+      const data = action.payload.map((p, _listIndex) => Object.assign({}, p, { _listIndex }));
+      return Object.assign({}, { isFetching: false, data });
+    
+    case types.CLEAR_PROBLEM_SELECTION:
+        return Object.assign({}, state, { data: state.data.map(item => Object.assign({}, item, { selected: false })) });
     
     case types.INIT_PROBLEMS:
       return Object.assign({}, initialState.problems);

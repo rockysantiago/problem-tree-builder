@@ -32,19 +32,19 @@ const filterOptions = [
   }
 ];
 
-const SearchFilter = () => (
+const SearchFilter = ({ onSelectFilter, filter }) => (
   <Dropdown basic button text="Sort/Filter">
     <Dropdown.Menu>
       <Dropdown.Header content="Sort by" />
       <Dropdown.Menu scrolling>
         {sortOptions.map(option => (
-          <Dropdown.Item key={option.value} {...option} />
+          <Dropdown.Item key={option.value} {...option} onClick={() => onSelectFilter(option.value)} selected={option.value === filter} />
         ))}
       </Dropdown.Menu>
       <Dropdown.Header content="Filter" />
       <Dropdown.Menu scrolling>
         {filterOptions.map(option => (
-          <Dropdown.Item key={option.value} {...option} />
+          <Dropdown.Item key={option.value} {...option} onClick={() => onSelectFilter(option.value)}  selected={option.value === filter}/>
         ))}
       </Dropdown.Menu>
     </Dropdown.Menu>

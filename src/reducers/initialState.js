@@ -2,6 +2,7 @@ export default {
   topic: {
     keyword: '',
     activeType: 'problem',
+    filter: 'All',
     problem: {},
     causes: [],
     effects: [],

@@ -40,7 +40,7 @@ export const selectOption = (index, type) => {
   };
 }
 
-export const selectSubOption = (selectedIndex, activeType) => {
+export const selectSubOption = (parentIndex, selectedIndex, activeType) => {
   const SEARCH_TYPES = {
     'sub-cause': types.SELECT_SUB_CAUSE,
     'sub-effect': types.SELECT_SUB_EFFECT
@@ -49,27 +49,46 @@ export const selectSubOption = (selectedIndex, activeType) => {
   return dispatch => {
     dispatch({
       type: SEARCH_TYPES[activeType],
+      parentIndex,
       idx: selectedIndex
     });
   };
 };
 
-export const searchSubOptions = (keyword, searchType, idx) => {
+export const searchSubOptions = (keyword, searchType, idx, shouldFetch) => {
   const SEARCH_TYPES = {
     cause: types.SET_SUB_CAUSES,
     effect: types.SET_SUB_EFFECTS
   };
 
   return dispatch => {
-    dispatch({ type: types.SET_FETCHING });
-    return getProblems(keyword, searchType)
-      .then(result => {
-        dispatch({
-          type: SEARCH_TYPES[searchType],
-          payload: result,
-          idx
-        });
-      })
-      .catch(err => console.error(`Sub ${searchType} fetch error: `, err));
+    if (shouldFetch) {
+      dispatch({ type: types.SET_FETCHING });
+      return getProblems(keyword, searchType)
+        .then(result => {
+          dispatch({
+            type: SEARCH_TYPES[searchType],
+            payload: result,
+            idx
+          });
+        })
+        .catch(err => console.error(`Sub ${searchType} fetch error: `, err));
+    }
   };
 };
+
+export const setFilter = filter => {
+  return dispatch => {
+    dispatch({ type: types.SET_FILTER, payload: filter });
+  };
+}
+
+export const clear = (activeType, idx) => {
+  return dispatch => {
+    if (activeType === 'problem') {
+      dispatch({ type: types.CLEAR_PROBLEM_SELECTION });
+    } else {
+      dispatch({ type: types.CLEAR_CAUSE_EFFECT_SELECTION });      
+    }
+  };
+}

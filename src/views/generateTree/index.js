@@ -6,6 +6,8 @@ import { Button } from 'semantic-ui-react';
 
 import Tree from 'components/Tree';
 
+import { Wrapper, Controls } from './style';
+
 class GenerateTree extends Component {
   printDocument = async () => {
     const canvas = await html2canvas(document.querySelector('#capture'));
@@ -14,15 +16,15 @@ class GenerateTree extends Component {
   };
 
   render() {
-    const { topic } = this.props;
-
     return (
-      <>
+      <Wrapper>
         <div id="capture">
-          <Tree data={topic} />
+          <Tree forExport />
         </div>
-        <Button onClick={this.printDocument}>Export File</Button>
-      </>
+        <Controls>
+          <Button onClick={this.printDocument}>Export File</Button>
+        </Controls>
+      </Wrapper>
     );
   }
 }

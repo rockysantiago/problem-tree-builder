@@ -63,6 +63,7 @@ class Tree extends Component {
   render() {
     const data = this.props.topic;
     const { activeMenu } = this.state;
+    const { forExport } = this.props;
 
     return (
       <Wrapper>
@@ -88,7 +89,7 @@ class Tree extends Component {
                     effect._data.map((subEffect, seIndex) => (
                       <Child>
                         <Node
-                          withControls
+                          withControls={!forExport}
                           onGroupControlClick={() =>
                             this.setActiveMenu(`subeffect${seIndex}`)
                           }
@@ -96,7 +97,7 @@ class Tree extends Component {
                             `subeffect${seIndex}` === activeMenu
                           }
                           content={subEffect.text}
-                          identifier="effect"
+                          identifier={!forExport && 'effect'}
                           onDelete={() =>
                             this.props.selectSubOption(
                               subEffect._listIndex,
@@ -134,8 +135,8 @@ class Tree extends Component {
                   }
                   addChildLabel="Add Sub-Effect"
                   content={effect.text}
-                  identifier="effect"
-                  withControls
+                  identifier={!forExport && 'effect'}
+                  withControls={!forExport}
                   onGroupControlClick={() =>
                     this.setActiveMenu(`effect${effectIndex}`)
                   }
@@ -165,11 +166,17 @@ class Tree extends Component {
         {data.effects.length <= 1 && <VerticalArrow />}
 
         <Node
-          onClick={() =>
-            this.props.setTopic({ activeType: 'problem', activeIndex: -1 })
+          onClick={
+            forExport
+              ? () => {}
+              : () =>
+                  this.props.setTopic({
+                    activeType: 'problem',
+                    activeIndex: -1
+                  })
           }
           content={data.problem.text || 'SELECT A PROBLEM STATEMENT'}
-          identifier="problem"
+          identifier={!forExport && 'problem'}
         />
         <VerticalArrow top />
         {/* Center */}
@@ -213,8 +220,8 @@ class Tree extends Component {
                   }
                   addChildLabel="Add Sub-Cause"
                   content={cause.text}
-                  identifier="cause"
-                  withControls
+                  identifier={!forExport && 'cause'}
+                  withControls={!forExport}
                   onGroupControlClick={() =>
                     this.setActiveMenu(`cause${index}`)
                   }
@@ -239,13 +246,13 @@ class Tree extends Component {
 
                         <VerticalArrow />
                         <Node
-                          withControls
+                          withControls={!forExport}
                           onGroupControlClick={() =>
                             this.setActiveMenu(`subcause${scIndex}`)
                           }
                           showControlGroup={`subcause${scIndex}` === activeMenu}
                           content={subCause.text}
-                          identifier="cause"
+                          identifier={!forExport && 'cause'}
                           onDelete={() =>
                             this.props.selectSubOption(
                               subCause._listIndex,

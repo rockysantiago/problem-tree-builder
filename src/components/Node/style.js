@@ -6,7 +6,6 @@ export const Container = styled.div`
   margin: 0 10px;
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
 
@@ -76,7 +75,7 @@ export const Wrapper = styled.div`
       } else if (props.identifier === 'empty') {
         minHeight = '40px';
       } else {
-        minHeight = '45px';
+        minHeight = '70px';
       }
 
       return minHeight;

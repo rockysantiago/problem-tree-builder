@@ -35,7 +35,6 @@ export const Controls = styled.div`
   border-radius: 5px;
   background: #f5f5f5;
   padding: 5px 10px;
-  width: 150px;
   position: absolute;
   margin-left: 235px;
   text-transform: uppercase;
@@ -45,10 +44,15 @@ export const Controls = styled.div`
 
   div {
     padding: 3px 0;
+    min-width: 160px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+
+    i {
+      height: auto;
+    }
   }
 `;
 

@@ -62,7 +62,7 @@ class Tree extends Component {
 
   render() {
     const { data } = this.props;
-    // const { activeMenu } = this.state;
+    const { activeMenu } = this.state;
 
     return (
       <Wrapper>
@@ -87,7 +87,13 @@ class Tree extends Component {
                   {effect._data &&
                     effect._data.map((subEffect, seIndex) => (
                       <Child>
-                        <Node content={subEffect.text} identifier="effect" />
+                        <Node 
+                          withControls
+                          onGroupControlClick={() => this.setActiveMenu(`subeffect${seIndex}`)}
+                          showControlGroup={`subeffect${seIndex}` === activeMenu}
+                          content={subEffect.text}
+                          identifier="effect"
+                        />
                         <VerticalArrow top />
                         {effect._data.length > 1 && (
                           <HorizontalLine
@@ -102,15 +108,20 @@ class Tree extends Component {
                 {effect._data && effect._data.length > 0 && <VerticalArrow />}
 
                 <Node
-                  onClick={() =>
-                    this.initAddWithType(
-                      'sub-effect',
-                      effectIndex,
-                      effect._listIndex
-                    )
+                  onAddSibling={() => this.props.setTopic({
+                    activeType: 'effect',
+                    activeIndex: effectIndex
+                  })}
+                  addSiblingLabel="Add another effect"
+                  onAddChild={() =>
+                    this.initAddWithType('sub-effect', effectIndex, effect._listIndex)
                   }
+                  addChildLabel="Add Sub-Effect"
                   content={effect.text}
                   identifier="effect"
+                  withControls
+                  onGroupControlClick={() => this.setActiveMenu(`effect${effectIndex}`)}
+                  showControlGroup={`effect${effectIndex}` === activeMenu}
                 />
 
                 {data.effects && data.effects.length > 1 && (
@@ -169,14 +180,20 @@ class Tree extends Component {
                 <VerticalArrow />
 
                 <Node
-                  onClick={() =>
+                  onAddSibling={() => this.props.setTopic({
+                    activeType: 'cause',
+                    activeIndex: index
+                  })}
+                  addSiblingLabel="Add another cause"
+                  onAddChild={() =>
                     this.initAddWithType('sub-cause', index, cause._listIndex)
                   }
+                  addChildLabel="Add Sub-Cause"
                   content={cause.text}
                   identifier="cause"
-                  // withControls
-                  // onGroupControlClick={() => this.setActiveMenu(`cause${index}`)}
-                  // showControlGroup={`cause${index}` === activeMenu}
+                  withControls
+                  onGroupControlClick={() => this.setActiveMenu(`cause${index}`)}
+                  showControlGroup={`cause${index}` === activeMenu}
                 />
 
                 {cause._data && cause._data.length > 0 && <VerticalArrow top />}
@@ -193,7 +210,11 @@ class Tree extends Component {
                         )}
 
                         <VerticalArrow />
-                        <Node content={subCause.text} identifier="cause" />
+                        <Node 
+                          withControls
+                          onGroupControlClick={() => this.setActiveMenu(`subcause${scIndex}`)}
+                          showControlGroup={`subcause${scIndex}` === activeMenu} 
+                          content={subCause.text} identifier="cause" />
                       </Child>
                     ))}
                 </Level>

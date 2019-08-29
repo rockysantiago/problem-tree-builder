@@ -18,7 +18,11 @@ class Node extends Component {
       onClick,
       withControls,
       onGroupControlClick,
-      showControlGroup
+      showControlGroup,
+      onAddSibling,
+      addSiblingLabel,
+      onAddChild,
+      addChildLabel
     } = this.props;
 
     return (
@@ -45,10 +49,19 @@ class Node extends Component {
 
         {withControls && showControlGroup && (
           <Controls>
-            {/* <div onClick={onControlClick}>
-              <span>Add sub-cause</span>
-              <Icon name="plus" />
-            </div> */}
+            {addSiblingLabel && (
+              <div onClick={onAddSibling}>
+                <span>{addSiblingLabel}</span>
+                <Icon name="plus" />
+              </div>
+            )}
+            {addChildLabel && (
+              <div onClick={onAddChild}>
+                <span>{addChildLabel}</span>
+                <Icon name="plus" />
+              </div>
+            )}
+            
             <Delete>
               <span>DELETE</span>
               <Icon name="close icon" />

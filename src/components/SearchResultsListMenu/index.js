@@ -8,7 +8,7 @@ const SearchResultsListMenu = ({ length, selected }) => (
     <Grid verticalAlign="middle">
       <Grid.Column width={6}>
         {selected && selected.length >= 1
-          ? `${selected.length} of 2 selected`
+          ? `${selected.length} of ${length} selected`
           : length > 1
           ? `${length} results found`
           : `${length} result found`}

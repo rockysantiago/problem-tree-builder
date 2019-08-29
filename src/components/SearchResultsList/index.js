@@ -1,14 +1,15 @@
 import React from 'react';
-import { List } from 'semantic-ui-react';
 
 import SearchResultsListItem from '../SearchResultsListItem';
 import SearchResultsListMenu from '../SearchResultsListMenu';
+
+import { StyledList } from './style';
 
 const SearchResultsList = ({ items, onSelect, selected }) => {
   return (
     <>
       <SearchResultsListMenu length={items.length} selected={selected} />
-      <List celled style={{ overflowY: 'scroll' }}>
+      <StyledList celled style={{ overflowY: 'scroll' }}>
         {items &&
           items.map((item, index) => (
             <SearchResultsListItem
@@ -18,7 +19,7 @@ const SearchResultsList = ({ items, onSelect, selected }) => {
               disabled={selected && selected.length >= 2}
             />
           ))}
-      </List>
+      </StyledList>
     </>
   );
 };

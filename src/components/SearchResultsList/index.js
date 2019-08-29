@@ -9,7 +9,7 @@ const SearchResultsList = ({ items, onSelect, selected }) => {
   return (
     <>
       <SearchResultsListMenu length={items.length} selected={selected} />
-      <StyledList celled style={{ overflowY: 'scroll' }}>
+      <StyledList celled>
         {items &&
           items.map((item, index) => (
             <SearchResultsListItem

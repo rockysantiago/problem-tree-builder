@@ -2,8 +2,13 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'Montserrat', , sans-serif;
+    font-family: 'Montserrat', sans-serif;
     src: @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+  }
+
+  @font-face {
+    font-family: 'Lato', sans-serif;
+    src: @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
   }
 
   body {

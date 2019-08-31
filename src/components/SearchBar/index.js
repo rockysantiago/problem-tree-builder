@@ -1,22 +1,19 @@
 import React from 'react';
-import { Input } from 'semantic-ui-react';
+import { StyledInput } from './style';
 
-const SearchBar = ({ keyword, onChange, onSearch, size, width }) => {
+const SearchBar = ({ keyword, onChange, onSearch, size, active }) => {
   return (
     <>
-      <Input
+      <StyledInput
         action={{
           content: 'Search',
           onClick: () => onSearch()
         }}
-        fluid={width ? false : true}
-        icon="search"
-        iconPosition="left"
         onChange={e => onChange(e.target.value)}
         placeholder="Enter topic or keyword"
         size={size}
         value={keyword}
-        style={{ width }}
+        active={active}
       />
     </>
   );

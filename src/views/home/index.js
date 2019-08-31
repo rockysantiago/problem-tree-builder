@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid } from 'semantic-ui-react';
 
 import { searchProblems } from 'actions/problemActions';
 import SearchBar from 'components/SearchBar';
 
-import { HeaderWrapper, HomeWrapper } from './style';
+import {
+  Wrapper,
+  Container,
+  Logo,
+  Center,
+  Background,
+  Image,
+  Heading,
+  Link
+} from './style';
 
 class Home extends Component {
   state = {
@@ -33,20 +41,33 @@ class Home extends Component {
   };
 
   render() {
+    const { keyword } = this.state;
+
     return (
-      <Grid centered verticalAlign="middle" style={{ minHeight: '100vh' }}>
-        <Grid.Column width={10} style={{ height: '520px' }}>
-          <HomeWrapper>
-            <HeaderWrapper>Start building your tree</HeaderWrapper>
+      <Wrapper>
+        <Container>
+          <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} />
+
+          <Center active={keyword !== ''}>
+            <Background>
+              {keyword === '' && (
+                <Image src={`${process.env.PUBLIC_URL}/bg-img.jpg`} />
+              )}
+            </Background>
+
+            <Heading>Start building your tree</Heading>
+
             <SearchBar
               onSearch={this.handleSearch}
               onChange={this.handleChange}
               size="huge"
-              width="50%"
+              active={keyword !== ''}
             />
-          </HomeWrapper>
-        </Grid.Column>
-      </Grid>
+          </Center>
+
+          <Link>Help</Link>
+        </Container>
+      </Wrapper>
     );
   }
 }

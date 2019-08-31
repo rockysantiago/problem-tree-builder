@@ -23,18 +23,19 @@ class Tree extends Component {
     };
   }
 
-  setActiveMenu = index => {
-    const { activeMenu } = this.state;
+  componentDidMount() {
+    document.addEventListener('click', this.setActiveMenu, false);
+  }
 
-    if (activeMenu !== index) {
-      this.setState({
-        activeMenu: index
-      });
-    } else {
-      this.setState({
-        activeMenu: null
-      });
-    }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.setActiveMenu, false);
+  }
+
+  setActiveMenu = e => {
+    const { activeMenu } = this.state;
+    this.setState({
+      activeMenu: activeMenu !== e.target.id ? e.target.id : null
+    });
   };
 
   initAddWithType = (activeType, parentIndex, listIndex) => {
@@ -98,11 +99,7 @@ class Tree extends Component {
                       <Child>
                         <Node
                           withControls={!forExport}
-                          onGroupControlClick={() =>
-                            this.setActiveMenu(
-                              `subeffect[${effectIndex}]${seIndex}`
-                            )
-                          }
+                          id={`subeffect[${effectIndex}]${seIndex}`}
                           showControlGroup={
                             `subeffect[${effectIndex}]${seIndex}` === activeMenu
                           }
@@ -148,9 +145,7 @@ class Tree extends Component {
                   content={effect.text}
                   identifier={!forExport && 'effect'}
                   withControls={!forExport}
-                  onGroupControlClick={() =>
-                    this.setActiveMenu(`effect${effectIndex}`)
-                  }
+                  id={`effect${effectIndex}`}
                   showControlGroup={`effect${effectIndex}` === activeMenu}
                   onDelete={() =>
                     this.props.selectOption(effect._listIndex, 'effect')
@@ -233,9 +228,7 @@ class Tree extends Component {
                   content={cause.text}
                   identifier={!forExport && 'cause'}
                   withControls={!forExport}
-                  onGroupControlClick={() =>
-                    this.setActiveMenu(`cause${index}`)
-                  }
+                  id={`cause${index}`}
                   showControlGroup={`cause${index}` === activeMenu}
                   onDelete={() =>
                     this.props.selectOption(cause._listIndex, 'cause')
@@ -258,9 +251,7 @@ class Tree extends Component {
                         <VerticalArrow />
                         <Node
                           withControls={!forExport}
-                          onGroupControlClick={() =>
-                            this.setActiveMenu(`subcause[${index}]${scIndex}`)
-                          }
+                          id={`subcause[${index}]${scIndex}`}
                           showControlGroup={
                             `subcause[${index}]${scIndex}` === activeMenu
                           }

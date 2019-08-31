@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { searchProblems } from 'actions/problemActions';
+import { retrieveSuggestions } from 'actions/suggestionActions';
 import SearchBar from 'components/SearchBar';
 
 import {
@@ -28,7 +29,10 @@ class Home extends Component {
    * @param {string} keyword
    * String value of the text field
    */
-  handleChange = keyword => this.setState({ keyword });
+  handleChange = keyword => {
+    this.props.retrieveSuggestions(keyword);
+    this.setState({ keyword });
+  };
 
   /**
    * Triggers the search using the keyword and navigates
@@ -42,6 +46,9 @@ class Home extends Component {
 
   render() {
     const { keyword } = this.state;
+    const { isFetching, data } = this.props.suggestions;
+    console.log('SUGGESTIONS : ', data);
+    // TODO: Add spinner if isFetching true
 
     return (
       <Wrapper>
@@ -73,7 +80,7 @@ class Home extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ searchProblems }, dispatch);
+  bindActionCreators({ searchProblems, retrieveSuggestions }, dispatch);
 
 const mapStateToProps = state => state;
 

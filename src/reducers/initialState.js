@@ -12,5 +12,9 @@ export default {
   problems: {
     isFetching: false,
     data: []
+  },
+  suggestions: {
+    isFetching: false,
+    data: []
   }
 };

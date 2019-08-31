@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Input } from 'semantic-ui-react';
 
 export const StyledInput = styled(Input)`
-  width: 40%;
+  width: 45%;
   height: 60px;
 
   input {

@@ -34,7 +34,8 @@ export default function topicReducer(state = initialState.topic, action) {
 
       return Object.assign({}, state, {
         _sourceCauses: newCauses,
-        causes: newCauses.filter(s => s.selected)
+        causes: newCauses.filter(s => s.selected),
+        activeType: 'cause'
       });
 
     case types.SELECT_EFFECT:
@@ -48,7 +49,8 @@ export default function topicReducer(state = initialState.topic, action) {
 
       return Object.assign({}, state, {
         _sourceEffects: newEffects,
-        effects: newEffects.filter(s => s.selected)
+        effects: newEffects.filter(s => s.selected),
+        activeType: 'effect'
       });
 
     case types.SET_SUB_CAUSES:

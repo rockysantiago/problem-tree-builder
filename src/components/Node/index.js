@@ -23,7 +23,8 @@ class Node extends Component {
       addSiblingLabel,
       onAddChild,
       addChildLabel,
-      onDelete
+      onDelete,
+      id
     } = this.props;
 
     return (
@@ -40,6 +41,7 @@ class Node extends Component {
           {withControls && (
             <div style={{ width: '10px' }}>
               <Icon
+                id={id}
                 onClick={onGroupControlClick}
                 name="ellipsis vertical"
                 style={{ height: '25px', width: '20px', marginLeft: '-6px' }}

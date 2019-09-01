@@ -44,7 +44,7 @@ class Home extends Component {
     navigate('/compose');
   };
 
-  handleSugggestionSelect = problem => {
+  handleSuggestionSelect = problem => {
     this.props.searchProblems(problem);
     navigate('/compose');
   };
@@ -75,7 +75,7 @@ class Home extends Component {
               width="45%"
               loadingSuggestions={isFetching}
               suggestions={data}
-              onSelectSuggestion={this.handleSugggestionSelect}
+              onSelectSuggestion={this.handleSuggestionSelect}
               keyword={keyword}
             />
           </Center>

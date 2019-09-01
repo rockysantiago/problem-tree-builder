@@ -52,6 +52,7 @@ export const Wrapper = styled.div`
     font-family: 'Lato', sans-serif !important;
     padding-left: 0px !important;
     height: ${props => (props.size === 'huge' ? '58px' : '43px')};
+    text-transform: capitalize !important;
 
     &::placeholder {
       color: #a0a0a0 !important;
@@ -114,6 +115,7 @@ export const ListItem = styled.div`
   color: #a0a0a0;
   padding: 10px 43px;
   text-transform: capitalize;
+  cursor: pointer;
 
   &:hover {
     background: #f5f5f5;

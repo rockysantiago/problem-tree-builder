@@ -24,7 +24,8 @@ class SearchBar extends Component {
       bordered,
       width,
       loadingSuggestions,
-      suggestions
+      suggestions,
+      onSelectSuggestion
     } = this.props;
 
     const hasSuggestions = active && suggestions;
@@ -64,7 +65,12 @@ class SearchBar extends Component {
           <List>
             {suggestions &&
               suggestions.map((suggestion, index) => (
-                <ListItem key={index}>{suggestion}</ListItem>
+                <ListItem
+                  onClick={() => onSelectSuggestion(suggestion)}
+                  key={index}
+                >
+                  {suggestion}
+                </ListItem>
               ))}
           </List>
         )}

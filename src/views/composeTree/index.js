@@ -117,36 +117,28 @@ class ComposeTree extends Component {
 
     if (topic.activeType === 'problem' && !problems.isFetching) {
       sidePanelHeading = 'Select a Problem Statement';
+      activeListItems = problems.data || [];
     } else if (topic.activeType === 'cause' && !topic.isFetching) {
       sidePanelHeading = 'Adding causes of core problem';
       subHeading = topic.problem.text;
+      activeListItems = topic._sourceCauses || [];
+      selectedItems = topic.causes;
     } else if (topic.activeType === 'sub-cause' && !topic.isFetching) {
       sidePanelHeading = 'Sub-causes of';
       subHeading = topic.causes[topic.activeIndex].text;
+      activeListItems = topic.causes[topic.activeIndex]._sources || [];
     } else if (topic.activeType === 'effect' && !topic.isFetching) {
       sidePanelHeading = 'Adding effect of core problem';
       subHeading = topic.problem.text;
+      activeListItems = topic._sourceEffects || [];
+      selectedItems = topic.effects;
     } else if (topic.activeType === 'sub-effect' && !topic.isFetching) {
       sidePanelHeading = 'Sub-effect of';
       subHeading = topic.effects[topic.activeIndex].text;
+      activeListItems = topic.effects[topic.activeIndex]._sources || [];
     } else {
       sidePanelHeading = 'Loading...';
       subHeading = '';
-    }
-
-    if (topic.activeType === 'problem') {
-      activeListItems = problems.data || [];
-    } else if (topic.activeType === 'cause') {
-      activeListItems = topic._sourceCauses || [];
-      selectedItems = topic.causes;
-    } else if (topic.activeType === 'sub-cause') {
-      activeListItems = topic.causes[topic.activeIndex]._sources || [];
-    } else if (topic.activeType === 'effect') {
-      activeListItems = topic._sourceEffects || [];
-      selectedItems = topic.effects;
-    } else if (topic.activeType === 'sub-effect') {
-      activeListItems = topic.effects[topic.activeIndex]._sources || [];
-    } else {
       activeListItems = [];
       selectedItems = [];
     }

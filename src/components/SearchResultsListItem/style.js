@@ -80,6 +80,7 @@ export const Description = styled.div`
   font-size: 10px;
   white-space: nowrap;
   max-width: 125px;
+  text-transform: capitalize;
 
   a {
     color: #005eba !important;

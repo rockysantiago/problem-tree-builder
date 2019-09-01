@@ -76,8 +76,10 @@ export const Wrapper = styled.div`
         minHeight = '70px';
       } else if (props.identifier === 'empty') {
         minHeight = '45px';
+      } else if (props.identifier === 'toBeFilled') {
+        minHeight = '55px';
       } else {
-        minHeight = '45px';
+        minHeight = '80px';
       }
 
       return minHeight;

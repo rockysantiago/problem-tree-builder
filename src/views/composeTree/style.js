@@ -35,14 +35,16 @@ export const Generate = styled(Button)`
   -webkit-font-smoothing: subpixel-antialiased;
   color: #3d3d3c !important;
   letter-spacing: 0.03em !important;
-  font-size: 14px !important;
-  width: 180px !important;
+  font-size: 12px !important;
+  width: 160px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
+  -webkit-font-smoothing: subpixel-antialiased;
 
   svg {
-    margin-right: -10px;
+    margin: 0 !important;
+    font-size: 16px !important;
   }
 
   &:disabled {

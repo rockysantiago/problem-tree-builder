@@ -3,11 +3,17 @@ import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
-import { Button } from 'semantic-ui-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Print,
+  Link,
+  FileCopy
+} from '@material-ui/icons';
 
 import Tree from 'components/Tree';
 
-import { Wrapper, Controls } from './style';
+import { Wrapper, Controls, Canvas, Button } from './style';
 
 class GenerateTree extends Component {
   printDocument = async () => {
@@ -19,17 +25,31 @@ class GenerateTree extends Component {
   render() {
     return (
       <Wrapper>
-        <div id="capture">
+        <Canvas id="capture">
           <Tree forExport />
-        </div>
+        </Canvas>
         <Controls left>
           <Button fluid onClick={() => navigate('/compose')}>
+            <ChevronLeft />
             Back to Editing
           </Button>
         </Controls>
         <Controls right>
+          <Button fluid>
+            DMF (.xslx file)
+            <FileCopy />
+          </Button>
+          <Button fluid>
+            Copy Link
+            <Link />
+          </Button>
+          <Button fluid>
+            Print Tree
+            <Print />
+          </Button>
           <Button fluid onClick={this.printDocument}>
             Export File
+            <ChevronRight />
           </Button>
         </Controls>
       </Wrapper>

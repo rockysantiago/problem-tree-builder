@@ -113,6 +113,15 @@ export const Label = styled.div`
 export const SidePanel = styled.div`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  margin-right: 15px;
+  bottom: 0;
+  top: 15px;
+  width: 30%;
+  display: flex;
 `;
 
 export const SidePanelHeading = styled.div`
@@ -148,7 +157,7 @@ export const SubHeading = styled.div`
 export const SidePanelBody = styled.div`
   background: #f5f5f5;
   padding: 15px;
-  position: fixed;
   height: 100%;
-  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
 `;

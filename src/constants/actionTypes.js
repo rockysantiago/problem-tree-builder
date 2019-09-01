@@ -1,6 +1,12 @@
 export const INITIAL_STATE = 'INITIAL_STATE';
 
 /**
+ * Suggestion action types
+ */
+export const GET_SUGGESTIONS = 'GET_SUGGESTIONS';
+export const SET_SUGGESTIONS = 'SET_SUGGESTIONS';
+
+/**
  * Problems action types
  */
 export const GET_PROBLEMS = 'GET_PROBLEMS';
@@ -23,4 +29,3 @@ export const SELECT_SUB_CAUSE = 'SELECT_SUB_CAUSE';
 export const SELECT_SUB_EFFECT = 'SELECT_SUB_EFFECT';
 export const SET_FILTER = 'SET_FILTER';
 export const CLEAR_CAUSE_EFFECT_SELECTION = 'CLEAR_CAUSE_EFFECT_SELECTION';
-

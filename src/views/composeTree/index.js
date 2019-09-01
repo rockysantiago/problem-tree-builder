@@ -23,6 +23,7 @@ import {
   selectSubOption,
   selectOption
 } from 'actions/topicActions';
+import { retrieveSuggestions } from 'actions/suggestionActions';
 
 import {
   Canvas,
@@ -57,10 +58,6 @@ class ComposeTree extends Component {
    */
   handleSearch = () => {
     const { keyword } = this.state;
-    this.handleSuggestion(keyword);
-  };
-
-  handleSuggestion = keyword => {
     this.setState({ keyword });
     this.props.searchProblems(keyword);
   };
@@ -75,6 +72,7 @@ class ComposeTree extends Component {
     this.setState({
       keyword: value
     });
+    this.props.retrieveSuggestions(value);
   };
 
   handleSelectResult = index => {
@@ -382,7 +380,8 @@ const mapDispatchToProps = dispatch =>
       searchOptions,
       searchSubOptions,
       selectSubOption,
-      selectOption
+      selectOption,
+      retrieveSuggestions
     },
     dispatch
   );

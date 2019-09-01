@@ -18,7 +18,6 @@ class Node extends Component {
       identifier,
       onClick,
       withControls,
-      onGroupControlClick,
       showControlGroup,
       onAddSibling,
       addSiblingLabel,
@@ -49,7 +48,6 @@ class Node extends Component {
             <div style={{ width: '10px' }}>
               <Icon
                 id={id}
-                onClick={onGroupControlClick}
                 name="ellipsis vertical"
                 style={{ height: '25px', width: '20px', marginLeft: '-6px' }}
               />

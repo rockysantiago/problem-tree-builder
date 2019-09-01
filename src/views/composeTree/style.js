@@ -18,6 +18,7 @@ export const SideBar = styled.div`
   position: absolute;
   bottom: 0;
   margin-bottom: 3%;
+  z-index: 9;
 
   ${props =>
     props.right &&

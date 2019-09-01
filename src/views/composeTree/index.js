@@ -221,7 +221,9 @@ class ComposeTree extends Component {
           </SideBar>
 
           <Canvas>
-            <div style={{ position: 'absolute', height: '100%' }}>
+            <div
+              style={{ position: 'absolute', height: '100%', width: '100%' }}
+            >
               <Tree onDeleteSibling={this.handleSelectResult} />
             </div>
           </Canvas>

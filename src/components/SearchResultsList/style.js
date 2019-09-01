@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { List } from 'semantic-ui-react';
 
-export const StyledList = styled(List)`
-  box-sizing: border-box;
+export const StyledList = styled.ul`
   overflow-y: scroll;
-  height: '100%';
+  max-height: 73%;
+  padding: 0;
+  margin-top: 1em;
 `;

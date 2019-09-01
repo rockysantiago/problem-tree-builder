@@ -6,11 +6,13 @@ import { filterList } from 'utils';
 
 import { StyledList } from './style';
 
-const SearchResultsList = ({ items, onSelect, selected, filter }) => {
+const SearchResultsList = ({ items, onSelect, selected, filter, type }) => {
   const newItems = filterList(filter, items);
+
   return (
     <>
       <SearchResultsListMenu length={newItems.length} selected={selected} />
+
       <StyledList celled>
         {newItems &&
           newItems.map((item, index) => (
@@ -19,6 +21,7 @@ const SearchResultsList = ({ items, onSelect, selected, filter }) => {
               item={item}
               onSelect={() => onSelect(item._listIndex)}
               disabled={selected && selected.length >= 3}
+              type={type}
             />
           ))}
       </StyledList>

@@ -1,51 +1,68 @@
 import React from 'react';
-import { Button, List } from 'semantic-ui-react';
+// import { Button, List } from 'semantic-ui-react';
+import { Add } from '@material-ui/icons';
 import {
-  ButtonWrapper,
-  ItemLink,
-  ItemWrapper,
-  ListColumn,
+  ListItem,
+  Icon,
+  Description,
+  Header,
+  Label,
   ListDetails,
-  ListRow
+  Indicator,
+  IndicationLevel
 } from './style';
 
-const SearchResultsListItem = ({ item, onSelect, disabled }) => {
+const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
   return (
-    <List.Item
-      style={{
-        borderLeft: '1px solid rgba(34,36,38,.15)',
-        borderRight: '1px solid rgba(34,36,38,.15)',
-        display: 'flex',
-        flexDirection: 'row',
-        height: '96px'
-      }}
+    <ListItem
+      onClick={!item.selected && disabled ? () => {} : onSelect}
+      type={item.selected ? type : ''}
     >
-      <ButtonWrapper>
+      <Icon type={item.selected ? type : ''}>{!item.selected && <Add />}</Icon>
+      {/* <ButtonWrapper>
         <Button
           basic
           icon={item.selected ? 'check' : 'add'}
           onClick={onSelect}
-          style={{ boxShadow: 'none' }}
+          style={{ boxShadow: 'none', border: '1px solid red' }}
           disabled={!item.selected && disabled}
         />
-      </ButtonWrapper>
+      </ButtonWrapper> */}
+
       <ListDetails>
-        <List.Header>
-          <ItemWrapper>{item.text}</ItemWrapper>
-        </List.Header>
-        <ListRow style={{ marginTop: '8px' }}>
-          <ListColumn style={{ flexFlow: 'nowrap' }}>
-            Link:
-            <ItemLink href={item.link}>{item.link}</ItemLink>
-          </ListColumn>
-          <ListColumn>Country: {item.country}</ListColumn>
-        </ListRow>
-        <ListRow>
-          <ListColumn>Project No: {item.project_no}</ListColumn>
-          <ListColumn>Section: {item.section}</ListColumn>
-        </ListRow>
+        <Header>{item.text}</Header>
+        <table>
+          <tr>
+            <td>
+              <Label>Source</Label>
+              <Description>
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  {item.link}
+                </a>
+              </Description>
+            </td>
+            <td>
+              <Label>Country</Label>
+              <Description>{item.country}</Description>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Label>Project No</Label>
+              <Description>{item.project_no}</Description>
+            </td>
+            <td>
+              <Label>Section</Label>
+              <Description>{item.section}</Description>
+            </td>
+          </tr>
+        </table>
       </ListDetails>
-    </List.Item>
+
+      <Indicator>
+        <IndicationLevel level={Math.round(item.textScore) * 10} />
+      </Indicator>
+    </ListItem>
   );
 };
 

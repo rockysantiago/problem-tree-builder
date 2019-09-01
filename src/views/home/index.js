@@ -62,6 +62,7 @@ class Home extends Component {
               onChange={this.handleChange}
               size="huge"
               active={keyword !== ''}
+              width="45%"
             />
           </Center>
 

@@ -8,7 +8,12 @@ const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: 'Lato', sans-serif;
-    src: @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
+    src: @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700i&display=swap');
+  }
+
+  @font-face {
+    font-family: MaterialIcons;
+    src: @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
   }
 
   body {

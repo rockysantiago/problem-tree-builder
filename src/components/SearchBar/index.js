@@ -1,7 +1,15 @@
 import React from 'react';
 import { StyledInput } from './style';
 
-const SearchBar = ({ keyword, onChange, onSearch, size, active }) => {
+const SearchBar = ({
+  keyword,
+  onChange,
+  onSearch,
+  size,
+  active,
+  bordered,
+  width
+}) => {
   return (
     <>
       <StyledInput
@@ -14,6 +22,8 @@ const SearchBar = ({ keyword, onChange, onSearch, size, active }) => {
         size={size}
         value={keyword}
         active={active}
+        bordered={bordered}
+        width={width}
       />
     </>
   );

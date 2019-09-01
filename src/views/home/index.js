@@ -47,6 +47,8 @@ class Home extends Component {
   render() {
     const { keyword } = this.state;
     const { isFetching, data } = this.props.suggestions;
+
+    console.log('isFetching : ', isFetching);
     console.log('SUGGESTIONS : ', data);
     // TODO: Add spinner if isFetching true
 

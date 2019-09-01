@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyledInput } from './style';
+import { Wrapper, StyledInput } from './style';
+import { Search } from '@material-ui/icons';
 
 const SearchBar = ({
   keyword,
@@ -11,7 +12,8 @@ const SearchBar = ({
   width
 }) => {
   return (
-    <>
+    <Wrapper size={size} bordered={bordered} width={width} active={active}>
+      <Search />
       <StyledInput
         action={{
           content: 'Search',
@@ -19,13 +21,9 @@ const SearchBar = ({
         }}
         onChange={e => onChange(e.target.value)}
         placeholder="Enter topic or keyword"
-        size={size}
         value={keyword}
-        active={active}
-        bordered={bordered}
-        width={width}
       />
-    </>
+    </Wrapper>
   );
 };
 

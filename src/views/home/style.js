@@ -84,12 +84,12 @@ export const Link = styled.a`
   bottom: 0;
   margin-bottom: 5%;
   font-family: 'Montserrat', sans-serif;
-  color: #a0a0a0;
+  color: #a0a0a0 !important;
   font-size: 16px;
   cursor: pointer;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
     color: #a0a0a0;
   }
 `;

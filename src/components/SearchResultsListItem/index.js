@@ -61,7 +61,7 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
       </ListDetails>
 
       <Indicator>
-        <IndicationLevel level={Math.round(item.textScore) * 10} />
+        <IndicationLevel level={Number(item.score) * 100} />
       </Indicator>
     </ListItem>
   );

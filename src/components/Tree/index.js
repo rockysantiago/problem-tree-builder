@@ -87,6 +87,7 @@ class Tree extends Component {
                 }
                 content="ADD EFFECTS"
                 identifier={data.problem.text ? 'toBeFilled' : 'empty'}
+                className="bounceIn"
               />
             </Child>
           ) : (
@@ -167,7 +168,7 @@ class Tree extends Component {
         </Level>
 
         {/* Center */}
-        <VerticalArrow />
+        <VerticalArrow top={data.effects.length <= 1} />
 
         {data.effects.length <= 1 && <VerticalArrow />}
 
@@ -187,7 +188,7 @@ class Tree extends Component {
         <VerticalArrow top />
         {/* Center */}
 
-        <Level>
+        <Level test={data.causes.length > 1}>
           {data.causes.length === 0 ? (
             <Child>
               <VerticalArrow />

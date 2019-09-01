@@ -46,9 +46,7 @@ class Home extends Component {
 
   render() {
     const { keyword } = this.state;
-    const { isFetching, data } = this.props.suggestions;
-    console.log('SUGGESTIONS : ', data);
-    // TODO: Add spinner if isFetching true
+    const { data, isFetching } = this.props.suggestions;
 
     return (
       <Wrapper>
@@ -69,6 +67,9 @@ class Home extends Component {
               onChange={this.handleChange}
               size="huge"
               active={keyword !== ''}
+              width="45%"
+              loadingSuggestions={isFetching}
+              suggestions={data}
             />
           </Center>
 

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as colors from '../../constants/colors';
 
 export const Container = styled.div`
   border: solid;
@@ -8,6 +9,7 @@ export const Container = styled.div`
   justify-content: space-between;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
+  font-family: 'Lato', sans-serif;
 
   i {
     font-size: 12px;
@@ -15,7 +17,7 @@ export const Container = styled.div`
 `;
 
 export const LegendIdentifier = styled.div`
-  width: 10px;
+  width: 8px;
 `;
 
 export const Text = styled.div`
@@ -23,9 +25,8 @@ export const Text = styled.div`
   text-transform: capitalize;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
   padding: 5px 10px;
   letter-spacing: 0.008em;
 `;
@@ -35,14 +36,15 @@ export const Controls = styled.div`
   background: #f5f5f5;
   padding: 5px 10px;
   position: absolute;
-  margin-left: 235px;
+  margin-left: 200px;
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  font-family: 'Lato', sans-serif;
 
   div {
-    padding: 3px 0;
+    padding: 5px 0;
     min-width: 160px;
     display: flex;
     align-items: center;
@@ -71,11 +73,13 @@ export const Wrapper = styled.div`
         props.identifier === 'cause' ||
         props.identifier === 'effect'
       ) {
-        minHeight = '80px';
+        minHeight = '70px';
       } else if (props.identifier === 'empty') {
-        minHeight = '40px';
-      } else {
         minHeight = '45px';
+      } else if (props.identifier === 'toBeFilled') {
+        minHeight = '55px';
+      } else {
+        minHeight = '80px';
       }
 
       return minHeight;
@@ -92,9 +96,9 @@ export const Wrapper = styled.div`
       if (props.identifier === 'problem') {
         width = '250px';
       } else if (props.identifier === 'empty') {
-        width = '200px';
+        width = '180px';
       } else {
-        width = '220px';
+        width = '185px';
       }
 
       return width;
@@ -111,11 +115,11 @@ export const Wrapper = styled.div`
       let color;
 
       if (props.identifier === 'problem') {
-        color = '#E86E5F';
+        color = colors.problem;
       } else if (props.identifier === 'cause') {
-        color = '#3291E3';
+        color = colors.cause;
       } else if (props.identifier === 'effect') {
-        color = '#3BCB28';
+        color = colors.effect;
       } else if (props.identifier === 'empty') {
         color = '#D7D7D7';
       } else if (props.identifier === 'toBeFilled') {
@@ -124,10 +128,38 @@ export const Wrapper = styled.div`
 
       return color;
     }};
+
+    ${props =>
+      (props.identifier === 'problem' ||
+        props.identifier === 'empty' ||
+        props.identifier === 'toBeFilled') &&
+      `-webkit-font-smoothing: subpixel-antialiased`}
   }
 
   ${Text} {
     color: ${props => (props.identifier === 'empty' ? '#DCDCDC' : '#3D3D3C')};
+    justify-content: ${props => {
+      let justifyContent;
+
+      if (props.identifier === 'empty' || props.identifier === 'toBeFilled') {
+        justifyContent = 'space-between';
+      } else {
+        justifyContent = 'center';
+      }
+
+      return justifyContent;
+    }};
+    text-align: ${props => {
+      let textAlign;
+
+      if (props.identifier === 'empty' || props.identifier === 'toBeFilled') {
+        textAlign = 'unset';
+      } else {
+        textAlign = 'center';
+      }
+
+      return textAlign;
+    }};
   }
 
   ${LegendIdentifier} {
@@ -135,11 +167,11 @@ export const Wrapper = styled.div`
       let color;
 
       if (props.identifier === 'problem') {
-        color = '#E86E5F';
+        color = colors.problem;
       } else if (props.identifier === 'cause') {
-        color = '#3291E3';
+        color = colors.cause;
       } else if (props.identifier === 'effect') {
-        color = '#3BCB28';
+        color = colors.effect;
       }
 
       return color;
@@ -151,11 +183,11 @@ export const Wrapper = styled.div`
       let color;
 
       if (props.identifier === 'problem') {
-        color = '#E86E5F';
+        color = colors.problem;
       } else if (props.identifier === 'cause') {
-        color = '#3291E3';
+        color = colors.cause;
       } else if (props.identifier === 'effect') {
-        color = '#3BCB28';
+        color = colors.effect;
       }
 
       return color;

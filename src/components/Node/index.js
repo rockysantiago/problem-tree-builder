@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Icon } from 'semantic-ui-react';
+import { ChevronRight } from '@material-ui/icons';
 
 import {
   Wrapper,
@@ -35,7 +36,13 @@ class Node extends Component {
         <Container>
           {identifier && <LegendIdentifier />}
 
-          <Text>{content}</Text>
+          <Text>
+            {content}
+
+            {(identifier === 'empty' || identifier === 'toBeFilled') && (
+              <ChevronRight />
+            )}
+          </Text>
 
           {withControls && (
             <div style={{ width: '10px' }}>

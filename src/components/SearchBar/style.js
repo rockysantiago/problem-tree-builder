@@ -1,14 +1,32 @@
 import styled from 'styled-components';
 import { Input } from 'semantic-ui-react';
 
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
 export const Wrapper = styled.div`
+  position: relative;
   border: 1px solid red;
   z-index: 99;
-  border-radius: ${props =>
-    props.size === 'huge' ? '10px !important' : '5px !important'};
+  border-radius: ${props => {
+    let borderRadius;
+
+    if (props.size === 'huge') {
+      borderRadius = '10px !important';
+    } else {
+      borderRadius = '5px !important';
+    }
+
+    return borderRadius;
+  }};
+
   background: white;
-  height: ${props => (props.size === 'huge' ? '60px' : '45px')};
+  min-height: ${props => (props.size === 'huge' ? '60px' : '45px')};
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: ${props => props.width};
   border-color: ${props =>
@@ -18,9 +36,32 @@ export const Wrapper = styled.div`
   font-size: ${props =>
     props.size === 'huge' ? '18px !important' : '14px !important'};
 
+  ${props =>
+    props.hasSuggestions &&
+    `
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+  `}
+
   svg {
     margin: 0 0 0 10px;
     font-size: ${props => (props.size === 'huge' ? '24px' : '18px')};
+  }
+
+  input {
+    border: none !important;
+    font-family: 'Lato', sans-serif !important;
+    padding-left: 10px !important;
+    height: ${props => (props.size === 'huge' ? '58px' : '43px')};
+
+    &::placeholder {
+      color: #a0a0a0 !important;
+      font-weight: 100 !important;
+    }
+
+    &:focus {
+      ${props => props.active && `border-color: #3D3D3C !important;`}
+    }
   }
 
   button {
@@ -32,29 +73,50 @@ export const Wrapper = styled.div`
     font-family: 'Lato', sans-serif !important;
     -webkit-font-smoothing: subpixel-antialiased !important;
     letter-spacing: 0.03em !important;
-    border-top-right-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
+    border-top-right-radius: 9px !important;
+    border-bottom-right-radius: 9px !important;
     font-size: ${props =>
       props.size === 'huge' ? '14px !important' : '10px !important'};
+    height: ${props =>
+      props.size === 'huge' ? '58px !important' : '43px !important'};
+    ${props =>
+      props.hasSuggestions &&
+      `
+      border-bottom: 1px solid #3d3d3c !important;
+      border-bottom-right-radius: 0px !important;
+      z-index: 2 !important;
+  `}
   }
 `;
 
 export const StyledInput = styled(Input)`
   width: 100%;
   height: 100%;
+`;
 
-  input {
-    border: none !important;
-    font-family: 'Lato', sans-serif !important;
-    padding-left: 10px !important;
+export const List = styled.div`
+  border: 1px solid #3d3d3c;
+  border-top: none;
+  width: calc(100% - -2px);
+  position: absolute;
+  margin-top: 57px;
+  background: white;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  max-height: 250px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding-bottom: 15px;
+`;
+export const ListItem = styled.div`
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  color: #a0a0a0;
+  padding: 10px 43px;
+  text-transform: capitalize;
 
-    &::placeholder {
-      color: #a0a0a0 !important;
-      font-weight: 100 !important;
-    }
-
-    &:focus {
-      ${props => props.active && `border-color: #3D3D3C !important;`}
-    }
+  &:hover {
+    background: #f5f5f5;
   }
 `;

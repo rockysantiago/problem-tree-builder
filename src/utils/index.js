@@ -5,6 +5,10 @@ export const filterList = (filter, items) => {
     newItems = clonedItems.sort(function(a, b) {
       return b.score - a.score;
     });
+  } else if (filter === 'Sentiment') {
+    newItems = clonedItems.sort(function(a, b) {
+      return b.sentiment_score - a.sentiment_score;
+    });
   } else if (filter === 'Newest') {
     newItems = clonedItems.sort(function(a, b) {
       return +new Date(b.pub_time) - +new Date(a.pub_time);

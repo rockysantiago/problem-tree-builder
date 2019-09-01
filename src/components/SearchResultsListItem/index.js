@@ -17,6 +17,7 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
     <ListItem
       onClick={!item.selected && disabled ? () => {} : onSelect}
       type={item.selected ? type : ''}
+      disabled={!item.selected && disabled}
     >
       <Icon type={item.selected ? type : ''}>{!item.selected && <Add />}</Icon>
       {/* <ButtonWrapper>

@@ -7,14 +7,16 @@ export const ListItem = styled.li`
   margin-left: 0px;
   display: flex;
   align-items: center;
-  background: white;
+  background: ${props => (props.disabled ? '#fcfcfc' : 'white')};
   margin-bottom: 8px;
   cursor: pointer;
   height: 96px;
   border-color: ${props => {
     let borderColor;
 
-    if (props.type.includes('problem')) {
+    if (props.disabled) {
+      borderColor = '#fcfcfc';
+    } else if (props.type.includes('problem')) {
       borderColor = colors.problem;
     } else if (props.type.includes('cause')) {
       borderColor = colors.cause;
@@ -26,6 +28,10 @@ export const ListItem = styled.li`
 
     return borderColor;
   }};
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 `;
 
 export const Icon = styled.div`
@@ -143,7 +149,7 @@ export const Indicator = styled.div`
 
 export const IndicationLevel = styled.div`
   width: 9px;
-  height: ${props => props.level}%;
+  height: ${props => (props.level < 100 ? props.level : '100')}%;
   background-image: linear-gradient(
     180deg,
     #3d3d3c 25%,

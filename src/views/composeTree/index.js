@@ -211,14 +211,19 @@ class ComposeTree extends Component {
           </SideBar>
 
           <SideBar right>
-            <Generate onClick={() => navigate('/generate-tree')}>
+            <Generate
+              onClick={() => navigate('/generate-tree')}
+              disabled={topic.effects.length === 0 || topic.causes.length === 0}
+            >
               Generate Tree
               <ChevronRight />
             </Generate>
           </SideBar>
 
           <Canvas>
-            <Tree onDeleteSibling={this.handleSelectResult} />
+            <div style={{ position: 'absolute', height: '100%' }}>
+              <Tree onDeleteSibling={this.handleSelectResult} />
+            </div>
           </Canvas>
         </Grid.Column>
 

@@ -11,6 +11,7 @@ export const Logo = styled.img`
 export const Canvas = styled.div`
   height: 100%;
   overflow: auto;
+  position: relative;
 `;
 
 export const SideBar = styled.div`
@@ -26,12 +27,12 @@ export const SideBar = styled.div`
 `;
 
 export const Generate = styled(Button)`
-  border: 1px solid #d7d7d7 !important;
-  background: white !important;
+  border: 1px solid #ffe9af !important;
+  background: #ffe9af !important;
   height: 50px !important;
   text-transform: uppercase !important;
   -webkit-font-smoothing: subpixel-antialiased;
-  color: #d7d7d7 !important;
+  color: #3d3d3c !important;
   letter-spacing: 0.03em !important;
   font-size: 14px !important;
   width: 180px !important;
@@ -41,6 +42,12 @@ export const Generate = styled(Button)`
 
   svg {
     margin-right: -10px;
+  }
+
+  &:disabled {
+    background: white !important;
+    border: 1px solid #d7d7d7 !important;
+    color: #d7d7d7 !important;
   }
 `;
 

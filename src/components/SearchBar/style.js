@@ -44,14 +44,13 @@ export const Wrapper = styled.div`
   `}
 
   svg {
-    margin: 0 0 0 10px;
     font-size: ${props => (props.size === 'huge' ? '24px' : '18px')};
   }
 
   input {
     border: none !important;
     font-family: 'Lato', sans-serif !important;
-    padding-left: 10px !important;
+    padding-left: 0px !important;
     height: ${props => (props.size === 'huge' ? '58px' : '43px')};
 
     &::placeholder {

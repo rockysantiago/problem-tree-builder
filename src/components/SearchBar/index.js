@@ -38,7 +38,16 @@ class SearchBar extends Component {
         hasSuggestions={hasSuggestions}
       >
         <Container>
-          {!loadingSuggestions ? <Search /> : <Spinner />}
+          <div
+            style={{
+              width: '46px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {!loadingSuggestions ? <Search /> : <Spinner />}
+          </div>
           <StyledInput
             action={{
               content: 'Search',

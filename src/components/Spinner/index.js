@@ -5,7 +5,7 @@ const Spinner = ({ size }) => (
   <div
     style={{
       position: 'relative',
-      width: '46px',
+      width: '43px',
       height: '51px'
     }}
   >

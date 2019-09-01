@@ -13,7 +13,7 @@ import {
 
 import Tree from 'components/Tree';
 
-import { Wrapper, Controls, Canvas, Button } from './style';
+import { Wrapper, Controls, Canvas, Button, Logo } from './style';
 
 class GenerateTree extends Component {
   printDocument = async () => {
@@ -25,6 +25,7 @@ class GenerateTree extends Component {
   render() {
     return (
       <Wrapper>
+        <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} />
         <Canvas id="capture">
           <Tree forExport />
         </Canvas>

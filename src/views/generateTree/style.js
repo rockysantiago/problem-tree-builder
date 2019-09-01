@@ -8,6 +8,13 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
+export const Logo = styled.img`
+  height: 75px;
+  position: absolute;
+  top: 0;
+  left: 1em;
+`;
+
 export const Canvas = styled.div`
   padding: 100px;
 `;

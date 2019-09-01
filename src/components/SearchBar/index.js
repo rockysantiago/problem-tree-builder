@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Wrapper, StyledInput, List, ListItem, Container } from './style';
 import { Search } from '@material-ui/icons';
+import ReactHtmlParser from 'react-html-parser';
 
 import Spinner from '../Spinner';
 
@@ -13,6 +14,13 @@ class SearchBar extends Component {
       }
     });
   }
+
+  parseSuggestion = suggestion => {
+    const { keyword } = this.props;
+    const stringMatch = new RegExp(keyword, 'gi');
+
+    return suggestion.replace(stringMatch, `<em>${keyword}</em>`);
+  };
 
   render() {
     const {
@@ -69,7 +77,7 @@ class SearchBar extends Component {
                   onClick={() => onSelectSuggestion(suggestion)}
                   key={index}
                 >
-                  {suggestion}
+                  {ReactHtmlParser(this.parseSuggestion(suggestion))}
                 </ListItem>
               ))}
           </List>

@@ -76,6 +76,7 @@ class Home extends Component {
               loadingSuggestions={isFetching}
               suggestions={data}
               onSelectSuggestion={this.handleSugggestionSelect}
+              keyword={keyword}
             />
           </Center>
 

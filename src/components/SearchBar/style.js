@@ -52,11 +52,12 @@ export const Wrapper = styled.div`
     font-family: 'Lato', sans-serif !important;
     padding-left: 0px !important;
     height: ${props => (props.size === 'huge' ? '58px' : '43px')};
-    text-transform: capitalize !important;
+    text-transform: lowercase !important;
 
     &::placeholder {
       color: #a0a0a0 !important;
       font-weight: 100 !important;
+      text-transform: none !important;
     }
 
     &:focus {
@@ -114,10 +115,16 @@ export const ListItem = styled.div`
   font-family: 'Lato', sans-serif;
   color: #a0a0a0;
   padding: 10px 43px;
-  text-transform: capitalize;
   cursor: pointer;
+  text-transform: lowercase;
 
   &:hover {
     background: #f5f5f5;
+  }
+
+  em {
+    font-weight: 700;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-style: inherit;
   }
 `;

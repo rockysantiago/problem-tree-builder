@@ -20,30 +20,56 @@ export const VerticalArrow = styled.div`
   width: 1px;
   height: 15px;
 
-  ${props =>
+  /* ${props =>
     props.top &&
     `
     &:before {
       content: '';
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-bottom: 5px solid black;
+      border-style: solid;
+      border-width: 0 5px 5px 5px;
+      border-color: transparent transparent black transparent;
       background: transparent;
       position: absolute;
-      margin-left: -5px;
+      margin: 0 0 0 -5px;
       z-index: -1;
     }
     
     &:after {
       content: '';
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-bottom: 4px solid white;
+      border-style: solid;
+      border-width: 0 4px 4px 4px;
+      border-color: transparent transparent white transparent;
       background: transparent;
       position: absolute;
-      margin-top: 1px;
-      margin-left: -4px;
+      margin: 1px 0 0 -4px;
       z-index: -1;
+    }`}; */
+
+    ${props =>
+      props.top &&
+      `
+    margin-top: 4px;
+    font-family: Icons;
+    &:before {
+      content: '\\f106';
+      color: #353535;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      margin-left: -5px;
+      float: left;
+      margin-top: -7px;
+    }`};
+  ${props =>
+    props.bottom &&
+    `
+    margin-bottom: 5px;
+    &:after {
+      content: '\\2193';
+      color: #353535;
+      font-size: 11px;
+      margin-left: -5px;
+      float: left;
+      margin-top: 11px;
     }`};
 `;
 

@@ -1,6 +1,6 @@
 import React from 'react';
-// import { Button, List } from 'semantic-ui-react';
 import { Add } from '@material-ui/icons';
+
 import {
   ListItem,
   Icon,
@@ -33,30 +33,32 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
       <ListDetails>
         <Header>{item.text}</Header>
         <table>
-          <tr>
-            <td>
-              <Label>Source</Label>
-              <Description>
-                <a href={item.link} target="_blank" rel="noopener noreferrer">
-                  {item.link}
-                </a>
-              </Description>
-            </td>
-            <td>
-              <Label>Country</Label>
-              <Description>{item.country}</Description>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Label>Project No</Label>
-              <Description>{item.project_no}</Description>
-            </td>
-            <td>
-              <Label>Section</Label>
-              <Description>{item.section}</Description>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <Label>Source</Label>
+                <Description>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
+                    {item.link}
+                  </a>
+                </Description>
+              </td>
+              <td>
+                <Label>Country</Label>
+                <Description>{item.country}</Description>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Label>Project No</Label>
+                <Description>{item.project_no}</Description>
+              </td>
+              <td>
+                <Label>Section</Label>
+                <Description>{item.section}</Description>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </ListDetails>
 

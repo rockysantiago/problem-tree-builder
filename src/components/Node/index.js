@@ -72,7 +72,7 @@ class Node extends Component {
 
             <Delete onClick={onDelete}>
               <span>DELETE</span>
-              <Icon name="close icon" />
+              <Icon name="close" />
             </Delete>
           </Controls>
         )}

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Dropdown } from 'semantic-ui-react';
 import { ChevronRight, Check } from '@material-ui/icons';
 
 import {
@@ -128,7 +127,7 @@ class SearchFilter extends Component {
 
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle isOpen={this.state.dropdownOpen}>
+        <DropdownToggle isopen={this.state.dropdownOpen ? 1 : 0}>
           Sort/Filter
           <ChevronRight />
         </DropdownToggle>

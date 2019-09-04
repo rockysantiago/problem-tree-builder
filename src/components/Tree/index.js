@@ -93,11 +93,11 @@ class Tree extends Component {
           ) : (
             data.effects &&
             data.effects.map((effect, effectIndex) => (
-              <Child>
+              <Child key={effectIndex}>
                 <Level bottomTop>
                   {effect._data &&
                     effect._data.map((subEffect, seIndex) => (
-                      <Child>
+                      <Child key={seIndex}>
                         <Node
                           withControls={!forExport}
                           id={`subeffect[${effectIndex}]${seIndex}`}
@@ -204,7 +204,7 @@ class Tree extends Component {
             </Child>
           ) : (
             data.causes.map((cause, index) => (
-              <Child>
+              <Child key={index}>
                 {data.causes && data.causes.length > 1 && (
                   <HorizontalLine
                     rightHalf={index === 0}
@@ -241,7 +241,7 @@ class Tree extends Component {
                 <Level>
                   {cause._data &&
                     cause._data.map((subCause, scIndex) => (
-                      <Child>
+                      <Child key={scIndex}>
                         {cause._data && cause._data.length > 1 && (
                           <HorizontalLine
                             rightHalf={scIndex === 0}

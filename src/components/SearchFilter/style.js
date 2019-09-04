@@ -26,16 +26,16 @@ export const DropdownToggle = styled(BSDropdownToggle)`
   align-items: center;
   border-color: #3D3D3C !important;
   border-bottom-right-radius: ${props =>
-    props.isOpen ? '0px !important' : '5px !important'};
+    props.isopen ? '0px !important' : '5px !important'};
   border-bottom-left-radius: ${props =>
-    props.isOpen ? '0px !important' : '5px !important'};
+    props.isopen ? '0px !important' : '5px !important'};
   border-bottom-color: ${props =>
-    props.isOpen ? 'white !important' : '#3D3D3C !important'}
+    props.isopen ? 'white !important' : '#3D3D3C !important'}
   margin: 0 5px !important;
   
   svg {
     font-size: 16px;
-    transform: rotate(${props => (props.isOpen ? '-90deg' : '90deg')});
+    transform: rotate(${props => (props.isopen ? '-90deg' : '90deg')});
     margin-left: 5px;
     margin-right: -5px;
   }

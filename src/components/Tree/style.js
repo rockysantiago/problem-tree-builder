@@ -57,7 +57,7 @@ export const VerticalArrow = styled.div`
       -webkit-font-smoothing: antialiased;
       margin-left: -5px;
       float: left;
-      margin-top: -7px;
+      margin-top: -9px;
     }`};
   ${props =>
     props.bottom &&

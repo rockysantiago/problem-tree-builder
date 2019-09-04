@@ -20,16 +20,6 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
       disabled={!item.selected && disabled}
     >
       <Icon type={item.selected ? type : ''}>{!item.selected && <Add />}</Icon>
-      {/* <ButtonWrapper>
-        <Button
-          basic
-          icon={item.selected ? 'check' : 'add'}
-          onClick={onSelect}
-          style={{ boxShadow: 'none', border: '1px solid red' }}
-          disabled={!item.selected && disabled}
-        />
-      </ButtonWrapper> */}
-
       <ListDetails>
         <Header>{item.text}</Header>
         <table>
@@ -51,7 +41,7 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
             <tr>
               <td>
                 <Label>Project No</Label>
-                <Description>{item.project_no}</Description>
+                <Description>{item.project_number}</Description>
               </td>
               <td>
                 <Label>Section</Label>

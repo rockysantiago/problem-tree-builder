@@ -25,7 +25,7 @@ class GenerateTree extends Component {
   render() {
     return (
       <Wrapper>
-        <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} />
+        {/* <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} /> */}
         <Canvas id="capture">
           <Tree forExport />
         </Canvas>

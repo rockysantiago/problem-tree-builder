@@ -56,7 +56,7 @@ class Home extends Component {
     return (
       <Wrapper>
         <Container>
-          <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} />
+          {/* <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} /> */}
 
           <Center active={keyword !== ''}>
             <Background>

@@ -146,7 +146,7 @@ class ComposeTree extends Component {
     return (
       <Grid padded style={{ height: '100vh', overflow: 'hidden' }}>
         <Grid.Column width={11} style={{ overflow: 'hidden' }}>
-          <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} />
+          {/* <Logo src={`${process.env.PUBLIC_URL}/adb_logo_outline.png`} /> */}
           <SideBar left>
             <Panel onClick={this.toggleTips} isOpen={tipsCollapse}>
               <ChevronRight />

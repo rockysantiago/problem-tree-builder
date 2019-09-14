@@ -13,7 +13,7 @@ import {
 
 import Tree from 'components/Tree';
 
-import { Wrapper, Controls, Canvas, Button, Logo } from './style';
+import { Wrapper, Controls, Canvas, Button } from './style';
 
 class GenerateTree extends Component {
   printDocument = async () => {

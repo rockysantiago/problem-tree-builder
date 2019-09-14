@@ -38,7 +38,7 @@ export const selectOption = (index, type) => {
       idx: index
     });
   };
-}
+};
 
 export const selectSubOption = (parentIndex, selectedIndex, activeType) => {
   const SEARCH_TYPES = {
@@ -81,14 +81,31 @@ export const setFilter = filter => {
   return dispatch => {
     dispatch({ type: types.SET_FILTER, payload: filter });
   };
-}
+};
 
 export const clear = (activeType, idx) => {
   return dispatch => {
     if (activeType === 'problem') {
       dispatch({ type: types.CLEAR_PROBLEM_SELECTION });
     } else {
-      dispatch({ type: types.CLEAR_CAUSE_EFFECT_SELECTION });      
+      dispatch({ type: types.CLEAR_CAUSE_EFFECT_SELECTION });
     }
   };
-}
+};
+
+export const updateOption = (type, index, childIndex, payload) => {
+  const UPDATE_TYPE = {
+    cause: types.UPDATE_CAUSE,
+    'sub-cause': types.UPDATE_SUB_CAUSE,
+    effect: types.UPDATE_EFFECT,
+    'sub-effect': types.UPDATE_SUB_EFFECT
+  };
+
+  return dispatch =>
+    dispatch({
+      type: UPDATE_TYPE[type],
+      index,
+      childIndex,
+      payload
+    });
+};

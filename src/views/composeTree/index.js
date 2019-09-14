@@ -9,12 +9,11 @@ import { Collapse } from 'reactstrap';
 import * as colors from '../../constants/colors';
 
 import SearchBar from 'components/SearchBar';
-// import SearchInput from 'components/SearchInput';
+
 import SearchResultsList from 'components/SearchResultsList';
 import Tree from 'components/Tree';
 import CustomInput from 'components/CustomInput';
 
-// Import Actions
 import { searchProblems, selectProblem } from 'actions/problemActions';
 import {
   setTopic,
@@ -27,7 +26,6 @@ import { retrieveSuggestions } from 'actions/suggestionActions';
 
 import {
   Canvas,
-  Logo,
   SideBar,
   Generate,
   Panel,
@@ -216,7 +214,7 @@ class ComposeTree extends Component {
             <div
               style={{ position: 'absolute', height: '100%', width: '100%' }}
             >
-              <Tree onDeleteSibling={this.handleSelectResult} />
+              <Tree />
             </div>
           </Canvas>
         </Grid.Column>
@@ -252,118 +250,6 @@ class ComposeTree extends Component {
               />
             </SidePanelBody>
           </SidePanel>
-
-          {/* {topic.activeType === 'problem' && (
-            <>
-              {problems.isFetching ? (
-                <h1>Loading...</h1>
-              ) : (
-                <>
-                  <Header
-                    content="Add a problem"
-                    size="huge"
-                    style={{ minHeight: 'auto' }}
-                  />
-                  <SearchBar
-                    keyword={keyword}
-                    onSearch={this.handleSearch}
-                    onChange={this.handleChange}
-                  />
-                  <SearchResultsList
-                    items={problems.data || []}
-                    onSelect={this.handleSelectResult}
-                    filter={topic.filter}
-                  />
-                </>
-              )}
-            </>
-          )} */}
-
-          {/* ADD CAUSES */}
-          {/* {topic.activeType === 'cause' && (
-            <>
-              {topic.isFetching ? (
-                <h1>Loading...</h1>
-              ) : (
-                <>
-                  <SearchInput
-                    content="Adding a cause of:"
-                    text={topic.problem.text}
-                  ></SearchInput>
-                  <SearchResultsList
-                    items={topic._sourceCauses || []}
-                    onSelect={this.handleSelectResult}
-                    selected={topic.causes}
-                    filter={topic.filter}
-                  />
-                </>
-              )}
-            </>
-          )} */}
-
-          {/* ADD SUB CAUSE */}
-          {/* {topic.activeType === 'sub-cause' && (
-            <>
-              {topic.isFetching ? (
-                <h1>Loading...</h1>
-              ) : (
-                <>
-                  <SearchInput
-                    content="Adding a sub-cause of:"
-                    text={topic.causes[topic.activeIndex].text}
-                  ></SearchInput>
-                  <SearchResultsList
-                    items={topic.causes[topic.activeIndex]._sources || []}
-                    onSelect={this.handleSubSelection}
-                    filter={topic.filter}
-                  />
-                </>
-              )}
-            </>
-          )} */}
-
-          {/* ADD EFFECTS */}
-          {/* {topic.activeType === 'effect' && (
-            <>
-              {topic.isFetching ? (
-                <h1>Loading...</h1>
-              ) : (
-                <>
-                  <SearchInput
-                    content="Adding an effect of:"
-                    text={topic.problem.text}
-                  ></SearchInput>
-                  <SearchResultsList
-                    items={topic._sourceEffects || []}
-                    onSelect={this.handleSelectResult}
-                    selected={topic.effects}
-                    filter={topic.filter}
-                  />
-                </>
-              )}
-            </>
-          )} */}
-
-          {/* ADD SUB EFFECTS */}
-          {/* {topic.activeType === 'sub-effect' && (
-            <>
-              {topic.isFetching ? (
-                <h1>Loading...</h1>
-              ) : (
-                <>
-                  <SearchInput
-                    content="Adding a sub-effect of:"
-                    text={topic.effects[topic.activeIndex].text}
-                  ></SearchInput>
-                  <SearchResultsList
-                    items={topic.effects[topic.activeIndex]._sources || []}
-                    onSelect={this.handleSubSelection}
-                    filter={topic.filter}
-                  />
-                </>
-              )}
-            </>
-          )} */}
         </Grid.Column>
       </Grid>
     );

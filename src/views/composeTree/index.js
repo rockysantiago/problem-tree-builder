@@ -9,12 +9,11 @@ import { Collapse } from 'reactstrap';
 import * as colors from '../../constants/colors';
 
 import SearchBar from 'components/SearchBar';
-// import SearchInput from 'components/SearchInput';
+
 import SearchResultsList from 'components/SearchResultsList';
 import Tree from 'components/Tree';
 import CustomInput from 'components/CustomInput';
 
-// Import Actions
 import { searchProblems, selectProblem } from 'actions/problemActions';
 import {
   setTopic,
@@ -27,7 +26,6 @@ import { retrieveSuggestions } from 'actions/suggestionActions';
 
 import {
   Canvas,
-  Logo,
   SideBar,
   Generate,
   Panel,

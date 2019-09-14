@@ -10,7 +10,6 @@ import SearchBar from 'components/SearchBar';
 import {
   Wrapper,
   Container,
-  Logo,
   Center,
   Background,
   Image,

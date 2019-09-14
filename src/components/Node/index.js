@@ -8,7 +8,8 @@ import {
   LegendIdentifier,
   Text,
   Controls,
-  Delete
+  Delete,
+  Edit
 } from './style';
 
 class Node extends Component {
@@ -24,6 +25,7 @@ class Node extends Component {
       onAddChild,
       addChildLabel,
       onDelete,
+      onEdit,
       id
     } = this.props;
 
@@ -69,6 +71,10 @@ class Node extends Component {
                 <Icon name="plus" />
               </div>
             )}
+            <Edit onClick={onEdit}>
+              <span>EDIT</span>
+              <Icon name="edit" />
+            </Edit>
 
             <Delete onClick={onDelete}>
               <span>DELETE</span>

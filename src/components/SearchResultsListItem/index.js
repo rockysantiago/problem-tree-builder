@@ -27,7 +27,7 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
             <tr>
               <td>
                 <Label>Source</Label>
-                <Description>
+                <Description style={{ textTransform: 'none' }}>
                   <a href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.link}
                   </a>

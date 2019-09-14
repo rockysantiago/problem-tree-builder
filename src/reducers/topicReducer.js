@@ -1,5 +1,9 @@
+import * as types from 'constants/actionTypes';
+import { CAUSE_STRING, EFFECT_STRING } from 'constants/strings';
+import getChildUpdates from 'utils/getChildUpdates';
+import getParentUpdates from 'utils/getParentUpdates';
+
 import initialState from './initialState';
-import * as types from '../constants/actionTypes';
 
 export default function topicReducer(state = initialState.topic, action) {
   switch (action.type) {
@@ -201,6 +205,46 @@ export default function topicReducer(state = initialState.topic, action) {
       }
 
       return;
+
+    case types.UPDATE_CAUSE:
+      const updatedCauses = getParentUpdates(state._sourceCauses, action);
+
+      return {
+        ...state,
+        _sourceCauses: updatedCauses,
+        causes: updatedCauses.filter(cause => cause.selected),
+        activeType: CAUSE_STRING
+      };
+
+    case types.UPDATE_SUB_CAUSE:
+      const updatedSubCauses = getChildUpdates(state._sourceCauses, action);
+
+      return {
+        ...state,
+        _sourceCauses: updatedSubCauses,
+        isFetching: false,
+        causes: updatedSubCauses.filter(subCause => subCause.selected)
+      };
+
+    case types.UPDATE_EFFECT:
+      const updatedEffects = getParentUpdates(state._sourceEffects, action);
+
+      return {
+        ...state,
+        _sourceEffects: updatedEffects,
+        effects: updatedEffects.filter(effect => effect.selected),
+        activeType: EFFECT_STRING
+      };
+
+    case types.UPDATE_SUB_EFFECT:
+      const updatedSubEffects = getChildUpdates(state._sourceEffects, action);
+
+      return {
+        ...state,
+        _sourceEffects: updatedSubEffects,
+        isFetching: false,
+        effects: updatedSubEffects.filter(subEffect => subEffect.selected)
+      };
 
     case types.INITIAL_STATE:
       return Object.assign({}, initialState.topic);

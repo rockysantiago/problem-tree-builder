@@ -4,24 +4,29 @@ import { bindActionCreators } from 'redux';
 
 import { searchProblems, selectProblem } from 'actions/problemActions';
 import {
-  setTopic,
-  searchOptions,
   searchSubOptions,
+  searchOptions,
+  selectOption,
   selectSubOption,
-  selectOption
+  setTopic,
+  updateOption
 } from 'actions/topicActions';
+import {
+  CAUSE_STRING,
+  SUB_CAUSE_STRING,
+  EFFECT_STRING,
+  SUB_EFFECT_STRING
+} from 'constants/strings';
 
+import EditModal from '../EditModal';
 import Node from '../Node';
-
 import { Wrapper, VerticalArrow, Level, Child, HorizontalLine } from './style';
 
 class Tree extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeMenu: null
-    };
-  }
+  state = {
+    activeMenu: null,
+    isModalOpen: false
+  };
 
   componentDidMount() {
     document.addEventListener('click', this.setActiveMenu, false);
@@ -69,10 +74,16 @@ class Tree extends Component {
     }
   };
 
+  showModal = (size, modalData, type) => () => {
+    this.setState({ size, modalData, type, isModalOpen: true });
+  };
+
+  closeModal = () => this.setState({ isModalOpen: false });
+
   render() {
     const data = this.props.topic;
-    const { activeMenu } = this.state;
-    const { forExport } = this.props;
+    const { activeMenu, size, modalData, type, isModalOpen } = this.state;
+    const { forExport, updateOption } = this.props;
 
     return (
       <Wrapper>
@@ -106,6 +117,11 @@ class Tree extends Component {
                           }
                           content={subEffect.text}
                           identifier={!forExport && 'effect'}
+                          onEdit={this.showModal(
+                            'mini',
+                            { parent: effect, child: subEffect },
+                            SUB_EFFECT_STRING
+                          )}
                           onDelete={() =>
                             this.props.selectSubOption(
                               effect._listIndex,
@@ -148,6 +164,7 @@ class Tree extends Component {
                   withControls={!forExport}
                   id={`effect${effectIndex}`}
                   showControlGroup={`effect${effectIndex}` === activeMenu}
+                  onEdit={this.showModal('mini', effect, EFFECT_STRING)}
                   onDelete={() =>
                     this.props.selectOption(effect._listIndex, 'effect')
                   }
@@ -231,6 +248,7 @@ class Tree extends Component {
                   withControls={!forExport}
                   id={`cause${index}`}
                   showControlGroup={`cause${index}` === activeMenu}
+                  onEdit={this.showModal('mini', cause, CAUSE_STRING)}
                   onDelete={() =>
                     this.props.selectOption(cause._listIndex, 'cause')
                   }
@@ -258,6 +276,11 @@ class Tree extends Component {
                           }
                           content={subCause.text}
                           identifier={!forExport && 'cause'}
+                          onEdit={this.showModal(
+                            'mini',
+                            { parent: cause, child: subCause },
+                            SUB_CAUSE_STRING
+                          )}
                           onDelete={() =>
                             this.props.selectSubOption(
                               cause._listIndex,
@@ -273,6 +296,14 @@ class Tree extends Component {
             ))
           )}
         </Level>
+        <EditModal
+          close={this.closeModal}
+          open={isModalOpen}
+          size={size}
+          confirm={updateOption}
+          data={modalData}
+          type={type}
+        ></EditModal>
       </Wrapper>
     );
   }
@@ -287,7 +318,8 @@ const mapDispatchToProps = dispatch =>
       searchOptions,
       searchSubOptions,
       selectSubOption,
-      selectOption
+      selectOption,
+      updateOption
     },
     dispatch
   );

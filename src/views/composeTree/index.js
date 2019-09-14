@@ -214,7 +214,7 @@ class ComposeTree extends Component {
             <div
               style={{ position: 'absolute', height: '100%', width: '100%' }}
             >
-              <Tree onDeleteSibling={this.handleSelectResult} />
+              <Tree />
             </div>
           </Canvas>
         </Grid.Column>

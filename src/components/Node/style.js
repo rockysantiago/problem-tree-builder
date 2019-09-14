@@ -57,6 +57,10 @@ export const Controls = styled.div`
   }
 `;
 
+export const Edit = styled.div`
+  color: #3d3d3c;
+`;
+
 export const Delete = styled.div`
   color: #3d3d3c;
 `;

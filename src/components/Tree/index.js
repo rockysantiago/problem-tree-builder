@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { searchProblems, selectProblem } from 'actions/problemActions';
+import {
+  searchProblems,
+  selectProblem,
+  updateProblem
+} from 'actions/problemActions';
 import {
   searchSubOptions,
   searchOptions,
@@ -12,11 +16,13 @@ import {
   updateOption
 } from 'actions/topicActions';
 import {
+  PROBLEM_STRING,
   CAUSE_STRING,
   SUB_CAUSE_STRING,
   EFFECT_STRING,
   SUB_EFFECT_STRING
 } from 'constants/strings';
+import { isEmpty } from 'utils';
 
 import EditModal from '../EditModal';
 import Node from '../Node';
@@ -74,16 +80,15 @@ class Tree extends Component {
     }
   };
 
-  showModal = (size, modalData, type) => () => {
+  showModal = (size, modalData, type) => () =>
     this.setState({ size, modalData, type, isModalOpen: true });
-  };
 
   closeModal = () => this.setState({ isModalOpen: false });
 
   render() {
     const data = this.props.topic;
     const { activeMenu, size, modalData, type, isModalOpen } = this.state;
-    const { forExport, updateOption } = this.props;
+    const { forExport, updateOption, updateProblem } = this.props;
 
     return (
       <Wrapper>
@@ -184,12 +189,15 @@ class Tree extends Component {
           )}
         </Level>
 
-        {/* Center */}
         <VerticalArrow top={data.effects.length <= 1} />
 
         {data.effects.length <= 1 && <VerticalArrow />}
 
         <Node
+          id={`problem${data.problem._listIndex}`}
+          content={data.problem.text || 'SELECT A PROBLEM STATEMENT'}
+          disableDelete
+          identifier={!forExport && 'problem'}
           onClick={
             forExport
               ? () => {}
@@ -199,11 +207,12 @@ class Tree extends Component {
                     activeIndex: -1
                   })
           }
-          content={data.problem.text || 'SELECT A PROBLEM STATEMENT'}
-          identifier={!forExport && 'problem'}
+          onEdit={this.showModal('mini', data.problem, PROBLEM_STRING)}
+          showControlGroup={`problem${data.problem._listIndex}` === activeMenu}
+          size={265}
+          withControls={!forExport && !isEmpty(data.problem)}
         />
         <VerticalArrow top />
-        {/* Center */}
 
         <Level test={data.causes.length > 1}>
           {data.causes.length === 0 ? (
@@ -298,11 +307,12 @@ class Tree extends Component {
         </Level>
         <EditModal
           close={this.closeModal}
+          data={modalData}
           open={isModalOpen}
           size={size}
-          confirm={updateOption}
-          data={modalData}
           type={type}
+          updateOption={updateOption}
+          updateProblem={updateProblem}
         ></EditModal>
       </Wrapper>
     );
@@ -314,6 +324,7 @@ const mapDispatchToProps = dispatch =>
     {
       searchProblems,
       selectProblem,
+      updateProblem,
       setTopic,
       searchOptions,
       searchSubOptions,
@@ -324,9 +335,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-const mapStateToProps = state => {
-  return state;
-};
+const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,

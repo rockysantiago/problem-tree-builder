@@ -1,5 +1,6 @@
+import * as types from 'constants/actionTypes';
+import { getParentUpdates } from 'utils';
 import initialState from './initialState';
-import * as types from '../constants/actionTypes';
 
 export default function problemsReducer(state = initialState.problems, action) {
   switch (action.type) {
@@ -7,12 +8,22 @@ export default function problemsReducer(state = initialState.problems, action) {
       return Object.assign({}, state, { isFetching: true });
 
     case types.SET_PROBLEMS:
-      const data = action.payload.map((p, _listIndex) => Object.assign({}, p, { _listIndex }));
+      const data = action.payload.map((p, _listIndex) =>
+        Object.assign({}, p, { _listIndex })
+      );
       return Object.assign({}, { isFetching: false, data });
-    
+
+    case types.UPDATE_PROBLEM:
+      const updatedProblems = getParentUpdates(state.data, action);
+      return { ...state, data: updatedProblems };
+
     case types.CLEAR_PROBLEM_SELECTION:
-        return Object.assign({}, state, { data: state.data.map(item => Object.assign({}, item, { selected: false })) });
-    
+      return Object.assign({}, state, {
+        data: state.data.map(item =>
+          Object.assign({}, item, { selected: false })
+        )
+      });
+
     case types.INIT_PROBLEMS:
       return Object.assign({}, initialState.problems);
 

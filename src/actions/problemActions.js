@@ -55,7 +55,7 @@ export const selectProblem = (index, problems) => {
         effects: [],
         causes: [],
         _sourceEffects: [],
-        _sourceCauses: [],
+        _sourceCauses: []
       }
     });
 
@@ -64,4 +64,8 @@ export const selectProblem = (index, problems) => {
       payload: newProblems
     });
   };
+};
+
+export const updateProblem = (index, payload) => dispatch => {
+  dispatch({ type: types.UPDATE_PROBLEM, index, payload });
 };

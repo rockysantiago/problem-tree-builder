@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Input, Modal } from 'semantic-ui-react';
 
-const EditModal = ({ size, open, close, data = {}, confirm, type }) => {
+import { PROBLEM_STRING } from 'constants/strings';
+
+const EditModal = ({
+  close,
+  data = {},
+  open,
+  size,
+  type,
+  updateOption,
+  updateProblem
+}) => {
   const [text, setText] = useState('');
   const [link, setLink] = useState('');
 
@@ -47,7 +57,9 @@ const EditModal = ({ size, open, close, data = {}, confirm, type }) => {
           basic
           content="Done"
           onClick={() => {
-            confirm(type, index, childIndex, { text, link });
+            type === PROBLEM_STRING
+              ? updateProblem(index, { text, link })
+              : updateOption(type, index, childIndex, { text, link });
             close();
           }}
         />

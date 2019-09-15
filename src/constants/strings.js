@@ -1,3 +1,4 @@
+export const PROBLEM_STRING = 'problem';
 export const CAUSE_STRING = 'cause';
 export const SUB_CAUSE_STRING = 'sub-cause';
 export const EFFECT_STRING = 'effect';

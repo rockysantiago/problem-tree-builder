@@ -36,7 +36,7 @@ export const Controls = styled.div`
   background: #f5f5f5;
   padding: 5px 10px;
   position: absolute;
-  margin-left: 200px;
+  margin-left: ${props => props.size || 200}px;
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 600;

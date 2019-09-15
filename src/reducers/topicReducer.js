@@ -1,7 +1,6 @@
 import * as types from 'constants/actionTypes';
 import { CAUSE_STRING, EFFECT_STRING } from 'constants/strings';
-import getChildUpdates from 'utils/getChildUpdates';
-import getParentUpdates from 'utils/getParentUpdates';
+import { getChildUpdates, getParentUpdates } from 'utils';
 
 import initialState from './initialState';
 
@@ -205,6 +204,15 @@ export default function topicReducer(state = initialState.topic, action) {
       }
 
       return;
+
+    case types.UPDATE_PROBLEM:
+      const { problem } = state;
+      const updatedProblem =
+        action.index === problem._listIndex
+          ? { ...problem, link: action.payload.link, text: action.payload.text }
+          : problem;
+
+      return { ...state, problem: updatedProblem };
 
     case types.UPDATE_CAUSE:
       const updatedCauses = getParentUpdates(state._sourceCauses, action);

@@ -205,6 +205,15 @@ export default function topicReducer(state = initialState.topic, action) {
 
       return;
 
+    case types.UPDATE_PROBLEM:
+      const { problem } = state;
+      const updatedProblem =
+        action.index === problem._listIndex
+          ? { ...problem, link: action.payload.link, text: action.payload.text }
+          : problem;
+
+      return { ...state, problem: updatedProblem };
+
     case types.UPDATE_CAUSE:
       const updatedCauses = getParentUpdates(state._sourceCauses, action);
 

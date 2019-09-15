@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
-import { Icon } from 'semantic-ui-react';
 import { ChevronRight } from '@material-ui/icons';
+import { Icon } from 'semantic-ui-react';
 
 import {
-  Wrapper,
   Container,
-  LegendIdentifier,
-  Text,
   Controls,
   Delete,
-  Edit
+  Edit,
+  LegendIdentifier,
+  Text,
+  Wrapper
 } from './style';
 
 class Node extends Component {
   render() {
     const {
-      content,
-      identifier,
-      onClick,
-      withControls,
-      showControlGroup,
-      onAddSibling,
-      addSiblingLabel,
-      onAddChild,
+      id,
       addChildLabel,
+      addSiblingLabel,
+      content,
+      disableDelete,
+      identifier,
+      onAddChild,
+      onAddSibling,
+      onClick,
       onDelete,
       onEdit,
-      id
+      showControlGroup,
+      size,
+      withControls
     } = this.props;
 
     return (
@@ -58,7 +60,7 @@ class Node extends Component {
         </Container>
 
         {withControls && showControlGroup && (
-          <Controls>
+          <Controls size={size}>
             {addSiblingLabel && (
               <div onClick={onAddSibling}>
                 <span>{addSiblingLabel}</span>
@@ -76,10 +78,12 @@ class Node extends Component {
               <Icon name="edit" />
             </Edit>
 
-            <Delete onClick={onDelete}>
-              <span>DELETE</span>
-              <Icon name="close" />
-            </Delete>
+            {!disableDelete && (
+              <Delete onClick={onDelete}>
+                <span>DELETE</span>
+                <Icon name="close" />
+              </Delete>
+            )}
           </Controls>
         )}
       </Wrapper>

@@ -17,6 +17,7 @@ import {
   EFFECT_STRING,
   SUB_EFFECT_STRING
 } from 'constants/strings';
+import { isEmpty } from 'utils';
 
 import EditModal from '../EditModal';
 import Node from '../Node';
@@ -184,12 +185,15 @@ class Tree extends Component {
           )}
         </Level>
 
-        {/* Center */}
         <VerticalArrow top={data.effects.length <= 1} />
 
         {data.effects.length <= 1 && <VerticalArrow />}
 
         <Node
+          id={`problem${data.problem._listIndex}`}
+          content={data.problem.text || 'SELECT A PROBLEM STATEMENT'}
+          disableDelete
+          identifier={!forExport && 'problem'}
           onClick={
             forExport
               ? () => {}
@@ -199,11 +203,11 @@ class Tree extends Component {
                     activeIndex: -1
                   })
           }
-          content={data.problem.text || 'SELECT A PROBLEM STATEMENT'}
-          identifier={!forExport && 'problem'}
+          showControlGroup={`problem${data.problem._listIndex}` === activeMenu}
+          size={265}
+          withControls={!forExport && !isEmpty(data.problem)}
         />
         <VerticalArrow top />
-        {/* Center */}
 
         <Level test={data.causes.length > 1}>
           {data.causes.length === 0 ? (
@@ -324,9 +328,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-const mapStateToProps = state => {
-  return state;
-};
+const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,

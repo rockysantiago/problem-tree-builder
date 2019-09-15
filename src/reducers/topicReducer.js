@@ -1,7 +1,6 @@
 import * as types from 'constants/actionTypes';
 import { CAUSE_STRING, EFFECT_STRING } from 'constants/strings';
-import getChildUpdates from 'utils/getChildUpdates';
-import getParentUpdates from 'utils/getParentUpdates';
+import { getChildUpdates, getParentUpdates } from 'utils';
 
 import initialState from './initialState';
 

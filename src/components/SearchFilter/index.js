@@ -17,11 +17,6 @@ const sortOptions = [
     value: 'Relevance'
   },
   {
-    key: 'Sentiment',
-    text: 'Sentiment',
-    value: 'Sentiment'
-  },
-  {
     key: 'Newest',
     text: 'Newest',
     value: 'Newest'
@@ -123,7 +118,13 @@ class SearchFilter extends Component {
   }
 
   render() {
-    const { onSelectFilter, filter } = this.props;
+    const {
+      onSelectFilter,
+      sortBy,
+      filterBy,
+      filterSource,
+      filterCountry
+    } = this.props;
 
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -136,9 +137,9 @@ class SearchFilter extends Component {
           {sortOptions.map(option => (
             <DropdownItem
               key={option.value}
-              onClick={() => onSelectFilter(option.value)}
+              onClick={() => onSelectFilter(option.value, 'sortBy')}
             >
-              <RadioButton selected={option.value === filter}>
+              <RadioButton selected={option.value === sortBy}>
                 <span />
               </RadioButton>
               {option.text}
@@ -149,9 +150,9 @@ class SearchFilter extends Component {
           {filterOptions.map(option => (
             <DropdownItem
               key={option.value}
-              onClick={() => onSelectFilter(option.value)}
+              onClick={() => onSelectFilter(option.value, 'filterBy')}
             >
-              <CheckBox selected={option.value === filter}>
+              <CheckBox selected={filterBy.includes(option.value)}>
                 <Check />
               </CheckBox>
               {option.text}
@@ -161,9 +162,9 @@ class SearchFilter extends Component {
           {sourceOptions.map(option => (
             <DropdownItem
               key={option.value}
-              onClick={() => onSelectFilter(option.value)}
+              onClick={() => onSelectFilter(option.value, 'filterSource')}
             >
-              <CheckBox selected={option.value === filter}>
+              <CheckBox selected={filterSource.includes(option.value)}>
                 <Check />
               </CheckBox>
               {option.text}
@@ -173,9 +174,9 @@ class SearchFilter extends Component {
           {countryOptions.map(option => (
             <DropdownItem
               key={option.value}
-              onClick={() => onSelectFilter(option.value)}
+              onClick={() => onSelectFilter(option.value, 'filterCountry')}
             >
-              <CheckBox selected={option.value === filter}>
+              <CheckBox selected={filterCountry.includes(option.value)}>
                 <Check />
               </CheckBox>
               {option.text}

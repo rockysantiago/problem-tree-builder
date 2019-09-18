@@ -77,9 +77,15 @@ export const searchSubOptions = (keyword, searchType, idx, shouldFetch) => {
   };
 };
 
-export const setFilter = filter => {
+export const setFilter = (value, field) => {
   return dispatch => {
-    dispatch({ type: types.SET_FILTER, payload: filter });
+    dispatch({
+      type: types.SET_FILTER,
+      payload: {
+        value,
+        field
+      }
+    });
   };
 };
 

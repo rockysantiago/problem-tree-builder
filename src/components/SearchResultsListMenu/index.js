@@ -23,7 +23,13 @@ class SearchResultsListMenu extends Component {
             : `${length} Result found`}
         </Label>
         <Menu>
-          <SearchFilter onSelectFilter={setFilter} filter={topic.filter} />
+          <SearchFilter
+            onSelectFilter={setFilter}
+            sortBy={topic.sortBy}
+            filterBy={topic.filterBy}
+            filterSource={topic.filterSource}
+            filterCountry={topic.filterCountry}
+          />
           <Button
             content="Clear"
             onClick={() => this.props.clear(topic.activeType)}

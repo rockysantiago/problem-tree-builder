@@ -12,13 +12,18 @@ const SearchResultsList = ({
   items,
   onSelect,
   selected,
-  filter,
   type,
   viewType,
-  onRate
+  onRate,
+  sortBy,
+  filterBy,
+  filterSource,
+  filterCountry
 }) => {
-  const newItems = filterList(filter, items);
-
+  const newItems = filterList(
+    { sortBy, filterBy, filterSource, filterCountry },
+    items
+  );
   const renderView = () => {
     switch (viewType) {
       case 'tile':

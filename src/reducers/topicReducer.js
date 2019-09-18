@@ -145,7 +145,22 @@ export default function topicReducer(state = initialState.topic, action) {
       });
 
     case types.SET_FILTER:
-      return Object.assign({}, state, { filter: action.payload });
+      const { field, value } = action.payload;
+      const obj = {};
+
+      if (field === 'sortBy') {
+        obj[field] = value;
+      } else if (state[field] && state[field].includes(value)) {
+        const list = [...state[field]];
+        list.splice(list.indexOf(value), 1);
+        obj[field] = list;
+      } else {
+        const list = [...state[field]];
+        list.push(value);
+        obj[field] = list;
+      }
+
+      return Object.assign({}, state, obj);
 
     case types.CLEAR_PROBLEM_SELECTION:
       return Object.assign({}, state, { problem: {}, causes: [], effects: [] });

@@ -261,7 +261,10 @@ class ComposeTree extends Component {
                     ? this.handleSubSelection
                     : this.handleSelectResult
                 }
-                filter={topic.filter}
+                sortBy={topic.sortBy}
+                filterBy={topic.filterBy}
+                filterSource={topic.filterSource}
+                filterCountry={topic.filterCountry}
                 type={topic.activeType}
                 selected={selectedItems}
                 viewType={topic.view}

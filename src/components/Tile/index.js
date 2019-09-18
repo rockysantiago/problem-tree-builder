@@ -12,7 +12,7 @@ import {
   ItemDetailWrapper
 } from './style';
 
-const Tile = ({ item, onSelect, disabled, type }) => (
+const Tile = ({ item, onSelect, disabled, type, onRate }) => (
   <Wrapper
     onClick={!item.selected && disabled ? () => {} : onSelect}
     type={item.selected ? type : ''}
@@ -65,7 +65,15 @@ const Tile = ({ item, onSelect, disabled, type }) => (
 
           <ItemDetailWrapper>
             <Label>User Score</Label>
-            <Rating icon="star" maxRating={5} defaultRating={item.stars} />
+            <Rating
+              icon="star"
+              maxRating={5}
+              defaultRating={item.stars}
+              onRate={(event, data) => {
+                onRate(data.rating, item.id);
+                event.stopPropagation();
+              }}
+            />
           </ItemDetailWrapper>
         </div>
 

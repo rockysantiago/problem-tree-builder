@@ -1,5 +1,5 @@
 import * as types from 'constants/actionTypes';
-import { getProblems } from 'api/ptg';
+import { getProblems, sendUserScore } from 'api/ptg';
 
 export const setTopic = payload => {
   return dispatch => {
@@ -112,3 +112,10 @@ export const updateOption = (type, index, childIndex, payload) => {
 
 export const switchView = view => dispatch =>
   dispatch({ type: types.SWITCH_VIEW, view });
+
+export const updateUserScore = (stars, id) => {
+  return async dispatch => {
+    dispatch({ type: types.UPDATE_USER_SCORE });
+    await sendUserScore(stars, id);
+  };
+};

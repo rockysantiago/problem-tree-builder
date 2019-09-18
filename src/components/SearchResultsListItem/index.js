@@ -1,6 +1,6 @@
 import React from 'react';
 import { Add } from '@material-ui/icons';
-import { Label as Tag } from 'semantic-ui-react';
+import { Label as Tag, Rating } from 'semantic-ui-react';
 
 import {
   ListItem,
@@ -13,7 +13,7 @@ import {
   IndicationLevel
 } from './style';
 
-const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
+const SearchResultsListItem = ({ item, onSelect, disabled, type, onRate }) => {
   return (
     <ListItem
       onClick={!item.selected && disabled ? () => {} : onSelect}
@@ -42,7 +42,7 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
           <tbody>
             <tr>
               <td>
-                <Label>Source</Label>
+                <Label>Link</Label>
                 <Description style={{ textTransform: 'none' }}>
                   <a href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.link}
@@ -56,12 +56,30 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
             </tr>
             <tr>
               <td>
-                <Label>Project No</Label>
-                <Description>{item.project_number}</Description>
+                <Label>Source</Label>
+                <Description>{item.source}</Description>
               </td>
               <td>
                 <Label>Section</Label>
                 <Description>{item.section}</Description>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Label>Title</Label>
+                <Description>{item.title}</Description>
+              </td>
+              <td>
+                <Label>User Score</Label>
+                <Rating
+                  icon="star"
+                  maxRating={5}
+                  defaultRating={item.stars}
+                  onRate={(event, data) => {
+                    onRate(data.rating, item.id);
+                    event.stopPropagation();
+                  }}
+                />
               </td>
             </tr>
           </tbody>

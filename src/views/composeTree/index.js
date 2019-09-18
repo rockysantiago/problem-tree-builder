@@ -21,7 +21,8 @@ import {
   searchOptions,
   searchSubOptions,
   selectSubOption,
-  selectOption
+  selectOption,
+  updateUserScore
 } from 'actions/topicActions';
 import { retrieveSuggestions } from 'actions/suggestionActions';
 
@@ -112,6 +113,10 @@ class ComposeTree extends Component {
   showModal = size => () => this.setState({ size, isModalOpen: true });
 
   closeModal = () => this.setState({ isModalOpen: false });
+
+  handleOnRate = (stars, id) => {
+    this.props.updateUserScore(stars, id);
+  };
 
   render() {
     const {
@@ -260,6 +265,7 @@ class ComposeTree extends Component {
                 type={topic.activeType}
                 selected={selectedItems}
                 viewType={topic.view}
+                onRate={this.handleOnRate}
               />
             </SidePanelBody>
           </SidePanel>
@@ -284,7 +290,8 @@ const mapDispatchToProps = dispatch =>
       searchSubOptions,
       selectSubOption,
       selectOption,
-      retrieveSuggestions
+      retrieveSuggestions,
+      updateUserScore
     },
     dispatch
   );

@@ -52,3 +52,24 @@ export const getWordSuggestions = async text => {
     );
   }
 };
+
+export const sendUserScore = async (stars, id) => {
+  const options = getOptions({ action: 'rating', stars, id });
+
+  try {
+    let response = await fetch(`${keys.baseUrl}/get_user_action`, options);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok.');
+    }
+
+    response = await response.json();
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      'There has been a problem with your fetch operation: ',
+      error.message
+    );
+  }
+};

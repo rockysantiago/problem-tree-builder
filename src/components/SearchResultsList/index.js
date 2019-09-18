@@ -14,7 +14,8 @@ const SearchResultsList = ({
   selected,
   filter,
   type,
-  viewType
+  viewType,
+  onRate
 }) => {
   const newItems = filterList(filter, items);
 
@@ -36,6 +37,7 @@ const SearchResultsList = ({
                   onSelect={() => onSelect(item._listIndex)}
                   disabled={selected && selected.length >= 3}
                   type={type}
+                  onRate={onRate}
                 />
               ))}
           </Wrapper>
@@ -53,6 +55,7 @@ const SearchResultsList = ({
                     onSelect={() => onSelect(item._listIndex)}
                     disabled={selected && selected.length >= 3}
                     type={type}
+                    onRate={onRate}
                   />
                 ))}
             </StyledList>

@@ -13,6 +13,7 @@ import SearchBar from 'components/SearchBar';
 import SearchResultsList from 'components/SearchResultsList';
 import Tree from 'components/Tree';
 import CustomInput from 'components/CustomInput';
+import CreateModal from 'components/CreateModal';
 
 import { searchProblems, selectProblem } from 'actions/problemActions';
 import {
@@ -46,7 +47,8 @@ class ComposeTree extends Component {
     this.state = {
       keyword: props.topic.keyword,
       tipsCollapse: false,
-      legendCollapse: false
+      legendCollapse: false,
+      isModalOpen: false
     };
   }
 
@@ -107,8 +109,18 @@ class ComposeTree extends Component {
     this.setState(state => ({ legendCollapse: !state.legendCollapse }));
   };
 
+  showModal = size => () => this.setState({ size, isModalOpen: true });
+
+  closeModal = () => this.setState({ isModalOpen: false });
+
   render() {
-    const { keyword, tipsCollapse, legendCollapse } = this.state;
+    const {
+      keyword,
+      tipsCollapse,
+      legendCollapse,
+      size,
+      isModalOpen
+    } = this.state;
     const { problems, topic } = this.props;
 
     let sidePanelHeading, subHeading, activeListItems, selectedItems;
@@ -236,7 +248,7 @@ class ComposeTree extends Component {
                 />
               )}
 
-              <CustomInput />
+              <CustomInput onClick={this.showModal('mini')} />
               <SearchResultsList
                 items={activeListItems}
                 onSelect={
@@ -252,6 +264,11 @@ class ComposeTree extends Component {
             </SidePanelBody>
           </SidePanel>
         </Grid.Column>
+        <CreateModal
+          close={this.closeModal}
+          open={isModalOpen}
+          size={size}
+        ></CreateModal>
       </Grid>
     );
   }

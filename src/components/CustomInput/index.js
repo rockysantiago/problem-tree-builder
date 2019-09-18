@@ -2,9 +2,9 @@ import React from 'react';
 import { Wrapper, Remarks } from './style';
 import { Add } from '@material-ui/icons';
 
-const CustomInput = () => {
+const CustomInput = ({ onClick }) => {
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Add />
       <div>
         <Remarks>Don't see what you need?</Remarks>

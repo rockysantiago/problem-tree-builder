@@ -1,6 +1,6 @@
 import React from 'react';
 import { Add } from '@material-ui/icons';
-import { Rating } from 'semantic-ui-react';
+import { Label as Tag, Rating } from 'semantic-ui-react';
 import {
   Description,
   Header,
@@ -20,7 +20,22 @@ const Tile = ({ item, onSelect, disabled, type }) => (
   >
     <Icon type={item.selected ? type : ''}>{!item.selected && <Add />}</Icon>
     <div style={{ width: '100%', padding: '5px' }}>
-      <Header>{item.text}</Header>
+      <Header>
+        {item.isEdited && (
+          <Tag
+            content="Edited"
+            size="mini"
+            style={{
+              marginRight: '4px',
+              textTransform: 'uppercase',
+              color: 'white',
+              backgroundColor: 'gray',
+              borderRadius: '25px'
+            }}
+          ></Tag>
+        )}
+        {item.text}
+      </Header>
       <div
         style={{
           display: 'flex',

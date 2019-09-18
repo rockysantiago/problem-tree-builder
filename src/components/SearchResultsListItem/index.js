@@ -1,5 +1,6 @@
 import React from 'react';
 import { Add } from '@material-ui/icons';
+import { Label as Tag } from 'semantic-ui-react';
 
 import {
   ListItem,
@@ -21,7 +22,22 @@ const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
     >
       <Icon type={item.selected ? type : ''}>{!item.selected && <Add />}</Icon>
       <ListDetails>
-        <Header>{item.text}</Header>
+        <Header>
+          {item.isEdited && (
+            <Tag
+              content="Edited"
+              size="mini"
+              style={{
+                marginRight: '4px',
+                textTransform: 'uppercase',
+                color: 'white',
+                backgroundColor: 'gray',
+                borderRadius: '25px'
+              }}
+            ></Tag>
+          )}
+          {item.text}
+        </Header>
         <table>
           <tbody>
             <tr>

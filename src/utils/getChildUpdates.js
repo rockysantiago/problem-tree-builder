@@ -6,7 +6,8 @@ const getChildUpdates = (items, action) =>
           ? {
               ...childItem,
               link: action.payload.link,
-              text: action.payload.text
+              text: action.payload.text,
+              isEdited: true
             }
           : childItem
       );

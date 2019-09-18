@@ -247,6 +247,7 @@ class ComposeTree extends Component {
                 filter={topic.filter}
                 type={topic.activeType}
                 selected={selectedItems}
+                viewType={topic.view}
               />
             </SidePanelBody>
           </SidePanel>

@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-// import { Grid, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import { setFilter, clear, switchView } from 'actions/topicActions';
+import SearchFilter from '../SearchFilter';
 import { Wrapper, Label, Menu, Button } from './style';
 
-import SearchFilter from '../SearchFilter';
-import { setFilter, clear } from 'actions/topicActions';
-
 class SearchResultsListMenu extends Component {
+  switchView = view => {
+    this.props.switchView(view);
+  };
+
   render() {
     const { selected, length, setFilter, topic } = this.props;
     return (
@@ -25,7 +28,13 @@ class SearchResultsListMenu extends Component {
             content="Clear"
             onClick={() => this.props.clear(topic.activeType)}
           />
-          <Button content="Tile" />
+          <Button
+            content={topic.view === 'list' ? 'tile' : 'list'}
+            onClick={() => {
+              const view = topic.view === 'list' ? 'tile' : 'list';
+              this.switchView(view);
+            }}
+          />
         </Menu>
       </Wrapper>
     );
@@ -36,7 +45,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       setFilter,
-      clear
+      clear,
+      switchView
     },
     dispatch
   );

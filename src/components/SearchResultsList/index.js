@@ -1,39 +1,70 @@
 import React from 'react';
 
-import SearchResultsListItem from '../SearchResultsListItem';
-import SearchResultsListMenu from '../SearchResultsListMenu';
 import { filterList } from 'utils';
 
-import { StyledList } from './style';
+import SearchResultsListItem from '../SearchResultsListItem';
+import SearchResultsListMenu from '../SearchResultsListMenu';
+import Tile from '../Tile';
 
-const SearchResultsList = ({ items, onSelect, selected, filter, type }) => {
+import { StyledList, Wrapper } from './style';
+
+const SearchResultsList = ({
+  items,
+  onSelect,
+  selected,
+  filter,
+  type,
+  viewType
+}) => {
   const newItems = filterList(filter, items);
+
+  const renderView = () => {
+    switch (viewType) {
+      case 'tile':
+        return (
+          <Wrapper
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap'
+            }}
+          >
+            {newItems &&
+              newItems.map((item, index) => (
+                <Tile
+                  key={index}
+                  item={item}
+                  onSelect={() => onSelect(item._listIndex)}
+                  disabled={selected && selected.length >= 3}
+                  type={type}
+                />
+              ))}
+          </Wrapper>
+        );
+
+      default:
+        return (
+          <Wrapper>
+            <StyledList celled>
+              {newItems &&
+                newItems.map((item, index) => (
+                  <SearchResultsListItem
+                    key={index}
+                    item={item}
+                    onSelect={() => onSelect(item._listIndex)}
+                    disabled={selected && selected.length >= 3}
+                    type={type}
+                  />
+                ))}
+            </StyledList>
+          </Wrapper>
+        );
+    }
+  };
 
   return (
     <>
       <SearchResultsListMenu length={newItems.length} selected={selected} />
-
-      <div
-        style={{
-          marginTop: '1em',
-          height: '100%',
-          overflow: 'auto',
-          padding: '0'
-        }}
-      >
-        <StyledList celled>
-          {newItems &&
-            newItems.map((item, index) => (
-              <SearchResultsListItem
-                key={index}
-                item={item}
-                onSelect={() => onSelect(item._listIndex)}
-                disabled={selected && selected.length >= 3}
-                type={type}
-              />
-            ))}
-        </StyledList>
-      </div>
+      {renderView()}
     </>
   );
 };

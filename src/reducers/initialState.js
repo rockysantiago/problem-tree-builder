@@ -1,6 +1,7 @@
 export default {
   topic: {
     keyword: '',
+    view: 'list',
     activeType: 'problem',
     filter: 'All',
     problem: {},

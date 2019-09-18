@@ -109,3 +109,6 @@ export const updateOption = (type, index, childIndex, payload) => {
       payload
     });
 };
+
+export const switchView = view => dispatch =>
+  dispatch({ type: types.SWITCH_VIEW, view });

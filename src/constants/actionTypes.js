@@ -35,3 +35,4 @@ export const UPDATE_CAUSE = 'UPDATE_CAUSE';
 export const UPDATE_SUB_CAUSE = 'UPDATE_SUB_CAUSE';
 export const UPDATE_EFFECT = 'UPDATE_EFFECT';
 export const UPDATE_SUB_EFFECT = 'UPDATE_SUB_EFFECT';
+export const SWITCH_VIEW = 'SWITCH_VIEW';

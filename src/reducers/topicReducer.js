@@ -254,6 +254,12 @@ export default function topicReducer(state = initialState.topic, action) {
         effects: updatedSubEffects.filter(subEffect => subEffect.selected)
       };
 
+    case types.SWITCH_VIEW:
+      return {
+        ...state,
+        view: action.view
+      };
+
     case types.INITIAL_STATE:
       return Object.assign({}, initialState.topic);
 

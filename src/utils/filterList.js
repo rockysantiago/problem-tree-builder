@@ -1,5 +1,5 @@
 const filterList = (selections, items) => {
-  const clonedItems = items.map(a => a);
+  const clonedItems = items.filter(i => !i.created);
   let newItems = [];
   if (selections.sortBy === 'Relevance') {
     newItems = clonedItems.sort(function(a, b) {

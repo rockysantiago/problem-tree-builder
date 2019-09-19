@@ -13,6 +13,14 @@ export default function problemsReducer(state = initialState.problems, action) {
       );
       return Object.assign({}, { isFetching: false, data });
 
+    case types.ADD_PROBLEM:
+      const newSet = [...state.data, { ...action.payload, created: true }];
+      const dataWithIndex = newSet.map((p, _listIndex) => ({
+        ...p,
+        _listIndex
+      }));
+      return { ...state, isFetching: false, data: dataWithIndex };
+
     case types.UPDATE_PROBLEM:
       const updatedProblems = getParentUpdates(state.data, action);
       return { ...state, data: updatedProblems };

@@ -69,3 +69,8 @@ export const selectProblem = (index, problems) => {
 export const updateProblem = (index, payload) => dispatch => {
   dispatch({ type: types.UPDATE_PROBLEM, index, payload });
 };
+
+export const addProblem = payload => dispatch => {
+  // TODO: Some API call
+  dispatch({ type: types.ADD_PROBLEM, payload });
+};

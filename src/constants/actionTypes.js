@@ -13,6 +13,7 @@ export const GET_PROBLEMS = 'GET_PROBLEMS';
 export const SET_PROBLEMS = 'SET_PROBLEMS';
 export const CLEAR_PROBLEM_SELECTION = 'CLEAR_PROBLEM_SELECTION';
 export const INIT_PROBLEMS = 'INIT_PROBLEMS';
+export const ADD_PROBLEM = 'ADD_PROBLEM';
 
 /**
  * Topic action types

@@ -15,7 +15,11 @@ import Tree from 'components/Tree';
 import CustomInput from 'components/CustomInput';
 import CreateModal from 'components/CreateModal';
 
-import { searchProblems, selectProblem } from 'actions/problemActions';
+import {
+  searchProblems,
+  selectProblem,
+  addProblem
+} from 'actions/problemActions';
 import {
   setTopic,
   searchOptions,
@@ -41,6 +45,7 @@ import {
   SubHeading,
   SidePanelBody
 } from './style';
+import CreatedResultsList from 'components/CreatedResultsList';
 
 class ComposeTree extends Component {
   constructor(props) {
@@ -116,6 +121,11 @@ class ComposeTree extends Component {
 
   handleOnRate = (stars, id) => {
     this.props.updateUserScore(stars, id);
+  };
+
+  handleAddProblem = payload => {
+    this.props.addProblem(payload);
+    this.closeModal();
   };
 
   render() {
@@ -253,6 +263,17 @@ class ComposeTree extends Component {
                 />
               )}
 
+              {/* HERE */}
+              <CreatedResultsList
+                items={activeListItems}
+                onSelect={
+                  topic.activeType.includes('sub-')
+                    ? this.handleSubSelection
+                    : this.handleSelectResult
+                }
+                type={topic.activeType}
+                selected={selectedItems}
+              />
               <CustomInput onClick={this.showModal('mini')} />
               <SearchResultsList
                 items={activeListItems}
@@ -277,6 +298,7 @@ class ComposeTree extends Component {
           close={this.closeModal}
           open={isModalOpen}
           size={size}
+          done={this.handleAddProblem}
         ></CreateModal>
       </Grid>
     );
@@ -288,6 +310,7 @@ const mapDispatchToProps = dispatch =>
     {
       searchProblems,
       selectProblem,
+      addProblem,
       setTopic,
       searchOptions,
       searchSubOptions,

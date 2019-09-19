@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Input, Modal } from 'semantic-ui-react';
 
-const CreateModal = ({ close, open, size }) => {
+const CreateModal = ({ done, close, open, size }) => {
+  const [text, setText] = useState('');
+  const [link, setLink] = useState('');
+
   return (
     <Modal
       size={size}
@@ -16,16 +19,34 @@ const CreateModal = ({ close, open, size }) => {
       }}
     >
       <Modal.Content>
-        <Input fluid placeholder="Input your own"></Input>
+        <Input
+          fluid
+          placeholder="Input your own"
+          onChange={e => {
+            setText(e.target.value);
+          }}
+        ></Input>
         <Input
           fluid
           placeholder="Paste link here"
           style={{ marginTop: '12px' }}
+          onChange={e => {
+            setLink(e.target.value);
+          }}
         ></Input>
       </Modal.Content>
       <Modal.Actions>
         <Button basic content="Cancel" onClick={close} />
-        <Button basic content="Done" onClick={() => close()} />
+        <Button
+          basic
+          content="Done"
+          onClick={() =>
+            done({
+              text,
+              link
+            })
+          }
+        />
       </Modal.Actions>
     </Modal>
   );

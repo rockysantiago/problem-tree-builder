@@ -26,6 +26,8 @@ import {
   searchSubOptions,
   selectSubOption,
   selectOption,
+  addOption,
+  addSubOption,
   updateUserScore
 } from 'actions/topicActions';
 import { retrieveSuggestions } from 'actions/suggestionActions';
@@ -127,10 +129,28 @@ class ComposeTree extends Component {
     const { topic } = this.props;
 
     if (topic.activeType === 'problem') {
-      this.props.addProblem(payload);
+      this.props.addProblem(
+        payload,
+        this.props.problems.data,
+        this.props.topic.keyword
+      );
+    } else if (topic.activeType === 'cause' || topic.activeType === 'effect') {
+      this.props.addOption(payload, topic.activeType, this.props.topic.keyword);
+    } else if (topic.activeType === 'sub-cause') {
+      this.props.addSubOption(
+        payload,
+        topic.causes[topic.activeIndex]._listIndex,
+        topic.activeType,
+        this.props.topic.keyword
+      );
+    } else if (topic.activeType === 'sub-effect') {
+      this.props.addSubOption(
+        payload,
+        topic.effects[topic.activeIndex]._listIndex,
+        topic.activeType,
+        this.props.topic.keyword
+      );
     }
-
-    // TODO: Other implementation
 
     this.closeModal();
   };
@@ -322,6 +342,8 @@ const mapDispatchToProps = dispatch =>
       searchSubOptions,
       selectSubOption,
       selectOption,
+      addOption,
+      addSubOption,
       retrieveSuggestions,
       updateUserScore
     },

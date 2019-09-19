@@ -41,6 +41,21 @@ export default function topicReducer(state = initialState.topic, action) {
         activeType: 'cause'
       });
 
+    case types.ADD_CAUSE:
+      // TODO: Add limitReached
+      const newAddedCauses = [...state._sourceCauses];
+      newAddedCauses.push({ ...action.payload, selected: true, created: true });
+      const newIndexedCauses = newAddedCauses.map((item, _listIndex) => ({
+        ...item,
+        _listIndex
+      }));
+
+      return Object.assign({}, state, {
+        _sourceCauses: newIndexedCauses,
+        causes: newIndexedCauses.filter(s => s.selected),
+        activeType: 'cause'
+      });
+
     case types.SELECT_EFFECT:
       const newEffects = Object.assign([], state._sourceEffects).map(
         (s, idx) => {
@@ -53,6 +68,25 @@ export default function topicReducer(state = initialState.topic, action) {
       return Object.assign({}, state, {
         _sourceEffects: newEffects,
         effects: newEffects.filter(s => s.selected),
+        activeType: 'effect'
+      });
+
+    case types.ADD_EFFECT:
+      // TODO: Add limitReached
+      const newAddedEffects = [...state._sourceEffects];
+      newAddedEffects.push({
+        ...action.payload,
+        selected: true,
+        created: true
+      });
+      const newIndexedEffects = newAddedEffects.map((item, _listIndex) => ({
+        ...item,
+        _listIndex
+      }));
+
+      return Object.assign({}, state, {
+        _sourceEffects: newIndexedEffects,
+        effects: newIndexedEffects.filter(s => s.selected),
         activeType: 'effect'
       });
 
@@ -121,6 +155,34 @@ export default function topicReducer(state = initialState.topic, action) {
         effects: newEffectsWithSubSelection.filter(s => s.selected)
       });
 
+    case types.ADD_SUB_EFFECT:
+      const newEffectsWithAddedSubSelection = Object.assign(
+        [],
+        state._sourceEffects
+      ).map((effect, idx) => {
+        if (action.parentIndex === idx) {
+          const originalSubEffects = [...effect._sources];
+          originalSubEffects.push({
+            ...action.payload,
+            selected: true,
+            created: true
+          });
+
+          const indexedSubEffects = originalSubEffects.map(
+            (subEffect, _listIndex) => ({ ...subEffect, _listIndex })
+          );
+          effect._sources = indexedSubEffects;
+          effect._data = indexedSubEffects.filter(item => item.selected);
+        }
+        return effect;
+      });
+
+      return Object.assign({}, state, {
+        _sourceEffects: newEffectsWithAddedSubSelection,
+        isFetching: false,
+        effects: newEffectsWithAddedSubSelection.filter(s => s.selected)
+      });
+
     case types.SELECT_SUB_CAUSE:
       const causeListIndex = action.parentIndex;
       const newCausesWithSubSelection = Object.assign(
@@ -142,6 +204,34 @@ export default function topicReducer(state = initialState.topic, action) {
         _sourceCauses: newCausesWithSubSelection,
         isFetching: false,
         causes: newCausesWithSubSelection.filter(s => s.selected)
+      });
+
+    case types.ADD_SUB_CAUSE:
+      const newCausesWithAddedSubSelection = Object.assign(
+        [],
+        state._sourceCauses
+      ).map((cause, idx) => {
+        if (action.parentIndex === idx) {
+          const originalSubCauses = [...cause._sources];
+          originalSubCauses.push({
+            ...action.payload,
+            selected: true,
+            created: true
+          });
+
+          const indexedSubCauses = originalSubCauses.map(
+            (subCause, _listIndex) => ({ ...subCause, _listIndex })
+          );
+          cause._sources = indexedSubCauses;
+          cause._data = indexedSubCauses.filter(item => item.selected);
+        }
+        return cause;
+      });
+
+      return Object.assign({}, state, {
+        _sourceCauses: newCausesWithAddedSubSelection,
+        isFetching: false,
+        causes: newCausesWithAddedSubSelection.filter(s => s.selected)
       });
 
     case types.SET_FILTER:

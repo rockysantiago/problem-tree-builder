@@ -13,7 +13,6 @@ export const GET_PROBLEMS = 'GET_PROBLEMS';
 export const SET_PROBLEMS = 'SET_PROBLEMS';
 export const CLEAR_PROBLEM_SELECTION = 'CLEAR_PROBLEM_SELECTION';
 export const INIT_PROBLEMS = 'INIT_PROBLEMS';
-export const ADD_PROBLEM = 'ADD_PROBLEM';
 
 /**
  * Topic action types
@@ -25,9 +24,13 @@ export const SET_SUB_CAUSES = 'SET_SUB_CAUSES';
 export const SET_EFFECTS = 'SET_EFFECTS';
 export const SET_SUB_EFFECTS = 'SET_SUB_EFFECTS';
 export const SELECT_CAUSE = 'SELECT_CAUSE';
+export const ADD_CAUSE = 'ADD_CAUSE';
 export const SELECT_EFFECT = 'SELECT_EFFECT';
+export const ADD_EFFECT = 'ADD_EFFECT';
 export const SELECT_SUB_CAUSE = 'SELECT_SUB_CAUSE';
+export const ADD_SUB_CAUSE = 'ADD_SUB_CAUSE';
 export const SELECT_SUB_EFFECT = 'SELECT_SUB_EFFECT';
+export const ADD_SUB_EFFECT = 'ADD_SUB_EFFECT';
 export const SET_FILTER = 'SET_FILTER';
 export const CLEAR_CAUSE_EFFECT_SELECTION = 'CLEAR_CAUSE_EFFECT_SELECTION';
 

@@ -1,5 +1,5 @@
 import * as types from 'constants/actionTypes';
-import { getProblems, sendUserScore } from 'api/ptg';
+import { getProblems, sendUserScore, addUserInput } from 'api/ptg';
 
 export const setTopic = payload => {
   return dispatch => {
@@ -40,6 +40,24 @@ export const selectOption = (index, type) => {
   };
 };
 
+export const addOption = (payload, type, keyword) => {
+  const SELECTION_TYPE = {
+    cause: types.ADD_CAUSE,
+    effect: types.ADD_EFFECT
+  };
+
+  return dispatch => {
+    return addUserInput(type, payload.text, payload.link, keyword)
+      .then(response => {
+        dispatch({
+          type: SELECTION_TYPE[type],
+          payload: { ...payload, ...response }
+        });
+      })
+      .catch(e => console.error(`Failed to save new option for ${type}: `, e));
+  };
+};
+
 export const selectSubOption = (parentIndex, selectedIndex, activeType) => {
   const SEARCH_TYPES = {
     'sub-cause': types.SELECT_SUB_CAUSE,
@@ -52,6 +70,27 @@ export const selectSubOption = (parentIndex, selectedIndex, activeType) => {
       parentIndex,
       idx: selectedIndex
     });
+  };
+};
+
+export const addSubOption = (payload, parentIndex, activeType, keyword) => {
+  const SEARCH_TYPES = {
+    'sub-cause': types.ADD_SUB_CAUSE,
+    'sub-effect': types.ADD_SUB_EFFECT
+  };
+
+  return dispatch => {
+    return addUserInput(activeType, payload.text, payload.link, keyword)
+      .then(response => {
+        dispatch({
+          type: SEARCH_TYPES[activeType],
+          parentIndex,
+          payload: { ...payload, ...response }
+        });
+      })
+      .catch(e =>
+        console.error(`Failed to save new option for ${activeType}: `, e)
+      );
   };
 };
 

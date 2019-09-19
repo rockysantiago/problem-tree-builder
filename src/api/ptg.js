@@ -73,3 +73,31 @@ export const sendUserScore = async (stars, id) => {
     );
   }
 };
+
+export const addNewOption = async (payload, type, problem) => {
+  const options = getOptions({ ...payload, type, action: 'add', problem });
+  console.log('SENDING...', options);
+
+  try {
+    // TODO: Bato, modify this URL
+    // let response = await fetch(`${keys.baseUrl}/get_user_action`, options);
+    let response = await Promise.resolve({
+      data: {
+        id: 1
+      },
+      success: true,
+      ok: true
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok.');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      'There has been a problem with your fetch operation: ',
+      error.message
+    );
+  }
+};

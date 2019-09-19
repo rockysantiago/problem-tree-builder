@@ -1,4 +1,4 @@
-import { getProblems } from 'api/ptg';
+import { getProblems, addNewOption } from 'api/ptg';
 import * as types from 'constants/actionTypes';
 
 export const searchProblems = keyword => {
@@ -70,7 +70,42 @@ export const updateProblem = (index, payload) => dispatch => {
   dispatch({ type: types.UPDATE_PROBLEM, index, payload });
 };
 
-export const addProblem = payload => dispatch => {
-  // TODO: Some API call
-  dispatch({ type: types.ADD_PROBLEM, payload });
+export const addProblem = (payload, problems, keyword) => dispatch => {
+  return addNewOption(payload, 'problem', keyword)
+    .then(response => {
+      const newProblems = [...problems, { ...payload, created: true }].map(
+        (p, _listIndex) => {
+          return _listIndex === problems.length
+            ? {
+                ...p,
+                _listIndex,
+                selected: true,
+                ...response
+              }
+            : {
+                ...p,
+                _listIndex,
+                selected: false
+              };
+        }
+      );
+
+      dispatch({
+        type: types.SET_TOPIC,
+        payload: {
+          problem: newProblems.filter(problem => problem.selected)[0],
+          activeType: 'problem',
+          effects: [],
+          causes: [],
+          _sourceEffects: [],
+          _sourceCauses: []
+        }
+      });
+
+      dispatch({
+        type: types.SET_PROBLEMS,
+        payload: newProblems
+      });
+    })
+    .catch(e => console.error('Failed to save new option for problem: ', e));
 };

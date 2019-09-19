@@ -11,7 +11,7 @@ import {
   ListDetails
 } from './style';
 
-const SearchResultsListItem = ({ item, onSelect, disabled, type, onRate }) => {
+const SearchResultsListItem = ({ item, onSelect, disabled, type }) => {
   return (
     <ListItem
       onClick={!item.selected && disabled ? () => {} : onSelect}

@@ -236,10 +236,37 @@ export default function topicReducer(state = initialState.topic, action) {
 
     case types.SET_FILTER:
       const { field, value } = action.payload;
+      // Hard coding
+      const reference = {
+        filterBy: ['All', 'Selected'],
+        filterSource: [
+          'All',
+          'Xinhua',
+          'Worldbank',
+          'RRP',
+          'SSA',
+          'CP',
+          'CPS',
+          'COBP'
+        ],
+        filterCountry: ['All', 'China, PR', 'Mongolia']
+      };
       const obj = {};
 
       if (field === 'sortBy') {
         obj[field] = value;
+      } else if (
+        value === 'All' &&
+        state[field] &&
+        !state[field].includes(value)
+      ) {
+        obj[field] = reference[field];
+      } else if (
+        value === 'All' &&
+        state[field] &&
+        state[field].includes(value)
+      ) {
+        obj[field] = [];
       } else if (state[field] && state[field].includes(value)) {
         const list = [...state[field]];
         list.splice(list.indexOf(value), 1);

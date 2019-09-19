@@ -123,8 +123,15 @@ class ComposeTree extends Component {
     this.props.updateUserScore(stars, id);
   };
 
-  handleAddProblem = payload => {
-    this.props.addProblem(payload);
+  handleCreate = payload => {
+    const { topic } = this.props;
+
+    if (topic.activeType === 'problem') {
+      this.props.addProblem(payload);
+    }
+
+    // TODO: Other implementation
+
     this.closeModal();
   };
 
@@ -263,7 +270,6 @@ class ComposeTree extends Component {
                 />
               )}
 
-              {/* HERE */}
               <CreatedResultsList
                 items={activeListItems}
                 onSelect={
@@ -298,7 +304,7 @@ class ComposeTree extends Component {
           close={this.closeModal}
           open={isModalOpen}
           size={size}
-          done={this.handleAddProblem}
+          done={this.handleCreate}
         ></CreateModal>
       </Grid>
     );

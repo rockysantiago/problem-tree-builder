@@ -1,7 +1,4 @@
 import React from 'react';
-
-import { filterList } from 'utils';
-
 import CreatedResultsListItem from '../CreatedResultsListItem';
 import { StyledList, Wrapper } from './style';
 

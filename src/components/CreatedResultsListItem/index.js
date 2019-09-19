@@ -1,6 +1,6 @@
 import React from 'react';
 import { Add } from '@material-ui/icons';
-import { Label as Tag, Rating } from 'semantic-ui-react';
+import { Label as Tag } from 'semantic-ui-react';
 
 import {
   ListItem,
@@ -8,9 +8,7 @@ import {
   Description,
   Header,
   Label,
-  ListDetails,
-  Indicator,
-  IndicationLevel
+  ListDetails
 } from './style';
 
 const SearchResultsListItem = ({ item, onSelect, disabled, type, onRate }) => {

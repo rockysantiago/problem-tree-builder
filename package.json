@@ -12,6 +12,7 @@
     "html2canvas": "^1.0.0-rc.3",
     "lodash": "^4.17.15",
     "material-ui": "^0.20.2",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-html-parser": "^2.0.2",

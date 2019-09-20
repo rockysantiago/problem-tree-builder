@@ -1,5 +1,5 @@
 import * as types from 'constants/actionTypes';
-import { getProblems, sendUserScore, addUserInput } from 'api/ptg';
+import { getProblems, sendUserScore, addUserInput, editProblem } from 'api/ptg';
 
 export const setTopic = payload => {
   return dispatch => {
@@ -146,13 +146,15 @@ export const updateOption = (type, index, childIndex, payload) => {
     'sub-effect': types.UPDATE_SUB_EFFECT
   };
 
-  return dispatch =>
+  return async dispatch => {
     dispatch({
       type: UPDATE_TYPE[type],
       index,
       childIndex,
       payload
     });
+    await editProblem(payload.text, payload.id);
+  };
 };
 
 export const switchView = view => dispatch =>

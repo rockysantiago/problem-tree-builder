@@ -188,4 +188,10 @@ class SearchFilter extends Component {
   }
 }
 
+SearchFilter.defaultProps = {
+  filterBy: [],
+  filterSource: [],
+  filterCountry: []
+};
+
 export default SearchFilter;

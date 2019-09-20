@@ -95,7 +95,7 @@ export const addUserInput = async (type, text, link, problem) => {
   }
 };
 
-export const updateProblem = async (text, id) => {
+export const editProblem = async (text, id) => {
   const options = getOptions({ action: 'edit', text, id });
 
   try {

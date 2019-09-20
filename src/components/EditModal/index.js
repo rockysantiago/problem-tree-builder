@@ -12,12 +12,14 @@ const EditModal = ({
   updateOption,
   updateProblem
 }) => {
+  const [id, setId] = useState('');
   const [text, setText] = useState('');
   const [link, setLink] = useState('');
 
   useEffect(() => {
     data.parent ? setText(data.child.text) : setText(data.text);
     data.parent ? setLink(data.child.link) : setLink(data.link);
+    data.parent ? setId(data.child.id) : setId(data.id);
   }, [data]);
 
   const index = data.parent ? data.parent._listIndex : data._listIndex;
@@ -58,8 +60,8 @@ const EditModal = ({
           content="Done"
           onClick={() => {
             type === PROBLEM_STRING
-              ? updateProblem(index, { text, link })
-              : updateOption(type, index, childIndex, { text, link });
+              ? updateProblem(index, { text, link, id })
+              : updateOption(type, index, childIndex, { text, link, id });
             close();
           }}
         />

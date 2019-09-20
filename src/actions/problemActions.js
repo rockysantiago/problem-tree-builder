@@ -1,4 +1,4 @@
-import { getProblems, addUserInput } from 'api/ptg';
+import { getProblems, addUserInput, editProblem } from 'api/ptg';
 import * as types from 'constants/actionTypes';
 
 export const searchProblems = keyword => {
@@ -66,8 +66,11 @@ export const selectProblem = (index, problems) => {
   };
 };
 
-export const updateProblem = (index, payload) => dispatch => {
-  dispatch({ type: types.UPDATE_PROBLEM, index, payload });
+export const updateProblem = (index, payload) => {
+  return async dispatch => {
+    dispatch({ type: types.UPDATE_PROBLEM, index, payload });
+    await editProblem(payload.text, payload.id);
+  };
 };
 
 export const addProblem = (payload, problems, keyword) => dispatch => {

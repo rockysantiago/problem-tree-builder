@@ -206,10 +206,9 @@ class ComposeTree extends Component {
               <Collapse isOpen={tipsCollapse}>
                 <PanelBody>
                   <Title>Select a problem</Title>
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life
-                  accusamus terry richardson ad squid. Nihil anim keffiyeh
-                  helvetica, craft beer labore wes anderson cred nesciunt
-                  sapiente ea proident.
+                  Start generating your problem tree by selecting a problem from
+                  the results. You can then proceed to choose causes and
+                  effects.
                 </PanelBody>
               </Collapse>
             </Panel>
@@ -224,7 +223,7 @@ class ComposeTree extends Component {
                       <tbody>
                         <tr>
                           <td>
-                            <Color color={colors.cause} />
+                            <Color color={colors.effect} />
                           </td>
                           <td>
                             <Label>Effect</Label>
@@ -240,7 +239,7 @@ class ComposeTree extends Component {
                         </tr>
                         <tr>
                           <td>
-                            <Color color={colors.effect} />
+                            <Color color={colors.cause} />
                           </td>
                           <td>
                             <Label>Cause</Label>

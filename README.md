@@ -1,68 +1,74 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Docs
 
-## Available Scripts
+- [Contributing](#contributing)
+  - [Codebase](#codebase)
+    - [Technologies](#technologies)
+    - [Folder Structure](#folder-structure)
+    - [Code Style](#code-style)
+  - [First time setup](#first-time-setup)
+  - [Running the app locally](#running-the-app-locally)
 
-In the project directory, you can run:
+## Contributing
 
-### `npm start`
+### Codebase
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Technologies
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- **Full-stack React**: We use React to power the frontend. Almost all of the code you'll touch in this codebase will be JavaScript.
 
-### `npm test`
+Here is a list of all the big technologies we use:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Redux**: Data storage
+- **React**: Frontend React app
+- **Styled-components**: CSS-in-JS, styling
+- **Fetch API**: HTTP client
 
-### `npm run build`
+#### Folder structure
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src/
+├── actions
+├── api
+├── components
+├── config
+├── constants
+├── reducers
+├── store
+├── utils
+├── views
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+#### Code Style
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+We run Prettier on-commit, which means you can write code in whatever style you want and it will be automatically formatted according to the common style when you run `git commit`. We also have ESLint setup, although we've disabled all stylistic rules since Prettier takes care of those.
 
-### `npm run eject`
+### First time setup
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The first step to running the app locally is downloading the code by cloning the repository:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+git clone https://github.com/rockysantiago/problem-tree-builder.git
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Installation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The app has two big installation steps:
 
-## Learn More
+1. **Install yarn**: We use [yarn](https://yarnpkg.com) to handle our JavaScript dependencies. See [the yarn documentation](https://yarnpkg.com/en/docs/install) for instructions on installing it.
+2. **Install the dependencies**:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+yarn
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You've now finished installing everything!
 
-### Code Splitting
+### Running the app locally
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+#### Develop the web UI
 
-### Analyzing the Bundle Size
+To develop the frontend and web UI run
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+yarn start
+```
